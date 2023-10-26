@@ -1,0 +1,2 @@
+/usr/bin/ar qc libInterpolatord.a  
+/usr/bin/ranlib libInterpolatord.a

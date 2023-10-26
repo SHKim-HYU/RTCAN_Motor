@@ -4,15 +4,16 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/xeno/Indy_ws/RTCAN_FT/include/CAN/CANDevice.cpp" "/home/xeno/Indy_ws/RTCAN_FT/build/include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o"
-  "/home/xeno/Indy_ws/RTCAN_FT/include/CAN/ElmoCiA402.cpp" "/home/xeno/Indy_ws/RTCAN_FT/build/include/CAN/CMakeFiles/CAN.dir/ElmoCiA402.cpp.o"
-  "/home/xeno/Indy_ws/RTCAN_FT/include/CAN/PCANDevice.cpp" "/home/xeno/Indy_ws/RTCAN_FT/build/include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o"
+  "/home/robot/robot_ws/RTCAN_Motor/include/CAN/CANDevice.cpp" "/home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o"
+  "/home/robot/robot_ws/RTCAN_Motor/include/CAN/MotorCiA402.cpp" "/home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o"
+  "/home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.cpp" "/home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../bin/inc"
+  "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
   "../include/CAN"
   )
 

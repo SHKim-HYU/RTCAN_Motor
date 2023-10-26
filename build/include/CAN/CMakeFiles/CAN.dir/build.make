@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/xeno/Indy_ws/RTCAN_FT
+CMAKE_SOURCE_DIR = /home/robot/robot_ws/RTCAN_Motor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/xeno/Indy_ws/RTCAN_FT/build
+CMAKE_BINARY_DIR = /home/robot/robot_ws/RTCAN_Motor/build
 
 # Include any dependencies generated for this target.
 include include/CAN/CMakeFiles/CAN.dir/depend.make
@@ -59,71 +59,71 @@ include include/CAN/CMakeFiles/CAN.dir/flags.make
 
 include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
 include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o: ../include/CAN/CANDevice.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xeno/Indy_ws/RTCAN_FT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/CANDevice.cpp.o -c /home/xeno/Indy_ws/RTCAN_FT/include/CAN/CANDevice.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/CANDevice.cpp.o -c /home/robot/robot_ws/RTCAN_Motor/include/CAN/CANDevice.cpp
 
 include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CAN.dir/CANDevice.cpp.i"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xeno/Indy_ws/RTCAN_FT/include/CAN/CANDevice.cpp > CMakeFiles/CAN.dir/CANDevice.cpp.i
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robot/robot_ws/RTCAN_Motor/include/CAN/CANDevice.cpp > CMakeFiles/CAN.dir/CANDevice.cpp.i
 
 include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CAN.dir/CANDevice.cpp.s"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xeno/Indy_ws/RTCAN_FT/include/CAN/CANDevice.cpp -o CMakeFiles/CAN.dir/CANDevice.cpp.s
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robot/robot_ws/RTCAN_Motor/include/CAN/CANDevice.cpp -o CMakeFiles/CAN.dir/CANDevice.cpp.s
 
-include/CAN/CMakeFiles/CAN.dir/ElmoCiA402.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
-include/CAN/CMakeFiles/CAN.dir/ElmoCiA402.cpp.o: ../include/CAN/ElmoCiA402.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xeno/Indy_ws/RTCAN_FT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object include/CAN/CMakeFiles/CAN.dir/ElmoCiA402.cpp.o"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/ElmoCiA402.cpp.o -c /home/xeno/Indy_ws/RTCAN_FT/include/CAN/ElmoCiA402.cpp
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: ../include/CAN/MotorCiA402.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/MotorCiA402.cpp.o -c /home/robot/robot_ws/RTCAN_Motor/include/CAN/MotorCiA402.cpp
 
-include/CAN/CMakeFiles/CAN.dir/ElmoCiA402.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CAN.dir/ElmoCiA402.cpp.i"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xeno/Indy_ws/RTCAN_FT/include/CAN/ElmoCiA402.cpp > CMakeFiles/CAN.dir/ElmoCiA402.cpp.i
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CAN.dir/MotorCiA402.cpp.i"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robot/robot_ws/RTCAN_Motor/include/CAN/MotorCiA402.cpp > CMakeFiles/CAN.dir/MotorCiA402.cpp.i
 
-include/CAN/CMakeFiles/CAN.dir/ElmoCiA402.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CAN.dir/ElmoCiA402.cpp.s"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xeno/Indy_ws/RTCAN_FT/include/CAN/ElmoCiA402.cpp -o CMakeFiles/CAN.dir/ElmoCiA402.cpp.s
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CAN.dir/MotorCiA402.cpp.s"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robot/robot_ws/RTCAN_Motor/include/CAN/MotorCiA402.cpp -o CMakeFiles/CAN.dir/MotorCiA402.cpp.s
 
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o: ../include/CAN/PCANDevice.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xeno/Indy_ws/RTCAN_FT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/PCANDevice.cpp.o -c /home/xeno/Indy_ws/RTCAN_FT/include/CAN/PCANDevice.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/PCANDevice.cpp.o -c /home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.cpp
 
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CAN.dir/PCANDevice.cpp.i"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xeno/Indy_ws/RTCAN_FT/include/CAN/PCANDevice.cpp > CMakeFiles/CAN.dir/PCANDevice.cpp.i
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.cpp > CMakeFiles/CAN.dir/PCANDevice.cpp.i
 
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CAN.dir/PCANDevice.cpp.s"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xeno/Indy_ws/RTCAN_FT/include/CAN/PCANDevice.cpp -o CMakeFiles/CAN.dir/PCANDevice.cpp.s
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.cpp -o CMakeFiles/CAN.dir/PCANDevice.cpp.s
 
 # Object files for target CAN
 CAN_OBJECTS = \
 "CMakeFiles/CAN.dir/CANDevice.cpp.o" \
-"CMakeFiles/CAN.dir/ElmoCiA402.cpp.o" \
+"CMakeFiles/CAN.dir/MotorCiA402.cpp.o" \
 "CMakeFiles/CAN.dir/PCANDevice.cpp.o"
 
 # External object files for target CAN
 CAN_EXTERNAL_OBJECTS =
 
-include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o
-include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/ElmoCiA402.cpp.o
-include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o
-include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/build.make
-include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/xeno/Indy_ws/RTCAN_FT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libCAN.a"
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && $(CMAKE_COMMAND) -P CMakeFiles/CAN.dir/cmake_clean_target.cmake
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CAN.dir/link.txt --verbose=$(VERBOSE)
+include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o
+include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o
+include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o
+include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/build.make
+include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libCANd.a"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && $(CMAKE_COMMAND) -P CMakeFiles/CAN.dir/cmake_clean_target.cmake
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CAN.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-include/CAN/CMakeFiles/CAN.dir/build: include/CAN/libCAN.a
+include/CAN/CMakeFiles/CAN.dir/build: include/CAN/libCANd.a
 
 .PHONY : include/CAN/CMakeFiles/CAN.dir/build
 
 include/CAN/CMakeFiles/CAN.dir/clean:
-	cd /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN && $(CMAKE_COMMAND) -P CMakeFiles/CAN.dir/cmake_clean.cmake
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && $(CMAKE_COMMAND) -P CMakeFiles/CAN.dir/cmake_clean.cmake
 .PHONY : include/CAN/CMakeFiles/CAN.dir/clean
 
 include/CAN/CMakeFiles/CAN.dir/depend:
-	cd /home/xeno/Indy_ws/RTCAN_FT/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/xeno/Indy_ws/RTCAN_FT /home/xeno/Indy_ws/RTCAN_FT/include/CAN /home/xeno/Indy_ws/RTCAN_FT/build /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN /home/xeno/Indy_ws/RTCAN_FT/build/include/CAN/CMakeFiles/CAN.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/robot_ws/RTCAN_Motor /home/robot/robot_ws/RTCAN_Motor/include/CAN /home/robot/robot_ws/RTCAN_Motor/build /home/robot/robot_ws/RTCAN_Motor/build/include/CAN /home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CMakeFiles/CAN.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : include/CAN/CMakeFiles/CAN.dir/depend
 

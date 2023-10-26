@@ -14,7 +14,7 @@
 #include <PCANDevice.h>
 
 // PCI/E-FD
-#define DEVICE "/dev/rtdm/pcan1"
+#define DEVICE "/dev/rtdm/pcan0"
 
 RT_TASK can_task;
 

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/xeno/Indy_ws/RTCAN_FT
+CMAKE_SOURCE_DIR = /home/robot/robot_ws/RTCAN_Motor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/xeno/Indy_ws/RTCAN_FT/build
+CMAKE_BINARY_DIR = /home/robot/robot_ws/RTCAN_Motor/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,6 +79,17 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # Special rule for the target install
 install: preinstall
@@ -113,22 +124,11 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xeno/Indy_ws/RTCAN_FT/build/CMakeFiles /home/xeno/Indy_ws/RTCAN_FT/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xeno/Indy_ws/RTCAN_FT/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -157,17 +157,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named RTCAN_FT
+# Target rules for targets named RTCAN_Motor
 
 # Build rule for target.
-RTCAN_FT: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_FT
-.PHONY : RTCAN_FT
+RTCAN_Motor: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor
+.PHONY : RTCAN_Motor
 
 # fast build rule for target.
-RTCAN_FT/fast:
-	$(MAKE) -f CMakeFiles/RTCAN_FT.dir/build.make CMakeFiles/RTCAN_FT.dir/build
-.PHONY : RTCAN_FT/fast
+RTCAN_Motor/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/build
+.PHONY : RTCAN_Motor/fast
 
 #=============================================================================
 # Target rules for targets named CAN
@@ -182,32 +182,58 @@ CAN/fast:
 	$(MAKE) -f include/CAN/CMakeFiles/CAN.dir/build.make include/CAN/CMakeFiles/CAN.dir/build
 .PHONY : CAN/fast
 
-src/RTCAN_FT_Client.o: src/RTCAN_FT_Client.cpp.o
+#=============================================================================
+# Target rules for targets named Interpolator
 
-.PHONY : src/RTCAN_FT_Client.o
+# Build rule for target.
+Interpolator: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Interpolator
+.PHONY : Interpolator
+
+# fast build rule for target.
+Interpolator/fast:
+	$(MAKE) -f include/Interpolator/CMakeFiles/Interpolator.dir/build.make include/Interpolator/CMakeFiles/Interpolator.dir/build
+.PHONY : Interpolator/fast
+
+#=============================================================================
+# Target rules for targets named Robot
+
+# Build rule for target.
+Robot: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Robot
+.PHONY : Robot
+
+# fast build rule for target.
+Robot/fast:
+	$(MAKE) -f include/Robot/CMakeFiles/Robot.dir/build.make include/Robot/CMakeFiles/Robot.dir/build
+.PHONY : Robot/fast
+
+src/RTCAN_Motor_Client.o: src/RTCAN_Motor_Client.cpp.o
+
+.PHONY : src/RTCAN_Motor_Client.o
 
 # target to build an object file
-src/RTCAN_FT_Client.cpp.o:
-	$(MAKE) -f CMakeFiles/RTCAN_FT.dir/build.make CMakeFiles/RTCAN_FT.dir/src/RTCAN_FT_Client.cpp.o
-.PHONY : src/RTCAN_FT_Client.cpp.o
+src/RTCAN_Motor_Client.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/src/RTCAN_Motor_Client.cpp.o
+.PHONY : src/RTCAN_Motor_Client.cpp.o
 
-src/RTCAN_FT_Client.i: src/RTCAN_FT_Client.cpp.i
+src/RTCAN_Motor_Client.i: src/RTCAN_Motor_Client.cpp.i
 
-.PHONY : src/RTCAN_FT_Client.i
+.PHONY : src/RTCAN_Motor_Client.i
 
 # target to preprocess a source file
-src/RTCAN_FT_Client.cpp.i:
-	$(MAKE) -f CMakeFiles/RTCAN_FT.dir/build.make CMakeFiles/RTCAN_FT.dir/src/RTCAN_FT_Client.cpp.i
-.PHONY : src/RTCAN_FT_Client.cpp.i
+src/RTCAN_Motor_Client.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/src/RTCAN_Motor_Client.cpp.i
+.PHONY : src/RTCAN_Motor_Client.cpp.i
 
-src/RTCAN_FT_Client.s: src/RTCAN_FT_Client.cpp.s
+src/RTCAN_Motor_Client.s: src/RTCAN_Motor_Client.cpp.s
 
-.PHONY : src/RTCAN_FT_Client.s
+.PHONY : src/RTCAN_Motor_Client.s
 
 # target to generate assembly for a file
-src/RTCAN_FT_Client.cpp.s:
-	$(MAKE) -f CMakeFiles/RTCAN_FT.dir/build.make CMakeFiles/RTCAN_FT.dir/src/RTCAN_FT_Client.cpp.s
-.PHONY : src/RTCAN_FT_Client.cpp.s
+src/RTCAN_Motor_Client.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/src/RTCAN_Motor_Client.cpp.s
+.PHONY : src/RTCAN_Motor_Client.cpp.s
 
 # Help Target
 help:
@@ -217,15 +243,17 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
+	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... RTCAN_FT"
+	@echo "... RTCAN_Motor"
 	@echo "... CAN"
-	@echo "... src/RTCAN_FT_Client.o"
-	@echo "... src/RTCAN_FT_Client.i"
-	@echo "... src/RTCAN_FT_Client.s"
+	@echo "... Interpolator"
+	@echo "... Robot"
+	@echo "... src/RTCAN_Motor_Client.o"
+	@echo "... src/RTCAN_Motor_Client.i"
+	@echo "... src/RTCAN_Motor_Client.s"
 .PHONY : help
 
 

@@ -1,2 +1,2 @@
-/usr/bin/ar qc libCAN.a  CMakeFiles/CAN.dir/CANDevice.cpp.o CMakeFiles/CAN.dir/ElmoCiA402.cpp.o CMakeFiles/CAN.dir/PCANDevice.cpp.o
-/usr/bin/ranlib libCAN.a
+/usr/bin/ar qc libCANd.a  CMakeFiles/CAN.dir/CANDevice.cpp.o CMakeFiles/CAN.dir/MotorCiA402.cpp.o CMakeFiles/CAN.dir/PCANDevice.cpp.o
+/usr/bin/ranlib libCANd.a
