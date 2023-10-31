@@ -101,11 +101,23 @@ else()
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fPIC" )
+
+# Find includes in the build directories and the include directory
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 execute_process(
         COMMAND ${CMAKE_CXX_COMPILER} -dumpfullversion -dumpversion OUTPUT_VARIABLE GCC_VERSION)
 if(GCC_VERSION VERSION_LESS 5.3.1)
     message(FATAL_ERROR "The installed g++ version is ${GCC_VERSION}. ${PROJECT_NAME} requires g++ 5.3.1 or greater.")
 endif()
+
+# Find the QtWidgets library
+find_package(Qt5 COMPONENTS Widgets Core Quick REQUIRED)
+
+# Enable automatic UIC compilation
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -fno-omit-frame-pointer -fno-inline-functions -fno-inline-functions-called-once -fno-optimize-sibling-calls")
@@ -114,35 +126,87 @@ set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_DEBUG} -pg")
 set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
 
 set(CAN_HEADERS_DIR ${PROJECT_SOURCE_DIR}/include/CAN)
+set(ECAT_HEADERS_DIR ${PROJECT_SOURCE_DIR}/include/EcatSystem)
+set(INTP_HEADERS_DIR ${PROJECT_SOURCE_DIR}/include/Interpolator)
+set(ROBOT_HEADERS_DIR ${PROJECT_SOURCE_DIR}/include/Robot)
+set(QTWIDGET_HEADERS_DIR ${PROJECT_SOURCE_DIR}/include/QtWidgets)
+set(DARKSTYLE_HEADERS_DIR ${PROJECT_SOURCE_DIR}/include/DarkStyleWindow)
 
 include_directories(${PROJ_INSTALL_INCLUDE_DIR})
 include_directories(
         ${KERNELHEADERS_DIR}
         ${CAN_HEADERS_DIR}
+        ${ECAT_HEADERS_DIR}
         ${INTP_HEADERS_DIR}
         ${ROBOT_HEADERS_DIR}
+        ${QTWIDGET_HEADERS_DIR}
+        ${DARKSTYLE_HEADERS_DIR}
 )
 
+# CAN
 add_subdirectory(include/CAN)
+
+# ECAT
+add_subdirectory(include/EcatSystem)
+
 add_subdirectory(include/Interpolator)
 add_subdirectory(include/Robot)
 
-add_executable(${PROJECT_NAME}
-        src/RTCAN_Motor_Client.cpp
+# QT
+add_subdirectory(include/QtWidgets)
+add_subdirectory(include/DarkStyleWindow)
+
+
+# Source files
+set(CTRL_SOURCE_FILES
+    src/RTCAN_Motor_Client.cpp
 )
 
-target_link_libraries(${PROJECT_NAME}
+set(GUI_SOURCE_FILES
+    src/QTmain.cpp
+    src/mainwindow.cpp
+    src/mainwindow.ui
+)
+
+# Add a executable with the above sources
+set(CTRL_EXECUTABLE ${PROJECT_NAME}_ctrl)
+set(GUI_EXECUTABLE ${PROJECT_NAME}_gui)
+add_executable(${CTRL_EXECUTABLE} ${CTRL_SOURCE_FILES})
+add_executable(${GUI_EXECUTABLE} ${GUI_SOURCE_FILES})
+
+# Add shell script file to run the executables and as a link
+file(WRITE ${CMAKE_BINARY_DIR}/run_script.sh "#!/bin/sh\n")
+file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/RTCAN_Motor_ctrl &\n")
+file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/RTCAN_Motor_gui &\n")
+file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "wait")
+
+set(SOURCE_SCRIPT "${CMAKE_BINARY_DIR}/run_script.sh")
+set(SYMLINK_PATH "${CMAKE_SOURCE_DIR}/run_script_symlink.sh")
+execute_process(COMMAND ln -s ${SOURCE_SCRIPT} ${SYMLINK_PATH})
+
+target_link_libraries(${CTRL_EXECUTABLE}
         sub::CAN
         sub::Interpolator
         sub::Robot
         dl
 )
 
+# Use the Widgets module from Qt 5
+target_link_libraries(${GUI_EXECUTABLE}
+    sub::QtWidgets
+    sub::DarkStyleWindow
+    Qt5::Widgets 
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Network
+    Qt5::Quick
+)
+
 # libpcan
 find_path(PCAN_INCLUDE_DIR NAMES libpcanfd.h)
 find_library(PCAN_LIBRARY NAMES pcanfd)
-target_include_directories(${PROJECT_NAME} PUBLIC ${PCAN_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME}
+target_include_directories(${CTRL_EXECUTABLE} PUBLIC ${PCAN_INCLUDE_DIR})
+target_link_libraries(${CTRL_EXECUTABLE}
        ${PCAN_LIBRARY}
 )
 message(STATUS "pcan library: ${PCAN_LIBRARY}")
@@ -152,7 +216,7 @@ message(STATUS "pcan include: ${PCAN_INCLUDE_DIR}")
 find_package(Xenomai 3.1.1 REQUIRED NATIVE)
 message(STATUS "Xenomai found with theses skins: ${Xenomai_SKINS}")
 if(Xenomai_FOUND)
-    target_include_directories(${PROJECT_NAME} PUBLIC ${KERNELHEADERS_DIR})
+    target_include_directories(${CTRL_EXECUTABLE} PUBLIC ${KERNELHEADERS_DIR})
     foreach(comp_lists ${Xenomai_FOUND_COMP})
         #message(STATUS "Xenomai ${comp_lists} includes : ${Xenomai_${comp_lists}_INCLUDE_DIRS}" )
         #message(STATUS "Xenomai ${comp_lists} definitions: ${Xenomai_${comp_lists}_DEFINITIONS}")
@@ -161,10 +225,10 @@ if(Xenomai_FOUND)
         #message(STATUS "Xenomai ${comp_lists} LDFLAGS : ${Xenomai_${comp_lists}_LDFLAGS}")
         #message(STATUS "Xenomai ${comp_lists} DL_FLAGS : ${Xenomai_${comp_lists}_DL_FLAGS}")
 
-        target_include_directories(${PROJECT_NAME} PUBLIC ${Xenomai_${comp_lists}_INCLUDE_DIRS})
+        target_include_directories(${CTRL_EXECUTABLE} PUBLIC ${Xenomai_${comp_lists}_INCLUDE_DIRS})
         # target_link_libraries(${PROJECT_NAME} PUBLIC ${Xenomai_${comp_lists}_LIBRARY_DIRS} ${Xenomai_${comp_lists}_LIBRARIES})
-        target_link_libraries(${PROJECT_NAME} ${Xenomai_${comp_lists}_DL_FLAGS})
-        set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS ${Xenomai_${comp_lists}_DEFINITIONS})
+        target_link_libraries(${CTRL_EXECUTABLE} ${Xenomai_${comp_lists}_DL_FLAGS})
+        set_target_properties(${CTRL_EXECUTABLE} PROPERTIES COMPILE_FLAGS ${Xenomai_${comp_lists}_DEFINITIONS})
     endforeach(comp_lists ${Xenomai_SKINS})
 endif(Xenomai_FOUND)
 

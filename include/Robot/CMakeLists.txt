@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.8)
 project(Robot LANGUAGES CXX)
 
 set(CMAKE_DEBUG_POSTFIX "d")
-
-
 file(GLOB SOURCE_FILES "ServoAxis.cpp" "ServoAxis.h" "PropertyDefinition.h")
 
 

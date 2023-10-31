@@ -1,0 +1,65 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"include/DarkStyleWindow/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "framelesswindow::@0853fdb130f0c777b8f5"
+		}
+	],
+	"id" : "DarkStyleWindow_autogen::@f0091f1f28e587374ecd",
+	"isGeneratorProvided" : true,
+	"name" : "DarkStyleWindow_autogen",
+	"paths" : 
+	{
+		"build" : "include/DarkStyleWindow",
+		"source" : "include/DarkStyleWindow"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/include/DarkStyleWindow/CMakeFiles/DarkStyleWindow_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/include/DarkStyleWindow/CMakeFiles/DarkStyleWindow_autogen.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

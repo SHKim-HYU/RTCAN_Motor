@@ -57,9 +57,22 @@ include include/CAN/CMakeFiles/CAN.dir/progress.make
 # Include the compile flags for this target's objects.
 include include/CAN/CMakeFiles/CAN.dir/flags.make
 
+include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
+include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o: include/CAN/CAN_autogen/mocs_compilation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o -c /home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CAN_autogen/mocs_compilation.cpp
+
+include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.i"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CAN_autogen/mocs_compilation.cpp > CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.i
+
+include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.s"
+	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CAN_autogen/mocs_compilation.cpp -o CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.s
+
 include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
 include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o: ../include/CAN/CANDevice.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o"
 	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/CANDevice.cpp.o -c /home/robot/robot_ws/RTCAN_Motor/include/CAN/CANDevice.cpp
 
 include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.i: cmake_force
@@ -72,7 +85,7 @@ include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.s: cmake_force
 
 include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
 include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: ../include/CAN/MotorCiA402.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o"
 	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/MotorCiA402.cpp.o -c /home/robot/robot_ws/RTCAN_Motor/include/CAN/MotorCiA402.cpp
 
 include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.i: cmake_force
@@ -85,7 +98,7 @@ include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.s: cmake_force
 
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o: include/CAN/CMakeFiles/CAN.dir/flags.make
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o: ../include/CAN/PCANDevice.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o"
 	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CAN.dir/PCANDevice.cpp.o -c /home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.cpp
 
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.i: cmake_force
@@ -98,6 +111,7 @@ include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.s: cmake_force
 
 # Object files for target CAN
 CAN_OBJECTS = \
+"CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/CAN.dir/CANDevice.cpp.o" \
 "CMakeFiles/CAN.dir/MotorCiA402.cpp.o" \
 "CMakeFiles/CAN.dir/PCANDevice.cpp.o"
@@ -105,17 +119,18 @@ CAN_OBJECTS = \
 # External object files for target CAN
 CAN_EXTERNAL_OBJECTS =
 
-include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o
-include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o
-include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o
-include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/build.make
-include/CAN/libCANd.a: include/CAN/CMakeFiles/CAN.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libCANd.a"
+include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o
+include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o
+include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o
+include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o
+include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/build.make
+include/CAN/libCAN.a: include/CAN/CMakeFiles/CAN.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libCAN.a"
 	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && $(CMAKE_COMMAND) -P CMakeFiles/CAN.dir/cmake_clean_target.cmake
 	cd /home/robot/robot_ws/RTCAN_Motor/build/include/CAN && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CAN.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-include/CAN/CMakeFiles/CAN.dir/build: include/CAN/libCANd.a
+include/CAN/CMakeFiles/CAN.dir/build: include/CAN/libCAN.a
 
 .PHONY : include/CAN/CMakeFiles/CAN.dir/build
 

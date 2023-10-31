@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "Release")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -40,8 +40,11 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/robot/robot_ws/RTCAN_Motor/build/include/CAN/cmake_install.cmake")
+  include("/home/robot/robot_ws/RTCAN_Motor/build/include/EcatSystem/cmake_install.cmake")
   include("/home/robot/robot_ws/RTCAN_Motor/build/include/Interpolator/cmake_install.cmake")
   include("/home/robot/robot_ws/RTCAN_Motor/build/include/Robot/cmake_install.cmake")
+  include("/home/robot/robot_ws/RTCAN_Motor/build/include/QtWidgets/cmake_install.cmake")
+  include("/home/robot/robot_ws/RTCAN_Motor/build/include/DarkStyleWindow/cmake_install.cmake")
 
 endif()
 

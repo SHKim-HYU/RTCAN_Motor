@@ -171,6 +171,48 @@ Interpolator/fast:
 	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Interpolator/CMakeFiles/Interpolator.dir/build.make include/Interpolator/CMakeFiles/Interpolator.dir/build
 .PHONY : Interpolator/fast
 
+# Convenience name for target.
+include/Interpolator/CMakeFiles/Interpolator_autogen.dir/rule:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f CMakeFiles/Makefile2 include/Interpolator/CMakeFiles/Interpolator_autogen.dir/rule
+.PHONY : include/Interpolator/CMakeFiles/Interpolator_autogen.dir/rule
+
+# Convenience name for target.
+Interpolator_autogen: include/Interpolator/CMakeFiles/Interpolator_autogen.dir/rule
+
+.PHONY : Interpolator_autogen
+
+# fast build rule for target.
+Interpolator_autogen/fast:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Interpolator/CMakeFiles/Interpolator_autogen.dir/build.make include/Interpolator/CMakeFiles/Interpolator_autogen.dir/build
+.PHONY : Interpolator_autogen/fast
+
+Interpolator_autogen/mocs_compilation.o: Interpolator_autogen/mocs_compilation.cpp.o
+
+.PHONY : Interpolator_autogen/mocs_compilation.o
+
+# target to build an object file
+Interpolator_autogen/mocs_compilation.cpp.o:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Interpolator/CMakeFiles/Interpolator.dir/build.make include/Interpolator/CMakeFiles/Interpolator.dir/Interpolator_autogen/mocs_compilation.cpp.o
+.PHONY : Interpolator_autogen/mocs_compilation.cpp.o
+
+Interpolator_autogen/mocs_compilation.i: Interpolator_autogen/mocs_compilation.cpp.i
+
+.PHONY : Interpolator_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+Interpolator_autogen/mocs_compilation.cpp.i:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Interpolator/CMakeFiles/Interpolator.dir/build.make include/Interpolator/CMakeFiles/Interpolator.dir/Interpolator_autogen/mocs_compilation.cpp.i
+.PHONY : Interpolator_autogen/mocs_compilation.cpp.i
+
+Interpolator_autogen/mocs_compilation.s: Interpolator_autogen/mocs_compilation.cpp.s
+
+.PHONY : Interpolator_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+Interpolator_autogen/mocs_compilation.cpp.s:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Interpolator/CMakeFiles/Interpolator.dir/build.make include/Interpolator/CMakeFiles/Interpolator.dir/Interpolator_autogen/mocs_compilation.cpp.s
+.PHONY : Interpolator_autogen/mocs_compilation.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -184,6 +226,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Interpolator"
+	@echo "... Interpolator_autogen"
+	@echo "... Interpolator_autogen/mocs_compilation.o"
+	@echo "... Interpolator_autogen/mocs_compilation.i"
+	@echo "... Interpolator_autogen/mocs_compilation.s"
 .PHONY : help
 
 

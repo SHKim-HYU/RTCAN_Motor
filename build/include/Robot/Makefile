@@ -171,6 +171,48 @@ Robot/fast:
 	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Robot/CMakeFiles/Robot.dir/build.make include/Robot/CMakeFiles/Robot.dir/build
 .PHONY : Robot/fast
 
+# Convenience name for target.
+include/Robot/CMakeFiles/Robot_autogen.dir/rule:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f CMakeFiles/Makefile2 include/Robot/CMakeFiles/Robot_autogen.dir/rule
+.PHONY : include/Robot/CMakeFiles/Robot_autogen.dir/rule
+
+# Convenience name for target.
+Robot_autogen: include/Robot/CMakeFiles/Robot_autogen.dir/rule
+
+.PHONY : Robot_autogen
+
+# fast build rule for target.
+Robot_autogen/fast:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Robot/CMakeFiles/Robot_autogen.dir/build.make include/Robot/CMakeFiles/Robot_autogen.dir/build
+.PHONY : Robot_autogen/fast
+
+Robot_autogen/mocs_compilation.o: Robot_autogen/mocs_compilation.cpp.o
+
+.PHONY : Robot_autogen/mocs_compilation.o
+
+# target to build an object file
+Robot_autogen/mocs_compilation.cpp.o:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Robot/CMakeFiles/Robot.dir/build.make include/Robot/CMakeFiles/Robot.dir/Robot_autogen/mocs_compilation.cpp.o
+.PHONY : Robot_autogen/mocs_compilation.cpp.o
+
+Robot_autogen/mocs_compilation.i: Robot_autogen/mocs_compilation.cpp.i
+
+.PHONY : Robot_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+Robot_autogen/mocs_compilation.cpp.i:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Robot/CMakeFiles/Robot.dir/build.make include/Robot/CMakeFiles/Robot.dir/Robot_autogen/mocs_compilation.cpp.i
+.PHONY : Robot_autogen/mocs_compilation.cpp.i
+
+Robot_autogen/mocs_compilation.s: Robot_autogen/mocs_compilation.cpp.s
+
+.PHONY : Robot_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+Robot_autogen/mocs_compilation.cpp.s:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/Robot/CMakeFiles/Robot.dir/build.make include/Robot/CMakeFiles/Robot.dir/Robot_autogen/mocs_compilation.cpp.s
+.PHONY : Robot_autogen/mocs_compilation.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -184,6 +226,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Robot"
+	@echo "... Robot_autogen"
+	@echo "... Robot_autogen/mocs_compilation.o"
+	@echo "... Robot_autogen/mocs_compilation.i"
+	@echo "... Robot_autogen/mocs_compilation.s"
 .PHONY : help
 
 

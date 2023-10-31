@@ -157,17 +157,56 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named RTCAN_Motor
+# Target rules for targets named RTCAN_Motor_gui
 
 # Build rule for target.
-RTCAN_Motor: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor
-.PHONY : RTCAN_Motor
+RTCAN_Motor_gui: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_gui
+.PHONY : RTCAN_Motor_gui
 
 # fast build rule for target.
-RTCAN_Motor/fast:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/build
-.PHONY : RTCAN_Motor/fast
+RTCAN_Motor_gui/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/build
+.PHONY : RTCAN_Motor_gui/fast
+
+#=============================================================================
+# Target rules for targets named RTCAN_Motor_ctrl
+
+# Build rule for target.
+RTCAN_Motor_ctrl: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_ctrl
+.PHONY : RTCAN_Motor_ctrl
+
+# fast build rule for target.
+RTCAN_Motor_ctrl/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/build
+.PHONY : RTCAN_Motor_ctrl/fast
+
+#=============================================================================
+# Target rules for targets named RTCAN_Motor_gui_autogen
+
+# Build rule for target.
+RTCAN_Motor_gui_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_gui_autogen
+.PHONY : RTCAN_Motor_gui_autogen
+
+# fast build rule for target.
+RTCAN_Motor_gui_autogen/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui_autogen.dir/build.make CMakeFiles/RTCAN_Motor_gui_autogen.dir/build
+.PHONY : RTCAN_Motor_gui_autogen/fast
+
+#=============================================================================
+# Target rules for targets named RTCAN_Motor_ctrl_autogen
+
+# Build rule for target.
+RTCAN_Motor_ctrl_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_ctrl_autogen
+.PHONY : RTCAN_Motor_ctrl_autogen
+
+# fast build rule for target.
+RTCAN_Motor_ctrl_autogen/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/build.make CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/build
+.PHONY : RTCAN_Motor_ctrl_autogen/fast
 
 #=============================================================================
 # Target rules for targets named CAN
@@ -183,6 +222,45 @@ CAN/fast:
 .PHONY : CAN/fast
 
 #=============================================================================
+# Target rules for targets named CAN_autogen
+
+# Build rule for target.
+CAN_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 CAN_autogen
+.PHONY : CAN_autogen
+
+# fast build rule for target.
+CAN_autogen/fast:
+	$(MAKE) -f include/CAN/CMakeFiles/CAN_autogen.dir/build.make include/CAN/CMakeFiles/CAN_autogen.dir/build
+.PHONY : CAN_autogen/fast
+
+#=============================================================================
+# Target rules for targets named EcatSystem
+
+# Build rule for target.
+EcatSystem: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 EcatSystem
+.PHONY : EcatSystem
+
+# fast build rule for target.
+EcatSystem/fast:
+	$(MAKE) -f include/EcatSystem/CMakeFiles/EcatSystem.dir/build.make include/EcatSystem/CMakeFiles/EcatSystem.dir/build
+.PHONY : EcatSystem/fast
+
+#=============================================================================
+# Target rules for targets named EcatSystem_autogen
+
+# Build rule for target.
+EcatSystem_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 EcatSystem_autogen
+.PHONY : EcatSystem_autogen
+
+# fast build rule for target.
+EcatSystem_autogen/fast:
+	$(MAKE) -f include/EcatSystem/CMakeFiles/EcatSystem_autogen.dir/build.make include/EcatSystem/CMakeFiles/EcatSystem_autogen.dir/build
+.PHONY : EcatSystem_autogen/fast
+
+#=============================================================================
 # Target rules for targets named Interpolator
 
 # Build rule for target.
@@ -194,6 +272,19 @@ Interpolator: cmake_check_build_system
 Interpolator/fast:
 	$(MAKE) -f include/Interpolator/CMakeFiles/Interpolator.dir/build.make include/Interpolator/CMakeFiles/Interpolator.dir/build
 .PHONY : Interpolator/fast
+
+#=============================================================================
+# Target rules for targets named Interpolator_autogen
+
+# Build rule for target.
+Interpolator_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Interpolator_autogen
+.PHONY : Interpolator_autogen
+
+# fast build rule for target.
+Interpolator_autogen/fast:
+	$(MAKE) -f include/Interpolator/CMakeFiles/Interpolator_autogen.dir/build.make include/Interpolator/CMakeFiles/Interpolator_autogen.dir/build
+.PHONY : Interpolator_autogen/fast
 
 #=============================================================================
 # Target rules for targets named Robot
@@ -208,13 +299,185 @@ Robot/fast:
 	$(MAKE) -f include/Robot/CMakeFiles/Robot.dir/build.make include/Robot/CMakeFiles/Robot.dir/build
 .PHONY : Robot/fast
 
+#=============================================================================
+# Target rules for targets named Robot_autogen
+
+# Build rule for target.
+Robot_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Robot_autogen
+.PHONY : Robot_autogen
+
+# fast build rule for target.
+Robot_autogen/fast:
+	$(MAKE) -f include/Robot/CMakeFiles/Robot_autogen.dir/build.make include/Robot/CMakeFiles/Robot_autogen.dir/build
+.PHONY : Robot_autogen/fast
+
+#=============================================================================
+# Target rules for targets named QtWidgets
+
+# Build rule for target.
+QtWidgets: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 QtWidgets
+.PHONY : QtWidgets
+
+# fast build rule for target.
+QtWidgets/fast:
+	$(MAKE) -f include/QtWidgets/CMakeFiles/QtWidgets.dir/build.make include/QtWidgets/CMakeFiles/QtWidgets.dir/build
+.PHONY : QtWidgets/fast
+
+#=============================================================================
+# Target rules for targets named QtWidgets_autogen
+
+# Build rule for target.
+QtWidgets_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 QtWidgets_autogen
+.PHONY : QtWidgets_autogen
+
+# fast build rule for target.
+QtWidgets_autogen/fast:
+	$(MAKE) -f include/QtWidgets/CMakeFiles/QtWidgets_autogen.dir/build.make include/QtWidgets/CMakeFiles/QtWidgets_autogen.dir/build
+.PHONY : QtWidgets_autogen/fast
+
+#=============================================================================
+# Target rules for targets named DarkStyleWindow
+
+# Build rule for target.
+DarkStyleWindow: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 DarkStyleWindow
+.PHONY : DarkStyleWindow
+
+# fast build rule for target.
+DarkStyleWindow/fast:
+	$(MAKE) -f include/DarkStyleWindow/CMakeFiles/DarkStyleWindow.dir/build.make include/DarkStyleWindow/CMakeFiles/DarkStyleWindow.dir/build
+.PHONY : DarkStyleWindow/fast
+
+#=============================================================================
+# Target rules for targets named DarkStyleWindow_autogen
+
+# Build rule for target.
+DarkStyleWindow_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 DarkStyleWindow_autogen
+.PHONY : DarkStyleWindow_autogen
+
+# fast build rule for target.
+DarkStyleWindow_autogen/fast:
+	$(MAKE) -f include/DarkStyleWindow/CMakeFiles/DarkStyleWindow_autogen.dir/build.make include/DarkStyleWindow/CMakeFiles/DarkStyleWindow_autogen.dir/build
+.PHONY : DarkStyleWindow_autogen/fast
+
+#=============================================================================
+# Target rules for targets named framelesswindow
+
+# Build rule for target.
+framelesswindow: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 framelesswindow
+.PHONY : framelesswindow
+
+# fast build rule for target.
+framelesswindow/fast:
+	$(MAKE) -f include/DarkStyleWindow/framelesswindow/CMakeFiles/framelesswindow.dir/build.make include/DarkStyleWindow/framelesswindow/CMakeFiles/framelesswindow.dir/build
+.PHONY : framelesswindow/fast
+
+#=============================================================================
+# Target rules for targets named framelesswindow_autogen
+
+# Build rule for target.
+framelesswindow_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 framelesswindow_autogen
+.PHONY : framelesswindow_autogen
+
+# fast build rule for target.
+framelesswindow_autogen/fast:
+	$(MAKE) -f include/DarkStyleWindow/framelesswindow/CMakeFiles/framelesswindow_autogen.dir/build.make include/DarkStyleWindow/framelesswindow/CMakeFiles/framelesswindow_autogen.dir/build
+.PHONY : framelesswindow_autogen/fast
+
+RTCAN_Motor_ctrl_autogen/mocs_compilation.o: RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.o
+
+.PHONY : RTCAN_Motor_ctrl_autogen/mocs_compilation.o
+
+# target to build an object file
+RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.o
+.PHONY : RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.o
+
+RTCAN_Motor_ctrl_autogen/mocs_compilation.i: RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.i
+
+.PHONY : RTCAN_Motor_ctrl_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.i
+.PHONY : RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.i
+
+RTCAN_Motor_ctrl_autogen/mocs_compilation.s: RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.s
+
+.PHONY : RTCAN_Motor_ctrl_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.s
+.PHONY : RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp.s
+
+RTCAN_Motor_gui_autogen/mocs_compilation.o: RTCAN_Motor_gui_autogen/mocs_compilation.cpp.o
+
+.PHONY : RTCAN_Motor_gui_autogen/mocs_compilation.o
+
+# target to build an object file
+RTCAN_Motor_gui_autogen/mocs_compilation.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/RTCAN_Motor_gui_autogen/mocs_compilation.cpp.o
+.PHONY : RTCAN_Motor_gui_autogen/mocs_compilation.cpp.o
+
+RTCAN_Motor_gui_autogen/mocs_compilation.i: RTCAN_Motor_gui_autogen/mocs_compilation.cpp.i
+
+.PHONY : RTCAN_Motor_gui_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+RTCAN_Motor_gui_autogen/mocs_compilation.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/RTCAN_Motor_gui_autogen/mocs_compilation.cpp.i
+.PHONY : RTCAN_Motor_gui_autogen/mocs_compilation.cpp.i
+
+RTCAN_Motor_gui_autogen/mocs_compilation.s: RTCAN_Motor_gui_autogen/mocs_compilation.cpp.s
+
+.PHONY : RTCAN_Motor_gui_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+RTCAN_Motor_gui_autogen/mocs_compilation.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/RTCAN_Motor_gui_autogen/mocs_compilation.cpp.s
+.PHONY : RTCAN_Motor_gui_autogen/mocs_compilation.cpp.s
+
+src/QTmain.o: src/QTmain.cpp.o
+
+.PHONY : src/QTmain.o
+
+# target to build an object file
+src/QTmain.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/src/QTmain.cpp.o
+.PHONY : src/QTmain.cpp.o
+
+src/QTmain.i: src/QTmain.cpp.i
+
+.PHONY : src/QTmain.i
+
+# target to preprocess a source file
+src/QTmain.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/src/QTmain.cpp.i
+.PHONY : src/QTmain.cpp.i
+
+src/QTmain.s: src/QTmain.cpp.s
+
+.PHONY : src/QTmain.s
+
+# target to generate assembly for a file
+src/QTmain.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/src/QTmain.cpp.s
+.PHONY : src/QTmain.cpp.s
+
 src/RTCAN_Motor_Client.o: src/RTCAN_Motor_Client.cpp.o
 
 .PHONY : src/RTCAN_Motor_Client.o
 
 # target to build an object file
 src/RTCAN_Motor_Client.cpp.o:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/src/RTCAN_Motor_Client.cpp.o
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/src/RTCAN_Motor_Client.cpp.o
 .PHONY : src/RTCAN_Motor_Client.cpp.o
 
 src/RTCAN_Motor_Client.i: src/RTCAN_Motor_Client.cpp.i
@@ -223,7 +486,7 @@ src/RTCAN_Motor_Client.i: src/RTCAN_Motor_Client.cpp.i
 
 # target to preprocess a source file
 src/RTCAN_Motor_Client.cpp.i:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/src/RTCAN_Motor_Client.cpp.i
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/src/RTCAN_Motor_Client.cpp.i
 .PHONY : src/RTCAN_Motor_Client.cpp.i
 
 src/RTCAN_Motor_Client.s: src/RTCAN_Motor_Client.cpp.s
@@ -232,8 +495,35 @@ src/RTCAN_Motor_Client.s: src/RTCAN_Motor_Client.cpp.s
 
 # target to generate assembly for a file
 src/RTCAN_Motor_Client.cpp.s:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor.dir/build.make CMakeFiles/RTCAN_Motor.dir/src/RTCAN_Motor_Client.cpp.s
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/src/RTCAN_Motor_Client.cpp.s
 .PHONY : src/RTCAN_Motor_Client.cpp.s
+
+src/mainwindow.o: src/mainwindow.cpp.o
+
+.PHONY : src/mainwindow.o
+
+# target to build an object file
+src/mainwindow.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/src/mainwindow.cpp.o
+.PHONY : src/mainwindow.cpp.o
+
+src/mainwindow.i: src/mainwindow.cpp.i
+
+.PHONY : src/mainwindow.i
+
+# target to preprocess a source file
+src/mainwindow.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/src/mainwindow.cpp.i
+.PHONY : src/mainwindow.cpp.i
+
+src/mainwindow.s: src/mainwindow.cpp.s
+
+.PHONY : src/mainwindow.s
+
+# target to generate assembly for a file
+src/mainwindow.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/src/mainwindow.cpp.s
+.PHONY : src/mainwindow.cpp.s
 
 # Help Target
 help:
@@ -247,13 +537,39 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... RTCAN_Motor"
+	@echo "... RTCAN_Motor_gui"
+	@echo "... RTCAN_Motor_ctrl"
+	@echo "... RTCAN_Motor_gui_autogen"
+	@echo "... RTCAN_Motor_ctrl_autogen"
 	@echo "... CAN"
+	@echo "... CAN_autogen"
+	@echo "... EcatSystem"
+	@echo "... EcatSystem_autogen"
 	@echo "... Interpolator"
+	@echo "... Interpolator_autogen"
 	@echo "... Robot"
+	@echo "... Robot_autogen"
+	@echo "... QtWidgets"
+	@echo "... QtWidgets_autogen"
+	@echo "... DarkStyleWindow"
+	@echo "... DarkStyleWindow_autogen"
+	@echo "... framelesswindow"
+	@echo "... framelesswindow_autogen"
+	@echo "... RTCAN_Motor_ctrl_autogen/mocs_compilation.o"
+	@echo "... RTCAN_Motor_ctrl_autogen/mocs_compilation.i"
+	@echo "... RTCAN_Motor_ctrl_autogen/mocs_compilation.s"
+	@echo "... RTCAN_Motor_gui_autogen/mocs_compilation.o"
+	@echo "... RTCAN_Motor_gui_autogen/mocs_compilation.i"
+	@echo "... RTCAN_Motor_gui_autogen/mocs_compilation.s"
+	@echo "... src/QTmain.o"
+	@echo "... src/QTmain.i"
+	@echo "... src/QTmain.s"
 	@echo "... src/RTCAN_Motor_Client.o"
 	@echo "... src/RTCAN_Motor_Client.i"
 	@echo "... src/RTCAN_Motor_Client.s"
+	@echo "... src/mainwindow.o"
+	@echo "... src/mainwindow.i"
+	@echo "... src/mainwindow.s"
 .PHONY : help
 
 

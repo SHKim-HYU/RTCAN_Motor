@@ -171,6 +171,21 @@ CAN/fast:
 	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/CAN/CMakeFiles/CAN.dir/build.make include/CAN/CMakeFiles/CAN.dir/build
 .PHONY : CAN/fast
 
+# Convenience name for target.
+include/CAN/CMakeFiles/CAN_autogen.dir/rule:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f CMakeFiles/Makefile2 include/CAN/CMakeFiles/CAN_autogen.dir/rule
+.PHONY : include/CAN/CMakeFiles/CAN_autogen.dir/rule
+
+# Convenience name for target.
+CAN_autogen: include/CAN/CMakeFiles/CAN_autogen.dir/rule
+
+.PHONY : CAN_autogen
+
+# fast build rule for target.
+CAN_autogen/fast:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/CAN/CMakeFiles/CAN_autogen.dir/build.make include/CAN/CMakeFiles/CAN_autogen.dir/build
+.PHONY : CAN_autogen/fast
+
 CANDevice.o: CANDevice.cpp.o
 
 .PHONY : CANDevice.o
@@ -197,6 +212,33 @@ CANDevice.s: CANDevice.cpp.s
 CANDevice.cpp.s:
 	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/CAN/CMakeFiles/CAN.dir/build.make include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.s
 .PHONY : CANDevice.cpp.s
+
+CAN_autogen/mocs_compilation.o: CAN_autogen/mocs_compilation.cpp.o
+
+.PHONY : CAN_autogen/mocs_compilation.o
+
+# target to build an object file
+CAN_autogen/mocs_compilation.cpp.o:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/CAN/CMakeFiles/CAN.dir/build.make include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o
+.PHONY : CAN_autogen/mocs_compilation.cpp.o
+
+CAN_autogen/mocs_compilation.i: CAN_autogen/mocs_compilation.cpp.i
+
+.PHONY : CAN_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+CAN_autogen/mocs_compilation.cpp.i:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/CAN/CMakeFiles/CAN.dir/build.make include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.i
+.PHONY : CAN_autogen/mocs_compilation.cpp.i
+
+CAN_autogen/mocs_compilation.s: CAN_autogen/mocs_compilation.cpp.s
+
+.PHONY : CAN_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+CAN_autogen/mocs_compilation.cpp.s:
+	cd /home/robot/robot_ws/RTCAN_Motor/build && $(MAKE) -f include/CAN/CMakeFiles/CAN.dir/build.make include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.s
+.PHONY : CAN_autogen/mocs_compilation.cpp.s
 
 MotorCiA402.o: MotorCiA402.cpp.o
 
@@ -265,9 +307,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... CAN"
+	@echo "... CAN_autogen"
 	@echo "... CANDevice.o"
 	@echo "... CANDevice.i"
 	@echo "... CANDevice.s"
+	@echo "... CAN_autogen/mocs_compilation.o"
+	@echo "... CAN_autogen/mocs_compilation.i"
+	@echo "... CAN_autogen/mocs_compilation.s"
 	@echo "... MotorCiA402.o"
 	@echo "... MotorCiA402.i"
 	@echo "... MotorCiA402.s"

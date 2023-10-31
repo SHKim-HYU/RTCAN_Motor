@@ -1,5 +1,5 @@
-#ifndef RTCAN_FT_CLIENT_H_
-#define RTCAN_FT_CLIENT_H_
+#ifndef RTCAN_MOTOR_CLIENT_H_
+#define RTCAN_MOTOR_CLIENT_H_
 
 #include <stdio.h>
 #include "iostream"
@@ -11,6 +11,7 @@
 #include <native/task.h>
 #include <native/timer.h>
 
+// Peak CAN
 #include <PCANDevice.h>
 
 // PCI/E-FD
@@ -19,6 +20,8 @@
 RT_TASK can_task;
 
 PCANDevice can;
+
+using namespace std;
 
 unsigned int cycle_ns = 1000000; // 1 ms
 
@@ -81,7 +84,6 @@ void can_comm_task(void *arg)
     }
     can.Close();
 }
-
 
 void signal_handler(int signum)
 {
