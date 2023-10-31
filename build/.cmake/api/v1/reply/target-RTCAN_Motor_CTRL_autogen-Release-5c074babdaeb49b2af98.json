@@ -29,9 +29,9 @@
 			"id" : "Robot::@bc8f6043f00d71530807"
 		}
 	],
-	"id" : "RTCAN_Motor_ctrl_autogen::@6890427a1f51a3e7e1df",
+	"id" : "RTCAN_Motor_CTRL_autogen::@6890427a1f51a3e7e1df",
 	"isGeneratorProvided" : true,
-	"name" : "RTCAN_Motor_ctrl_autogen",
+	"name" : "RTCAN_Motor_CTRL_autogen",
 	"paths" : 
 	{
 		"build" : ".",
@@ -59,13 +59,13 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/RTCAN_Motor_ctrl_autogen",
+			"path" : "build/CMakeFiles/RTCAN_Motor_CTRL_autogen",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/RTCAN_Motor_ctrl_autogen.rule",
+			"path" : "build/CMakeFiles/RTCAN_Motor_CTRL_autogen.rule",
 			"sourceGroupIndex" : 1
 		}
 	],

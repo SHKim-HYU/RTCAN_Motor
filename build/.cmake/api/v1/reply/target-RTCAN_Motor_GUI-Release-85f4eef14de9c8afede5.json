@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "RTCAN_Motor_gui"
+			"path" : "RTCAN_Motor_GUI"
 		}
 	],
 	"backtrace" : 1,
@@ -110,7 +110,7 @@
 				},
 				{
 					"backtrace" : 0,
-					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_gui_autogen/include"
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_GUI_autogen/include"
 				},
 				{
 					"backtrace" : 3,
@@ -219,10 +219,10 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "RTCAN_Motor_gui_autogen::@6890427a1f51a3e7e1df"
+			"id" : "RTCAN_Motor_GUI_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "RTCAN_Motor_gui::@6890427a1f51a3e7e1df",
+	"id" : "RTCAN_Motor_GUI::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -289,8 +289,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "RTCAN_Motor_gui",
-	"nameOnDisk" : "RTCAN_Motor_gui",
+	"name" : "RTCAN_Motor_GUI",
+	"nameOnDisk" : "RTCAN_Motor_GUI",
 	"paths" : 
 	{
 		"build" : ".",
@@ -321,7 +321,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/RTCAN_Motor_gui_autogen/mocs_compilation.cpp",
+			"path" : "build/RTCAN_Motor_GUI_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

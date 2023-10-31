@@ -53,8 +53,8 @@ CMAKE_BINARY_DIR = /home/robot/robot_ws/RTCAN_Motor/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/RTCAN_Motor_gui.dir/all
-all: CMakeFiles/RTCAN_Motor_ctrl.dir/all
+all: CMakeFiles/RTCAN_Motor_GUI.dir/all
+all: CMakeFiles/RTCAN_Motor_CTRL.dir/all
 all: include/CAN/all
 all: include/EcatSystem/all
 all: include/Interpolator/all
@@ -75,10 +75,10 @@ preinstall: include/DarkStyleWindow/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/RTCAN_Motor_gui.dir/clean
-clean: CMakeFiles/RTCAN_Motor_ctrl.dir/clean
-clean: CMakeFiles/RTCAN_Motor_gui_autogen.dir/clean
-clean: CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/clean
+clean: CMakeFiles/RTCAN_Motor_GUI.dir/clean
+clean: CMakeFiles/RTCAN_Motor_CTRL.dir/clean
+clean: CMakeFiles/RTCAN_Motor_GUI_autogen.dir/clean
+clean: CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/clean
 clean: include/CAN/clean
 clean: include/EcatSystem/clean
 clean: include/Interpolator/clean
@@ -266,121 +266,121 @@ include/Robot/clean: include/Robot/CMakeFiles/Robot_autogen.dir/clean
 .PHONY : include/Robot/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/RTCAN_Motor_gui.dir
+# Target rules for target CMakeFiles/RTCAN_Motor_GUI.dir
 
 # All Build rule for target.
-CMakeFiles/RTCAN_Motor_gui.dir/all: include/QtWidgets/CMakeFiles/QtWidgets.dir/all
-CMakeFiles/RTCAN_Motor_gui.dir/all: include/DarkStyleWindow/CMakeFiles/DarkStyleWindow.dir/all
-CMakeFiles/RTCAN_Motor_gui.dir/all: include/DarkStyleWindow/framelesswindow/CMakeFiles/framelesswindow.dir/all
-CMakeFiles/RTCAN_Motor_gui.dir/all: CMakeFiles/RTCAN_Motor_gui_autogen.dir/all
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/depend
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=36,37,38,39 "Built target RTCAN_Motor_gui"
-.PHONY : CMakeFiles/RTCAN_Motor_gui.dir/all
+CMakeFiles/RTCAN_Motor_GUI.dir/all: include/QtWidgets/CMakeFiles/QtWidgets.dir/all
+CMakeFiles/RTCAN_Motor_GUI.dir/all: include/DarkStyleWindow/CMakeFiles/DarkStyleWindow.dir/all
+CMakeFiles/RTCAN_Motor_GUI.dir/all: include/DarkStyleWindow/framelesswindow/CMakeFiles/framelesswindow.dir/all
+CMakeFiles/RTCAN_Motor_GUI.dir/all: CMakeFiles/RTCAN_Motor_GUI_autogen.dir/all
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/depend
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=36,37,38,39 "Built target RTCAN_Motor_GUI"
+.PHONY : CMakeFiles/RTCAN_Motor_GUI.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/RTCAN_Motor_gui.dir/rule: cmake_check_build_system
+CMakeFiles/RTCAN_Motor_GUI.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 27
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_gui.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_GUI.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 0
-.PHONY : CMakeFiles/RTCAN_Motor_gui.dir/rule
+.PHONY : CMakeFiles/RTCAN_Motor_GUI.dir/rule
 
 # Convenience name for target.
-RTCAN_Motor_gui: CMakeFiles/RTCAN_Motor_gui.dir/rule
+RTCAN_Motor_GUI: CMakeFiles/RTCAN_Motor_GUI.dir/rule
 
-.PHONY : RTCAN_Motor_gui
+.PHONY : RTCAN_Motor_GUI
 
 # clean rule for target.
-CMakeFiles/RTCAN_Motor_gui.dir/clean:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui.dir/build.make CMakeFiles/RTCAN_Motor_gui.dir/clean
-.PHONY : CMakeFiles/RTCAN_Motor_gui.dir/clean
+CMakeFiles/RTCAN_Motor_GUI.dir/clean:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/clean
+.PHONY : CMakeFiles/RTCAN_Motor_GUI.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/RTCAN_Motor_ctrl.dir
+# Target rules for target CMakeFiles/RTCAN_Motor_CTRL.dir
 
 # All Build rule for target.
-CMakeFiles/RTCAN_Motor_ctrl.dir/all: include/CAN/CMakeFiles/CAN.dir/all
-CMakeFiles/RTCAN_Motor_ctrl.dir/all: include/Interpolator/CMakeFiles/Interpolator.dir/all
-CMakeFiles/RTCAN_Motor_ctrl.dir/all: include/Robot/CMakeFiles/Robot.dir/all
-CMakeFiles/RTCAN_Motor_ctrl.dir/all: CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/all
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/depend
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=32,33,34 "Built target RTCAN_Motor_ctrl"
-.PHONY : CMakeFiles/RTCAN_Motor_ctrl.dir/all
+CMakeFiles/RTCAN_Motor_CTRL.dir/all: include/CAN/CMakeFiles/CAN.dir/all
+CMakeFiles/RTCAN_Motor_CTRL.dir/all: include/Interpolator/CMakeFiles/Interpolator.dir/all
+CMakeFiles/RTCAN_Motor_CTRL.dir/all: include/Robot/CMakeFiles/Robot.dir/all
+CMakeFiles/RTCAN_Motor_CTRL.dir/all: CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/all
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL.dir/build.make CMakeFiles/RTCAN_Motor_CTRL.dir/depend
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL.dir/build.make CMakeFiles/RTCAN_Motor_CTRL.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=32,33,34 "Built target RTCAN_Motor_CTRL"
+.PHONY : CMakeFiles/RTCAN_Motor_CTRL.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/RTCAN_Motor_ctrl.dir/rule: cmake_check_build_system
+CMakeFiles/RTCAN_Motor_CTRL.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 16
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_ctrl.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_CTRL.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 0
-.PHONY : CMakeFiles/RTCAN_Motor_ctrl.dir/rule
+.PHONY : CMakeFiles/RTCAN_Motor_CTRL.dir/rule
 
 # Convenience name for target.
-RTCAN_Motor_ctrl: CMakeFiles/RTCAN_Motor_ctrl.dir/rule
+RTCAN_Motor_CTRL: CMakeFiles/RTCAN_Motor_CTRL.dir/rule
 
-.PHONY : RTCAN_Motor_ctrl
+.PHONY : RTCAN_Motor_CTRL
 
 # clean rule for target.
-CMakeFiles/RTCAN_Motor_ctrl.dir/clean:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl.dir/build.make CMakeFiles/RTCAN_Motor_ctrl.dir/clean
-.PHONY : CMakeFiles/RTCAN_Motor_ctrl.dir/clean
+CMakeFiles/RTCAN_Motor_CTRL.dir/clean:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL.dir/build.make CMakeFiles/RTCAN_Motor_CTRL.dir/clean
+.PHONY : CMakeFiles/RTCAN_Motor_CTRL.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/RTCAN_Motor_gui_autogen.dir
+# Target rules for target CMakeFiles/RTCAN_Motor_GUI_autogen.dir
 
 # All Build rule for target.
-CMakeFiles/RTCAN_Motor_gui_autogen.dir/all: include/QtWidgets/CMakeFiles/QtWidgets.dir/all
-CMakeFiles/RTCAN_Motor_gui_autogen.dir/all: include/DarkStyleWindow/CMakeFiles/DarkStyleWindow.dir/all
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui_autogen.dir/build.make CMakeFiles/RTCAN_Motor_gui_autogen.dir/depend
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui_autogen.dir/build.make CMakeFiles/RTCAN_Motor_gui_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=40 "Built target RTCAN_Motor_gui_autogen"
-.PHONY : CMakeFiles/RTCAN_Motor_gui_autogen.dir/all
+CMakeFiles/RTCAN_Motor_GUI_autogen.dir/all: include/QtWidgets/CMakeFiles/QtWidgets.dir/all
+CMakeFiles/RTCAN_Motor_GUI_autogen.dir/all: include/DarkStyleWindow/CMakeFiles/DarkStyleWindow.dir/all
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI_autogen.dir/build.make CMakeFiles/RTCAN_Motor_GUI_autogen.dir/depend
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI_autogen.dir/build.make CMakeFiles/RTCAN_Motor_GUI_autogen.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=40 "Built target RTCAN_Motor_GUI_autogen"
+.PHONY : CMakeFiles/RTCAN_Motor_GUI_autogen.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/RTCAN_Motor_gui_autogen.dir/rule: cmake_check_build_system
+CMakeFiles/RTCAN_Motor_GUI_autogen.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 23
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_gui_autogen.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_GUI_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 0
-.PHONY : CMakeFiles/RTCAN_Motor_gui_autogen.dir/rule
+.PHONY : CMakeFiles/RTCAN_Motor_GUI_autogen.dir/rule
 
 # Convenience name for target.
-RTCAN_Motor_gui_autogen: CMakeFiles/RTCAN_Motor_gui_autogen.dir/rule
+RTCAN_Motor_GUI_autogen: CMakeFiles/RTCAN_Motor_GUI_autogen.dir/rule
 
-.PHONY : RTCAN_Motor_gui_autogen
+.PHONY : RTCAN_Motor_GUI_autogen
 
 # clean rule for target.
-CMakeFiles/RTCAN_Motor_gui_autogen.dir/clean:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_gui_autogen.dir/build.make CMakeFiles/RTCAN_Motor_gui_autogen.dir/clean
-.PHONY : CMakeFiles/RTCAN_Motor_gui_autogen.dir/clean
+CMakeFiles/RTCAN_Motor_GUI_autogen.dir/clean:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI_autogen.dir/build.make CMakeFiles/RTCAN_Motor_GUI_autogen.dir/clean
+.PHONY : CMakeFiles/RTCAN_Motor_GUI_autogen.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/RTCAN_Motor_ctrl_autogen.dir
+# Target rules for target CMakeFiles/RTCAN_Motor_CTRL_autogen.dir
 
 # All Build rule for target.
-CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/all: include/CAN/CMakeFiles/CAN.dir/all
-CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/all: include/Interpolator/CMakeFiles/Interpolator.dir/all
-CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/all: include/Robot/CMakeFiles/Robot.dir/all
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/build.make CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/depend
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/build.make CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=35 "Built target RTCAN_Motor_ctrl_autogen"
-.PHONY : CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/all
+CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/all: include/CAN/CMakeFiles/CAN.dir/all
+CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/all: include/Interpolator/CMakeFiles/Interpolator.dir/all
+CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/all: include/Robot/CMakeFiles/Robot.dir/all
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/build.make CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/depend
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/build.make CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles --progress-num=35 "Built target RTCAN_Motor_CTRL_autogen"
+.PHONY : CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/rule: cmake_check_build_system
+CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 13
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles 0
-.PHONY : CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/rule
+.PHONY : CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/rule
 
 # Convenience name for target.
-RTCAN_Motor_ctrl_autogen: CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/rule
+RTCAN_Motor_CTRL_autogen: CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/rule
 
-.PHONY : RTCAN_Motor_ctrl_autogen
+.PHONY : RTCAN_Motor_CTRL_autogen
 
 # clean rule for target.
-CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/clean:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/build.make CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/clean
-.PHONY : CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/clean
+CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/clean:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/build.make CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/clean
+.PHONY : CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/clean
 
 #=============================================================================
 # Target rules for target include/CAN/CMakeFiles/CAN.dir

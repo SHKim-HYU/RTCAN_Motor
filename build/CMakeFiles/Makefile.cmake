@@ -143,8 +143,8 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "CMakeFiles/RTCAN_Motor_gui_autogen.dir/AutogenInfo.json"
-  "CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/AutogenInfo.json"
+  "CMakeFiles/RTCAN_Motor_GUI_autogen.dir/AutogenInfo.json"
+  "CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/AutogenInfo.json"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "include/CAN/CMakeFiles/CMakeDirectoryInformation.cmake"
   "include/EcatSystem/CMakeFiles/CMakeDirectoryInformation.cmake"
@@ -159,10 +159,10 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/RTCAN_Motor_gui.dir/DependInfo.cmake"
-  "CMakeFiles/RTCAN_Motor_ctrl.dir/DependInfo.cmake"
-  "CMakeFiles/RTCAN_Motor_gui_autogen.dir/DependInfo.cmake"
-  "CMakeFiles/RTCAN_Motor_ctrl_autogen.dir/DependInfo.cmake"
+  "CMakeFiles/RTCAN_Motor_GUI.dir/DependInfo.cmake"
+  "CMakeFiles/RTCAN_Motor_CTRL.dir/DependInfo.cmake"
+  "CMakeFiles/RTCAN_Motor_GUI_autogen.dir/DependInfo.cmake"
+  "CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/DependInfo.cmake"
   "include/CAN/CMakeFiles/CAN.dir/DependInfo.cmake"
   "include/CAN/CMakeFiles/CAN_autogen.dir/DependInfo.cmake"
   "include/EcatSystem/CMakeFiles/EcatSystem.dir/DependInfo.cmake"

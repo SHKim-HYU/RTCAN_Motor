@@ -169,15 +169,15 @@ set(GUI_SOURCE_FILES
 )
 
 # Add a executable with the above sources
-set(CTRL_EXECUTABLE ${PROJECT_NAME}_ctrl)
-set(GUI_EXECUTABLE ${PROJECT_NAME}_gui)
+set(CTRL_EXECUTABLE ${PROJECT_NAME}_CTRL)
+set(GUI_EXECUTABLE ${PROJECT_NAME}_GUI)
 add_executable(${CTRL_EXECUTABLE} ${CTRL_SOURCE_FILES})
 add_executable(${GUI_EXECUTABLE} ${GUI_SOURCE_FILES})
 
 # Add shell script file to run the executables and as a link
 file(WRITE ${CMAKE_BINARY_DIR}/run_script.sh "#!/bin/sh\n")
-file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/RTCAN_Motor_ctrl &\n")
-file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/RTCAN_Motor_gui &\n")
+file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/${CTRL_EXECUTABLE} &\n")
+file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/${GUI_EXECUTABLE} &\n")
 file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "wait")
 
 set(SOURCE_SCRIPT "${CMAKE_BINARY_DIR}/run_script.sh")

@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "RTCAN_Motor_ctrl"
+			"path" : "RTCAN_Motor_CTRL"
 		}
 	],
 	"backtrace" : 1,
@@ -81,7 +81,7 @@
 				},
 				{
 					"backtrace" : 0,
-					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_ctrl_autogen/include"
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_CTRL_autogen/include"
 				},
 				{
 					"backtrace" : 3,
@@ -166,10 +166,10 @@
 		},
 		{
 			"backtrace" : 0,
-			"id" : "RTCAN_Motor_ctrl_autogen::@6890427a1f51a3e7e1df"
+			"id" : "RTCAN_Motor_CTRL_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "RTCAN_Motor_ctrl::@6890427a1f51a3e7e1df",
+	"id" : "RTCAN_Motor_CTRL::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -236,8 +236,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "RTCAN_Motor_ctrl",
-	"nameOnDisk" : "RTCAN_Motor_ctrl",
+	"name" : "RTCAN_Motor_CTRL",
+	"nameOnDisk" : "RTCAN_Motor_CTRL",
 	"paths" : 
 	{
 		"build" : ".",
@@ -260,7 +260,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/RTCAN_Motor_ctrl_autogen/mocs_compilation.cpp",
+			"path" : "build/RTCAN_Motor_CTRL_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
