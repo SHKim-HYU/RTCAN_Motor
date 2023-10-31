@@ -48,6 +48,10 @@ typedef struct {
     QLineEdit*              editTargetVel;
     QLabel*                 labelActualVel;
     QLineEdit*              editActualVel;
+    QLabel*                 labelTargetTor;
+    QLineEdit*              editTargetTor;
+    QLabel*                 labelActualTor;
+    QLineEdit*              editActualTor;
     QPushButton*            btnMove;
     QPushButton*            btnJogNDir;
     QPushButton*            btnJogPDir;    
@@ -215,6 +219,9 @@ public slots:
 
     void OnTimerInit();
     void OnTimer();
+
+    void OnClickButtonGetForceData();
+    void OnClickButtonGetTorqueData();
 
     void OnLogMessage(QString &);
 };

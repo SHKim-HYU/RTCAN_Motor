@@ -394,16 +394,56 @@ MainWindow::MainWindow(QWidget *parent)
     tab_Task->setLayout(gl_Task);
     //-------------------------------------------------------------
 
+    // TAB: Sensor Data       
+    QLabel *labelGetForceData = new QLabel("Force [N]");
+    QLineEdit *editGetForceData= new QLineEdit("0");
+    // editGetForceData->setMinimumHeight(lineTextMinHeight);
+    editGetForceData->setMaximumHeight(100);
+    editGetForceData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetForceData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetForceData->setDisabled(true);
+    QPushButton *btnGetForceData = new QPushButton("Read");
+    // btnGetForceData->setMinimumHeight(lineTextMinHeight);
+    btnGetForceData->setMaximumHeight(100);
+    connect(btnGetForceData, SIGNAL(clicked(bool)), SLOT(OnClickButtonGetForceData(bool)));
+
+    QLabel *labelGetTorqueData = new QLabel("Torque [Nm]");
+    QLineEdit *editGetTorqueData= new QLineEdit("0");
+    // editGetTorqueData->setMinimumHeight(lineTextMinHeight);
+    editGetTorqueData->setMaximumHeight(100);
+    editGetTorqueData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetTorqueData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetTorqueData->setDisabled(true);
+    QPushButton *btnGetTorqueData = new QPushButton("Read");
+    // btnGetTorqueData->setMinimumHeight(lineTextMinHeight);
+    btnGetTorqueData->setMaximumHeight(100);
+    connect(btnGetTorqueData, SIGNAL(clicked(bool)), SLOT(OnClickButtonGetTorqueData(bool)));
+
+    QGridLayout *gl_Sensor = new QGridLayout(this);
+    gl_Sensor->addWidget(labelGetForceData, 1, 1);
+    gl_Sensor->addWidget(editGetForceData, 1, 2);
+    gl_Sensor->addWidget(btnGetForceData, 1, 3);
+    gl_Sensor->addWidget(labelGetTorqueData, 2, 1);
+    gl_Sensor->addWidget(editGetTorqueData, 2, 2);
+    gl_Sensor->addWidget(btnGetTorqueData, 2, 3);
+
+
+    QWidget *tab_Sensor = new QWidget();
+    tab_Sensor->setLayout(gl_Sensor);
+    //-------------------------------------------------------------
+
     
     QTabWidget *tabWidgetControl = new QTabWidget();
     tabWidgetControl->addTab(tab_Servo, QString("Servo Drive Control"));
     tabWidgetControl->addTab(tab_Joint, QString("Joint Space Control"));
     tabWidgetControl->addTab(tab_Task, QString("Task Space Control"));
+    tabWidgetControl->addTab(tab_Sensor, QString("Read Sensor Data"));
     tabWidgetControl->setFont(fontTabTitle);
     tabWidgetControl->setPalette(palette);
     tab_Servo->setFont(fontText);
     tab_Joint->setFont(fontText);
     tab_Task->setFont(fontText);
+    tab_Sensor->setFont(fontText);
 
     QHBoxLayout *HLayoutMainH1 = new QHBoxLayout(this);
     // HLayoutMainH1->addSpacing(1);
@@ -658,6 +698,17 @@ Servo_t MainWindow::CreateJointServoLayout(bool header)
     editActualVel->setMinimumWidth(100);
     editActualVel->setDisabled(true);
 
+    QLineEdit *editTargetTor = new QLineEdit(" ");
+    editTargetTor->setAlignment(Qt::AlignRight);
+    editTargetTor->setFixedHeight(height);
+    editTargetTor->setMinimumWidth(100);
+
+    QLineEdit *editActualTor = new QLineEdit(" ");
+    editActualTor->setAlignment(Qt::AlignRight);
+    editActualTor->setFixedHeight(height);
+    editActualTor->setMinimumWidth(100);
+    editActualTor->setDisabled(true);
+
     QPushButton *btnMove = new QPushButton("MOVE");
     btnMove->setFixedHeight(height);
     QPushButton *btnJogNDir = new QPushButton("Jog -");
@@ -675,6 +726,9 @@ Servo_t MainWindow::CreateJointServoLayout(bool header)
         editTargetVel->setText("Target Velocity");
         editTargetVel->setDisabled(true);
         editActualVel->setText("Actual Velocity");
+        editTargetTor->setText("Target Torque");
+        editTargetTor->setDisabled(true);
+        editActualTor->setText("Actual Torque");
 
         btnMove->setDisabled(true);
         btnJogNDir->setDisabled(true);
@@ -690,6 +744,8 @@ Servo_t MainWindow::CreateJointServoLayout(bool header)
         editActualPos->setText("0");
         editTargetVel->setText("0");
         editActualVel->setText("0");
+        editTargetTor->setText("0");
+        editActualTor->setText("0");
     }
 
     HBoxLayout->addWidget(comboMode);
@@ -697,6 +753,8 @@ Servo_t MainWindow::CreateJointServoLayout(bool header)
     HBoxLayout->addWidget(editActualPos);
     HBoxLayout->addWidget(editTargetVel);
     HBoxLayout->addWidget(editActualVel);
+    HBoxLayout->addWidget(editTargetTor);
+    HBoxLayout->addWidget(editActualTor);
 
     HBoxLayout->addWidget(btnMove);
     HBoxLayout->addWidget(btnJogNDir);
@@ -711,6 +769,11 @@ Servo_t MainWindow::CreateJointServoLayout(bool header)
     ret.editTargetVel = editTargetVel;
     // ret.labelActualVel  = labelActualVel;
     ret.editActualVel = editActualVel;
+
+    // ret.labelTargetTor  = labelTargetTor;
+    ret.editTargetTor = editTargetTor;
+    // ret.labelActualTor  = labelActualTor;
+    ret.editActualTor = editActualTor;
 
     ret.btnMove = btnMove;
     ret.btnJogNDir = btnJogNDir;
@@ -912,6 +975,16 @@ void MainWindow::OnTimer()
     
 }
 
+void MainWindow::OnClickButtonGetForceData()
+{
+    
+}
+
+void MainWindow::OnClickButtonGetTorqueData()
+{
+
+}
+
 #define EC_TIMEOUTMON 500
 
 void MainWindow::simpletest(char *ifname)
@@ -933,3 +1006,4 @@ void MainWindow::print_usage(void)
 {
    
 }
+
