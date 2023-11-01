@@ -658,33 +658,6 @@ src/xddp_nrt.cpp.s:
 	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/src/xddp_nrt.cpp.s
 .PHONY : src/xddp_nrt.cpp.s
 
-src/xddp_rt.o: src/xddp_rt.cpp.o
-
-.PHONY : src/xddp_rt.o
-
-# target to build an object file
-src/xddp_rt.cpp.o:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/src/xddp_rt.cpp.o
-.PHONY : src/xddp_rt.cpp.o
-
-src/xddp_rt.i: src/xddp_rt.cpp.i
-
-.PHONY : src/xddp_rt.i
-
-# target to preprocess a source file
-src/xddp_rt.cpp.i:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/src/xddp_rt.cpp.i
-.PHONY : src/xddp_rt.cpp.i
-
-src/xddp_rt.s: src/xddp_rt.cpp.s
-
-.PHONY : src/xddp_rt.s
-
-# target to generate assembly for a file
-src/xddp_rt.cpp.s:
-	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/src/xddp_rt.cpp.s
-.PHONY : src/xddp_rt.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -743,9 +716,6 @@ help:
 	@echo "... src/xddp_nrt.o"
 	@echo "... src/xddp_nrt.i"
 	@echo "... src/xddp_nrt.s"
-	@echo "... src/xddp_rt.o"
-	@echo "... src/xddp_rt.i"
-	@echo "... src/xddp_rt.s"
 .PHONY : help
 
 

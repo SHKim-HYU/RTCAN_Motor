@@ -62,10 +62,7 @@
 	"QT_UIC_EXECUTABLE" : "/opt/Qt5.14.2/5.14.2/gcc_64/bin/uic",
 	"QT_VERSION_MAJOR" : 5,
 	"SETTINGS_FILE" : "/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_XDDP_RT_autogen.dir/AutogenUsed.txt",
-	"SOURCES" : 
-	[
-		[ "/home/robot/robot_ws/RTCAN_Motor/src/xddp_rt.cpp", "MU" ]
-	],
+	"SOURCES" : [],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : [],

@@ -195,7 +195,7 @@ void pipe_writer_run(void *arg)
     ssize_t size;
     char msg[10];
 
-    rt_task_set_periodic(NULL, TM_NOW, 10*cycle_ns);
+    rt_task_set_periodic(NULL, TM_NOW, 100*cycle_ns); // 100ms
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
         sprintf(msg, "Msg %d", num++);
