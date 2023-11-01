@@ -22,7 +22,7 @@ void rt_task_writer(void *arg) {
             printf("Failed to write to RT pipe\n");
             break;
         }
-        rt_task_sleep(1000000); // Sleep for 1s
+        rt_task_sleep(1000000); // Sleep for 1ms
     }
 }
 
@@ -43,7 +43,7 @@ void rt_task_reader(void *arg) {
 int main(int argc, char* argv[]) {
     mlockall(MCL_CURRENT|MCL_FUTURE);
 
-    if (rt_pipe_create(&mypipe, "myXDDPPipe", P_MINOR_AUTO, 0)) {
+    if (rt_pipe_create(&mypipe, "pipeRT", P_MINOR_AUTO, 0)) {
         printf("Failed to create RT pipe\n");
         return 1;
     }
