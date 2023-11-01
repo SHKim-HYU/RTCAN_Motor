@@ -6,3 +6,15 @@
 
 #IncludeRegexTransform: 
 
+/home/robot/robot_ws/RTCAN_Motor/src/xddp_nrt.cpp
+iostream
+-
+thread
+-
+fcntl.h
+-
+unistd.h
+-
+cstring
+-
+

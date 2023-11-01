@@ -22,7 +22,7 @@ void rt_task_writer(void *arg) {
             printf("Failed to write to RT pipe\n");
             break;
         }
-        rt_task_sleep(1000000000); // Sleep for 1s
+        rt_task_sleep(1000000); // Sleep for 1s
     }
 }
 
