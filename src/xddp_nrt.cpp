@@ -1,52 +1,49 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <thread>
+#include <fcntl.h>
 #include <unistd.h>
-#include <sys/socket.h>
-#include <linux/if_ether.h>
-#include <linux/if_packet.h>
-#include <net/if.h>
-#include <netinet/in.h>
+#include <cstring>
 
-#define XDDP_PORT 0x1225 // 예제 XDDP 포트
+// XDDP 파이프로 데이터를 쓰는 함수
+void write_to_pipe(int fd) {
+    char msg[] = "Hello RT";
+    while (true) {
+        if (write(fd, msg, sizeof(msg)) < 0) {
+            perror("Failed to write to the XDDP pipe");
+            break;
+        }
+        sleep(1); // 1초 대기
+    }
+}
 
-int main(void)
-{
-    int sock;
-    struct sockaddr_ll saddr;
+// XDDP 파이프에서 데이터를 읽는 함수
+void read_from_pipe(int fd) {
     char buf[10];
-    int ifindex;
+    while (true) {
+        if (read(fd, buf, sizeof(buf)) > 0) {
+            std::cout << "Received: " << buf << std::endl;
+        }
+    }
+}
 
-    // RAW 소켓 생성
-    sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
-    if (sock < 0) {
-        perror("socket");
-        exit(1);
+int main() {
+    int fd;
+
+    // XDDP 파이프 열기
+    fd = open("/proc/xenomai/registry/rtipc/xddp/myXDDPPipe", O_RDWR);
+    if (fd < 0) {
+        perror("Failed to open XDDP pipe");
+        return 1;
     }
 
-    // 인터페이스 인덱스 가져오기
-    ifindex = if_nametoindex("rteth0"); // Xenomai 가상 네트워크 인터페이스
+    // 스레드 생성 및 실행
+    std::thread writer_thread(write_to_pipe, fd);
+    std::thread reader_thread(read_from_pipe, fd);
 
-    // 소켓 주소 설정
-    memset(&saddr, 0, sizeof(saddr));
-    saddr.sll_family = AF_PACKET;
-    saddr.sll_ifindex = ifindex;
-    saddr.sll_protocol = htons(ETH_P_ALL);
+    // 스레드가 끝나길 기다림
+    writer_thread.join();
+    reader_thread.join();
 
-    if (bind(sock, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
-        perror("bind");
-        exit(1);
-    }
-
-    // 데이터 수신
-    if (recv(sock, buf, sizeof(buf), 0) < 0) {
-        perror("recv");
-        exit(1);
-    }
-
-    printf("Received message: %s\n", buf);
-
-    // 소켓 닫기
-    close(sock);
+    close(fd);
     return 0;
 }

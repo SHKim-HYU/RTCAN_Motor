@@ -215,6 +215,10 @@ target_link_libraries(${GUI_EXECUTABLE}
     Qt5::Quick
 )
 
+target_link_libraries(${XDDP_NRT}
+    pthread
+)
+
 # libpcan
 find_path(PCAN_INCLUDE_DIR NAMES libpcanfd.h)
 find_library(PCAN_LIBRARY NAMES pcanfd)

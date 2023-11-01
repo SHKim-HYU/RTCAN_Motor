@@ -1,46 +1,64 @@
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <signal.h>
 #include <sys/mman.h>
-#include <rtdm/rtipc.h> // RTDM (Real-Time Driver Model) for IPC
+#include <native/task.h>
+#include <native/timer.h>
+#include <native/pipe.h>
 
-#define XDDP_PORT 0x1225 // 예제 XDDP 포트
+RT_PIPE mypipe;
+RT_TASK mytask_writer;
+RT_TASK mytask_reader;
 
-int main(void)
-{
-    int sock;
-    struct sockaddr_ipc saddr;
-    struct timespec ts;
+void rt_task_writer(void *arg) {
+    int num = 0;
+    ssize_t size;
     char msg[10];
 
-    // Mlockall을 사용하여 메모리 페이지를 고정
-    mlockall(MCL_CURRENT | MCL_FUTURE);
+    while (1) {
+        sprintf(msg, "Msg %d", num++);
+        size = rt_pipe_write(&mypipe, msg, sizeof(msg), P_NORMAL);
+        if (size < 0) {
+            printf("Failed to write to RT pipe\n");
+            break;
+        }
+        rt_task_sleep(1000000000); // Sleep for 1s
+    }
+}
 
-    // XDDP 소켓 생성
-    sock = rt_dev_socket(AF_RTIPC, SOCK_DGRAM, IPCPROTO_XDDP);
-    if (sock < 0) {
-        perror("rt_dev_socket");
+void rt_task_reader(void *arg) {
+    ssize_t size;
+    char msg[10];
+
+    while (1) {
+        size = rt_pipe_read(&mypipe, msg, sizeof(msg), TM_INFINITE);
+        if (size < 0) {
+            printf("Failed to read from RT pipe\n");
+            break;
+        }
+        printf("Received: %s\n", msg);
+    }
+}
+
+int main(int argc, char* argv[]) {
+    mlockall(MCL_CURRENT|MCL_FUTURE);
+
+    if (rt_pipe_create(&mypipe, "myXDDPPipe", P_MINOR_AUTO, 0)) {
+        printf("Failed to create RT pipe\n");
         return 1;
     }
 
-    // 소켓 주소 설정
-    saddr.sipc_family = AF_RTIPC;
-    saddr.sipc_port = XDDP_PORT;
-    if (rt_dev_bind(sock, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
-        perror("rt_dev_bind");
-        return 1;
-    }
+    rt_task_create(&mytask_writer, "mytask_writer", 0, 50, 0);
+    rt_task_create(&mytask_reader, "mytask_reader", 0, 50, 0);
 
-    while(1)
-    {
-    // 메시지 전송
-    snprintf(msg, sizeof(msg), "Hello");
-    if (rt_dev_sendto(sock, msg, sizeof(msg), 0, NULL, 0) < 0) {
-        perror("rt_dev_sendto");
-        return 1;
-    }
-    }
+    rt_task_start(&mytask_writer, &rt_task_writer, NULL);
+    rt_task_start(&mytask_reader, &rt_task_reader, NULL);
 
-    // 소켓 닫기
-    rt_dev_close(sock);
+    pause();  // Wait for Ctrl+C
+
+    rt_task_delete(&mytask_writer);
+    rt_task_delete(&mytask_reader);
+    rt_pipe_delete(&mypipe);
+
     return 0;
 }
