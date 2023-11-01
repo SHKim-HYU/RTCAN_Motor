@@ -157,6 +157,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named RTCAN_Motor_XDDP_NRT
+
+# Build rule for target.
+RTCAN_Motor_XDDP_NRT: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_XDDP_NRT
+.PHONY : RTCAN_Motor_XDDP_NRT
+
+# fast build rule for target.
+RTCAN_Motor_XDDP_NRT/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build
+.PHONY : RTCAN_Motor_XDDP_NRT/fast
+
+#=============================================================================
+# Target rules for targets named RTCAN_Motor_XDDP_RT
+
+# Build rule for target.
+RTCAN_Motor_XDDP_RT: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_XDDP_RT
+.PHONY : RTCAN_Motor_XDDP_RT
+
+# fast build rule for target.
+RTCAN_Motor_XDDP_RT/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build
+.PHONY : RTCAN_Motor_XDDP_RT/fast
+
+#=============================================================================
 # Target rules for targets named RTCAN_Motor_GUI
 
 # Build rule for target.
@@ -181,6 +207,32 @@ RTCAN_Motor_CTRL: cmake_check_build_system
 RTCAN_Motor_CTRL/fast:
 	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL.dir/build.make CMakeFiles/RTCAN_Motor_CTRL.dir/build
 .PHONY : RTCAN_Motor_CTRL/fast
+
+#=============================================================================
+# Target rules for targets named RTCAN_Motor_XDDP_NRT_autogen
+
+# Build rule for target.
+RTCAN_Motor_XDDP_NRT_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_XDDP_NRT_autogen
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen
+
+# fast build rule for target.
+RTCAN_Motor_XDDP_NRT_autogen/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT_autogen.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT_autogen.dir/build
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen/fast
+
+#=============================================================================
+# Target rules for targets named RTCAN_Motor_XDDP_RT_autogen
+
+# Build rule for target.
+RTCAN_Motor_XDDP_RT_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RTCAN_Motor_XDDP_RT_autogen
+.PHONY : RTCAN_Motor_XDDP_RT_autogen
+
+# fast build rule for target.
+RTCAN_Motor_XDDP_RT_autogen/fast:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT_autogen.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT_autogen.dir/build
+.PHONY : RTCAN_Motor_XDDP_RT_autogen/fast
 
 #=============================================================================
 # Target rules for targets named RTCAN_Motor_GUI_autogen
@@ -444,6 +496,60 @@ RTCAN_Motor_GUI_autogen/mocs_compilation.cpp.s:
 	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/RTCAN_Motor_GUI_autogen/mocs_compilation.cpp.s
 .PHONY : RTCAN_Motor_GUI_autogen/mocs_compilation.cpp.s
 
+RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.o: RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.o
+
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.o
+
+# target to build an object file
+RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.o
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.o
+
+RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.i: RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.i
+
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.i
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.i
+
+RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.s: RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.s
+
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.s
+.PHONY : RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.s
+
+RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.o: RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.o
+
+.PHONY : RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.o
+
+# target to build an object file
+RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.o
+.PHONY : RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.o
+
+RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.i: RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.i
+
+.PHONY : RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.i
+.PHONY : RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.i
+
+RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.s: RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.s
+
+.PHONY : RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.s
+.PHONY : RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.cpp.s
+
 src/QTmain.o: src/QTmain.cpp.o
 
 .PHONY : src/QTmain.o
@@ -525,6 +631,60 @@ src/mainwindow.cpp.s:
 	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/src/mainwindow.cpp.s
 .PHONY : src/mainwindow.cpp.s
 
+src/xddp_nrt.o: src/xddp_nrt.cpp.o
+
+.PHONY : src/xddp_nrt.o
+
+# target to build an object file
+src/xddp_nrt.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/src/xddp_nrt.cpp.o
+.PHONY : src/xddp_nrt.cpp.o
+
+src/xddp_nrt.i: src/xddp_nrt.cpp.i
+
+.PHONY : src/xddp_nrt.i
+
+# target to preprocess a source file
+src/xddp_nrt.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/src/xddp_nrt.cpp.i
+.PHONY : src/xddp_nrt.cpp.i
+
+src/xddp_nrt.s: src/xddp_nrt.cpp.s
+
+.PHONY : src/xddp_nrt.s
+
+# target to generate assembly for a file
+src/xddp_nrt.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/src/xddp_nrt.cpp.s
+.PHONY : src/xddp_nrt.cpp.s
+
+src/xddp_rt.o: src/xddp_rt.cpp.o
+
+.PHONY : src/xddp_rt.o
+
+# target to build an object file
+src/xddp_rt.cpp.o:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/src/xddp_rt.cpp.o
+.PHONY : src/xddp_rt.cpp.o
+
+src/xddp_rt.i: src/xddp_rt.cpp.i
+
+.PHONY : src/xddp_rt.i
+
+# target to preprocess a source file
+src/xddp_rt.cpp.i:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/src/xddp_rt.cpp.i
+.PHONY : src/xddp_rt.cpp.i
+
+src/xddp_rt.s: src/xddp_rt.cpp.s
+
+.PHONY : src/xddp_rt.s
+
+# target to generate assembly for a file
+src/xddp_rt.cpp.s:
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_XDDP_RT.dir/build.make CMakeFiles/RTCAN_Motor_XDDP_RT.dir/src/xddp_rt.cpp.s
+.PHONY : src/xddp_rt.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -537,8 +697,12 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... RTCAN_Motor_XDDP_NRT"
+	@echo "... RTCAN_Motor_XDDP_RT"
 	@echo "... RTCAN_Motor_GUI"
 	@echo "... RTCAN_Motor_CTRL"
+	@echo "... RTCAN_Motor_XDDP_NRT_autogen"
+	@echo "... RTCAN_Motor_XDDP_RT_autogen"
 	@echo "... RTCAN_Motor_GUI_autogen"
 	@echo "... RTCAN_Motor_CTRL_autogen"
 	@echo "... CAN"
@@ -561,6 +725,12 @@ help:
 	@echo "... RTCAN_Motor_GUI_autogen/mocs_compilation.o"
 	@echo "... RTCAN_Motor_GUI_autogen/mocs_compilation.i"
 	@echo "... RTCAN_Motor_GUI_autogen/mocs_compilation.s"
+	@echo "... RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.o"
+	@echo "... RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.i"
+	@echo "... RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.s"
+	@echo "... RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.o"
+	@echo "... RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.i"
+	@echo "... RTCAN_Motor_XDDP_RT_autogen/mocs_compilation.s"
 	@echo "... src/QTmain.o"
 	@echo "... src/QTmain.i"
 	@echo "... src/QTmain.s"
@@ -570,6 +740,12 @@ help:
 	@echo "... src/mainwindow.o"
 	@echo "... src/mainwindow.i"
 	@echo "... src/mainwindow.s"
+	@echo "... src/xddp_nrt.o"
+	@echo "... src/xddp_nrt.i"
+	@echo "... src/xddp_nrt.s"
+	@echo "... src/xddp_rt.o"
+	@echo "... src/xddp_rt.i"
+	@echo "... src/xddp_rt.s"
 .PHONY : help
 
 

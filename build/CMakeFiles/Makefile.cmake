@@ -143,6 +143,8 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "CMakeFiles/RTCAN_Motor_XDDP_NRT_autogen.dir/AutogenInfo.json"
+  "CMakeFiles/RTCAN_Motor_XDDP_RT_autogen.dir/AutogenInfo.json"
   "CMakeFiles/RTCAN_Motor_GUI_autogen.dir/AutogenInfo.json"
   "CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/AutogenInfo.json"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
@@ -159,8 +161,12 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/DependInfo.cmake"
+  "CMakeFiles/RTCAN_Motor_XDDP_RT.dir/DependInfo.cmake"
   "CMakeFiles/RTCAN_Motor_GUI.dir/DependInfo.cmake"
   "CMakeFiles/RTCAN_Motor_CTRL.dir/DependInfo.cmake"
+  "CMakeFiles/RTCAN_Motor_XDDP_NRT_autogen.dir/DependInfo.cmake"
+  "CMakeFiles/RTCAN_Motor_XDDP_RT_autogen.dir/DependInfo.cmake"
   "CMakeFiles/RTCAN_Motor_GUI_autogen.dir/DependInfo.cmake"
   "CMakeFiles/RTCAN_Motor_CTRL_autogen.dir/DependInfo.cmake"
   "include/CAN/CMakeFiles/CAN.dir/DependInfo.cmake"

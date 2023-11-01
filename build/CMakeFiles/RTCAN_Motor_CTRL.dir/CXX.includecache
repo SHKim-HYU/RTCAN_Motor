@@ -26,6 +26,8 @@ string
 CANDevice.h
 -
 
+/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_CTRL_autogen/mocs_compilation.cpp
+
 /home/robot/robot_ws/RTCAN_Motor/src/RTCAN_Motor_Client.cpp
 stdio.h
 -

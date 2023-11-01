@@ -1,0 +1,168 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "RTCAN_Motor_XDDP_NRT"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 188,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 135,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 136,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -std=c++17 -Wall -Wextra -fPIC -O2 -DNDEBUG  "
+				},
+				{
+					"fragment" : "-std=c++17"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build"
+				},
+				{
+					"path" : "/home/robot/robot_ws/RTCAN_Motor"
+				},
+				{
+					"backtrace" : 0,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_XDDP_NRT_autogen/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/bin/inc"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/EcatSystem"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Interpolator"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Robot"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/QtWidgets"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "RTCAN_Motor_XDDP_NRT_autogen::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "RTCAN_Motor_XDDP_NRT::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-std=c++17 -Wall -Wextra -fPIC -O2 -DNDEBUG",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "RTCAN_Motor_XDDP_NRT",
+	"nameOnDisk" : "RTCAN_Motor_XDDP_NRT",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/xddp_nrt.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

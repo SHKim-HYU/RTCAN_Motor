@@ -4,8 +4,12 @@
 /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/list_install_components.dir
 /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/rebuild_cache.dir
 /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/edit_cache.dir
+/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_XDDP_NRT.dir
+/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_XDDP_RT.dir
 /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_GUI.dir
 /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_CTRL.dir
+/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_XDDP_NRT_autogen.dir
+/home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_XDDP_RT_autogen.dir
 /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_GUI_autogen.dir
 /home/robot/robot_ws/RTCAN_Motor/build/CMakeFiles/RTCAN_Motor_CTRL_autogen.dir
 /home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CMakeFiles/install/strip.dir

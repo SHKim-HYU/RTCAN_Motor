@@ -1,0 +1,482 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"build" : "include/CAN",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "include/CAN",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"build" : "include/EcatSystem",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "include/EcatSystem",
+					"targetIndexes" : 
+					[
+						4,
+						5
+					]
+				},
+				{
+					"build" : "include/Interpolator",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "include/Interpolator",
+					"targetIndexes" : 
+					[
+						6,
+						7
+					]
+				},
+				{
+					"build" : "include/Robot",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "include/Robot",
+					"targetIndexes" : 
+					[
+						18,
+						19
+					]
+				},
+				{
+					"build" : "include/QtWidgets",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 5,
+					"source" : "include/QtWidgets",
+					"targetIndexes" : 
+					[
+						8,
+						9
+					]
+				},
+				{
+					"build" : "include/DarkStyleWindow",
+					"childIndexes" : 
+					[
+						7,
+						8,
+						9
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 6,
+					"source" : "include/DarkStyleWindow",
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				},
+				{
+					"build" : "include/DarkStyleWindow/darkstyle",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 7,
+					"source" : "include/DarkStyleWindow/darkstyle"
+				},
+				{
+					"build" : "include/DarkStyleWindow/framelesswindow",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 8,
+					"source" : "include/DarkStyleWindow/framelesswindow",
+					"targetIndexes" : 
+					[
+						20,
+						21
+					]
+				},
+				{
+					"build" : "include/DarkStyleWindow/images",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 9,
+					"source" : "include/DarkStyleWindow/images"
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "RTCAN_Motor",
+					"targetIndexes" : 
+					[
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "CAN",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "EcatSystem",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "Interpolator",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						6,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "Robot",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						18,
+						19
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "QtWidgets",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						8,
+						9
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						7,
+						8,
+						9
+					],
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "DarkStyleWindow",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						7
+					],
+					"name" : "darkstyle",
+					"parentIndex" : 6
+				},
+				{
+					"directoryIndexes" : 
+					[
+						8
+					],
+					"name" : "framelesswindow",
+					"parentIndex" : 6,
+					"targetIndexes" : 
+					[
+						20,
+						21
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						9
+					],
+					"name" : "images",
+					"parentIndex" : 6
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "CAN::@b812fb93f64d8e23a576",
+					"jsonFile" : "target-CAN-Release-83e5aeac77f5ccb7550c.json",
+					"name" : "CAN",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "CAN_autogen::@b812fb93f64d8e23a576",
+					"jsonFile" : "target-CAN_autogen-Release-7e1072a9cb148c95c66b.json",
+					"name" : "CAN_autogen",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "DarkStyleWindow::@f0091f1f28e587374ecd",
+					"jsonFile" : "target-DarkStyleWindow-Release-1155e14679fdc2a1dad2.json",
+					"name" : "DarkStyleWindow",
+					"projectIndex" : 6
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "DarkStyleWindow_autogen::@f0091f1f28e587374ecd",
+					"jsonFile" : "target-DarkStyleWindow_autogen-Release-8e1c607aacd0db94d970.json",
+					"name" : "DarkStyleWindow_autogen",
+					"projectIndex" : 6
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "EcatSystem::@f689c52d19d87c0c3843",
+					"jsonFile" : "target-EcatSystem-Release-2fe612e5fceb13fe2cd9.json",
+					"name" : "EcatSystem",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "EcatSystem_autogen::@f689c52d19d87c0c3843",
+					"jsonFile" : "target-EcatSystem_autogen-Release-f0a3c7c0e050bae5608c.json",
+					"name" : "EcatSystem_autogen",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Interpolator::@3b557d557d621394a5fb",
+					"jsonFile" : "target-Interpolator-Release-c6a0010190256ab26f6d.json",
+					"name" : "Interpolator",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Interpolator_autogen::@3b557d557d621394a5fb",
+					"jsonFile" : "target-Interpolator_autogen-Release-d412a5cb984715168779.json",
+					"name" : "Interpolator_autogen",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "QtWidgets::@f3637580905fab2528a1",
+					"jsonFile" : "target-QtWidgets-Release-1fae2630632f4d9935b1.json",
+					"name" : "QtWidgets",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "QtWidgets_autogen::@f3637580905fab2528a1",
+					"jsonFile" : "target-QtWidgets_autogen-Release-f779e76b760b93194320.json",
+					"name" : "QtWidgets_autogen",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_CTRL::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_CTRL-Release-c9a3553c433b6035b22d.json",
+					"name" : "RTCAN_Motor_CTRL",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_CTRL_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_CTRL_autogen-Release-5c074babdaeb49b2af98.json",
+					"name" : "RTCAN_Motor_CTRL_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_GUI::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_GUI-Release-b401b6f50aae371067c7.json",
+					"name" : "RTCAN_Motor_GUI",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_GUI_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_GUI_autogen-Release-1968842ec3276dbba0b4.json",
+					"name" : "RTCAN_Motor_GUI_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_XDDP_NRT::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_XDDP_NRT-Release-2c504052148154466fdb.json",
+					"name" : "RTCAN_Motor_XDDP_NRT",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_XDDP_NRT_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_XDDP_NRT_autogen-Release-e465f2e3ad9b216f3042.json",
+					"name" : "RTCAN_Motor_XDDP_NRT_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_XDDP_RT::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_XDDP_RT-Release-3b79a0939f9977969845.json",
+					"name" : "RTCAN_Motor_XDDP_RT",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RTCAN_Motor_XDDP_RT_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RTCAN_Motor_XDDP_RT_autogen-Release-895c0177930d6c7d8cd1.json",
+					"name" : "RTCAN_Motor_XDDP_RT_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "Robot::@bc8f6043f00d71530807",
+					"jsonFile" : "target-Robot-Release-e8a864df4d287eb27de9.json",
+					"name" : "Robot",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "Robot_autogen::@bc8f6043f00d71530807",
+					"jsonFile" : "target-Robot_autogen-Release-9a55e3ca6d8f671f361c.json",
+					"name" : "Robot_autogen",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "framelesswindow::@0853fdb130f0c777b8f5",
+					"jsonFile" : "target-framelesswindow-Release-dd3ceb655ef6ae7e0399.json",
+					"name" : "framelesswindow",
+					"projectIndex" : 8
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "framelesswindow_autogen::@0853fdb130f0c777b8f5",
+					"jsonFile" : "target-framelesswindow_autogen-Release-eac657605f57bfc113e3.json",
+					"name" : "framelesswindow_autogen",
+					"projectIndex" : 8
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/robot/robot_ws/RTCAN_Motor/build",
+		"source" : "/home/robot/robot_ws/RTCAN_Motor"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}
