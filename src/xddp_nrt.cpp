@@ -1,47 +1,80 @@
-#include <iostream>
-#include <thread>
-#include <fcntl.h>
+#include "iostream"
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <cstring>
+#include <signal.h>
+#include <string.h>
+#include <malloc.h>
+#include <pthread.h>
+#include <fcntl.h>
+#include <errno.h>
 
-// void write_to_pipe(int fd) {
-//     char msg[] = "Hello RT";
-//     while (true) {
-//         if (write(fd, msg, sizeof(msg)) < 0) {
-//             perror("Failed to write to the XDDP pipe");
-//             break;
-//         }
-//         sleep(1);
-//     }
-// }
+pthread_t nrt;
 
-void read_from_pipe(int fd) {
-    double buf[6];
-    while (true) {
-        if (read(fd, buf, sizeof(buf)) > 0) {
-            std::cout << "[Force] x:"<<buf[0]<<", y:"<<buf[1]<<", z:"<<buf[2] << std::endl;
-            std::cout << "[Torque] x:"<<buf[3]<<", y:"<<buf[4]<<", z:"<<buf[5] << std::endl;
-            std::cout << std::endl;
-        }
-    }
+#define XDDP_PORT 0	/* [0..CONFIG-XENO_OPT_PIPE_NRDEV - 1] */
+
+static void fail(const char *reason)
+{
+	perror(reason);
+	exit(EXIT_FAILURE);
 }
 
-int main() {
-    int fd;
+static void *regular_thread(void *arg)
+{
+	double buf[6];
+    char *devname;
+	int fd, ret;
 
-    // XDDP Path
-    fd = open("/proc/xenomai/registry/rtipc/xddp/pipeRT", O_RDWR);
-    if (fd < 0) {
-        perror("Failed to open XDDP pipe");
-        return 1;
-    }
+	if (asprintf(&devname, "/dev/rtp%d", XDDP_PORT) < 0)
+		fail("asprintf");
 
-    // std::thread writer_thread(write_to_pipe, fd);
-    std::thread reader_thread(read_from_pipe, fd);
+	fd = open(devname, O_RDWR);
+	free(devname);
+	if (fd < 0)
+		fail("open");
 
-    // writer_thread.join();
-    reader_thread.join();
+	while(1){
+		/* Get the next message from realtime_thread. */
+		ret = read(fd, buf, sizeof(buf));
+		if (ret <= 0)
+			fail("read");
+        std::cout << "[Force] x:"<<buf[0]<<", y:"<<buf[1]<<", z:"<<buf[2] << std::endl;
+        std::cout << "[Torque] x:"<<buf[3]<<", y:"<<buf[4]<<", z:"<<buf[5] << std::endl;
+        std::cout << std::endl;
+		// /* Echo the message back to realtime_thread. */
+		// ret = write(fd, buf, ret);
+		// if (ret <= 0)
+		// 	fail("write");
+	}
 
-    close(fd);
-    return 0;
+	return NULL;
 }
+
+int main(int argc, char **argv)
+{
+	pthread_attr_t regattr;
+	sigset_t set;
+	int sig;
+
+	sigemptyset(&set);
+	sigaddset(&set, SIGINT);
+	sigaddset(&set, SIGTERM);
+	sigaddset(&set, SIGHUP);
+	pthread_sigmask(SIG_BLOCK, &set, NULL);
+
+	pthread_attr_init(&regattr);
+	pthread_attr_setdetachstate(&regattr, PTHREAD_CREATE_JOINABLE);
+	pthread_attr_setinheritsched(&regattr, PTHREAD_EXPLICIT_SCHED);
+	pthread_attr_setschedpolicy(&regattr, SCHED_OTHER);
+
+	errno = pthread_create(&nrt, &regattr, &regular_thread, NULL);
+	if (errno)
+		fail("pthread_create");
+
+	sigwait(&set, &sig);
+	pthread_cancel(nrt);
+	pthread_join(nrt, NULL);
+
+	return 0;
+}
+

@@ -51,12 +51,6 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 236,
-				"parent" : 0
-			},
-			{
-				"command" : 3,
-				"file" : 0,
 				"line" : 246,
 				"parent" : 0
 			}
@@ -95,6 +89,10 @@
 				},
 				{
 					"backtrace" : 4,
+					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
+				},
+				{
+					"backtrace" : 4,
 					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
 				},
 				{
@@ -119,18 +117,14 @@
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
-				},
-				{
-					"backtrace" : 6,
 					"path" : "/usr/xenomai/include/cobalt"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"path" : "/usr/xenomai/include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"path" : "/usr/xenomai/include/alchemy"
 				},
 				{

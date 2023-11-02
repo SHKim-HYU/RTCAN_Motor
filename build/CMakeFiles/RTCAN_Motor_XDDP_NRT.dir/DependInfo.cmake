@@ -15,6 +15,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../"
   "RTCAN_Motor_XDDP_NRT_autogen/include"
   "../bin/inc"
+  "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
   "../include/CAN"
   "../include/EcatSystem"
   "../include/Interpolator"

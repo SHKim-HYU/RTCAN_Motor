@@ -6,17 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp
-
 /home/robot/robot_ws/RTCAN_Motor/src/xddp_nrt.cpp
 iostream
+/home/robot/robot_ws/RTCAN_Motor/src/iostream
+stdio.h
 -
-thread
--
-fcntl.h
+stdlib.h
 -
 unistd.h
 -
-cstring
+signal.h
+-
+string.h
+-
+malloc.h
+-
+pthread.h
+-
+fcntl.h
+-
+errno.h
 -
 

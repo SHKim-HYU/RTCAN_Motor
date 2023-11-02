@@ -8,9 +8,9 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
-#include <alchemy/pipe.h>
 #include <alchemy/task.h>
 #include <alchemy/timer.h>
+#include <rtdm/ipc.h> 
 
 // Peak CAN
 #include <PCANDevice.h>
@@ -19,11 +19,11 @@
 #define DEVICE1 "/dev/rtdm/pcan0"
 #define DEVICE2 "/dev/rtdm/pcan1"
 
-RT_PIPE pipeRT;
+#define XDDP_PORT 0	/* [0..CONFIG-XENO_OPT_PIPE_NRDEV - 1] */
 
 RT_TASK ft_task;
 RT_TASK motor_task;
-RT_TASK pipe_writer;
+RT_TASK xddp_writer;
 
 PCANDevice can1, can2;
 
@@ -189,30 +189,64 @@ void motor_run(void *arg)
     can2.Close();
 }
 
-void pipe_writer_run(void *arg)
+static void fail(const char *reason)
 {
-    int num = 0;
-    ssize_t size;
-    char msg[10];
+	perror(reason);
+	exit(EXIT_FAILURE);
+}
+
+void xddp_writer_run(void *arg)
+{
+    struct sockaddr_ipc saddr;
+	int ret, s, n = 0, len;
+	struct timespec ts;
+	size_t poolsz;
 
     rt_task_set_periodic(NULL, TM_NOW, 100*cycle_ns); // 100ms
-    while (1) {
+
+	s = __cobalt_socket(AF_RTIPC, SOCK_DGRAM, IPCPROTO_XDDP);
+	if (s < 0) {
+		perror("socket");
+		exit(EXIT_FAILURE);
+	}
+
+	poolsz = 16384; /* bytes */
+	ret = __cobalt_setsockopt(s, SOL_XDDP, XDDP_POOLSZ,
+			 &poolsz, sizeof(poolsz));
+	if (ret)
+		fail("setsockopt");
+
+	memset(&saddr, 0, sizeof(saddr));
+	saddr.sipc_family = AF_RTIPC;
+	saddr.sipc_port = XDDP_PORT;
+	ret = __cobalt_bind(s, (struct sockaddr *)&saddr, sizeof(saddr));
+	if (ret)
+		fail("bind");
+
+    while(1) 
+    {
         rt_task_wait_period(NULL); //wait for next cycle
-        sprintf(msg, "Msg %d", num++);
-        size = rt_pipe_write(&pipeRT, ft_array, sizeof(ft_array), P_NORMAL);
-        if (size < 0) {
-            printf("Failed to write to RT pipe\n");
-            break;
-        }
-    }
+	
+		ret = __cobalt_sendto(s, ft_array, sizeof(ft_array), 0, NULL, 0);
+		if (ret != sizeof(ft_array))
+			fail("sendto");
+
+		// /* Read back packets echoed by the regular thread */
+		// ret = __cobalt_recvfrom(s, buf, sizeof(buf), 0, NULL, 0);
+		// if (ret <= 0)
+		// 	fail("recvfrom");
+
+		// printf("   => \"%.*s\" echoed by peer\n", ret, buf);
+	}
+
+	return;
 }
 
 void signal_handler(int signum)
 {
     rt_task_delete(&ft_task);
     rt_task_delete(&motor_task);
-    rt_task_delete(&pipe_writer);
-    rt_pipe_delete(&pipeRT);
+    rt_task_delete(&xddp_writer);
     printf("Servo drives Stopped!\n");
     exit(1);
 }
@@ -227,11 +261,7 @@ int main(int argc, char *argv[])
 
     /* Avoids memory swapping for this program */
     mlockall(MCL_CURRENT|MCL_FUTURE);
-    
-    if (rt_pipe_create(&pipeRT, "pipeRT", P_MINOR_AUTO, 0)) {
-        printf("Failed to create RT pipe\n");
-        return 1;
-    }
+
 
     rt_task_create(&ft_task, "ft_task", 0, 99, 0);
     rt_task_start(&ft_task, &ft_run, NULL);
@@ -239,8 +269,8 @@ int main(int argc, char *argv[])
     rt_task_create(&motor_task, "motor_task", 0, 98, 0);
     rt_task_start(&motor_task, &motor_run, NULL);
 
-    rt_task_create(&pipe_writer, "pipe_writer", 0, 97, 0);
-    rt_task_start(&pipe_writer, &pipe_writer_run, NULL);
+    rt_task_create(&xddp_writer, "xddp_writer", 0, 80, 0);
+    rt_task_start(&xddp_writer, &xddp_writer_run, NULL);
 
     // Must pause here
     pause();

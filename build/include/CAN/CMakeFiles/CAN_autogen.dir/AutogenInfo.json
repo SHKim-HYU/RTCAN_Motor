@@ -44,6 +44,7 @@
 		"/home/robot/robot_ws/RTCAN_Motor/build/include/CAN",
 		"/home/robot/robot_ws/RTCAN_Motor/include/CAN",
 		"/home/robot/robot_ws/RTCAN_Motor/bin/inc",
+		"/usr/src/linux-headers-5.4.239-xenomai-3.2.3+",
 		"/home/robot/robot_ws/RTCAN_Motor/include/EcatSystem",
 		"/home/robot/robot_ws/RTCAN_Motor/include/Interpolator",
 		"/home/robot/robot_ws/RTCAN_Motor/include/Robot",

@@ -8,7 +8,6 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o
  ../include/CAN/PCANDevice.h
  /home/robot/robot_ws/RTCAN_Motor/src/RTCAN_Motor_Client.cpp
  /usr/xenomai/include/alchemy/compat.h
- /usr/xenomai/include/alchemy/pipe.h
  /usr/xenomai/include/alchemy/task.h
  /usr/xenomai/include/alchemy/timer.h
  /usr/xenomai/include/boilerplate/atomic.h
@@ -28,6 +27,7 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o
  /usr/xenomai/include/cobalt/boilerplate/limits.h
  /usr/xenomai/include/cobalt/boilerplate/sched.h
  /usr/xenomai/include/cobalt/boilerplate/wrappers.h
+ /usr/xenomai/include/cobalt/fcntl.h
  /usr/xenomai/include/cobalt/pthread.h
  /usr/xenomai/include/cobalt/sched.h
  /usr/xenomai/include/cobalt/semaphore.h
@@ -35,7 +35,9 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o
  /usr/xenomai/include/cobalt/stdio.h
  /usr/xenomai/include/cobalt/stdlib.h
  /usr/xenomai/include/cobalt/sys/cobalt.h
+ /usr/xenomai/include/cobalt/sys/ioctl.h
  /usr/xenomai/include/cobalt/sys/mman.h
+ /usr/xenomai/include/cobalt/sys/socket.h
  /usr/xenomai/include/cobalt/sys/time.h
  /usr/xenomai/include/cobalt/ticks.h
  /usr/xenomai/include/cobalt/time.h
@@ -63,5 +65,9 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o
  /usr/xenomai/include/copperplate/heapobj.h
  /usr/xenomai/include/copperplate/reference.h
  /usr/xenomai/include/copperplate/threadobj.h
+ /usr/xenomai/include/rtdm/ipc.h
+ /usr/xenomai/include/rtdm/rtdm.h
+ /usr/xenomai/include/rtdm/uapi/ipc.h
+ /usr/xenomai/include/rtdm/uapi/rtdm.h
  /usr/xenomai/include/trank/trank.h
  /usr/xenomai/include/xeno_config.h

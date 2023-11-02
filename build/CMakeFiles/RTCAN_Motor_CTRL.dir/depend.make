@@ -7,7 +7,6 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/CAN/CAN
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/CAN/PCANDevice.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../src/RTCAN_Motor_Client.cpp
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/alchemy/compat.h
-CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/alchemy/pipe.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/alchemy/task.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/alchemy/timer.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/boilerplate/atomic.h
@@ -27,6 +26,7 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/inclu
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/boilerplate/limits.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/boilerplate/sched.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/boilerplate/wrappers.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/fcntl.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/pthread.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/sched.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/semaphore.h
@@ -34,7 +34,9 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/inclu
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/stdio.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/stdlib.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/sys/cobalt.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/sys/ioctl.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/sys/mman.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/sys/socket.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/sys/time.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/ticks.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/cobalt/time.h
@@ -62,6 +64,10 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/inclu
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/copperplate/heapobj.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/copperplate/reference.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/copperplate/threadobj.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/rtdm/ipc.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/rtdm/rtdm.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/rtdm/uapi/ipc.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/rtdm/uapi/rtdm.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/trank/trank.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/xeno_config.h
 
