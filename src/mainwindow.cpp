@@ -396,24 +396,44 @@ MainWindow::MainWindow(QWidget *parent)
 
     // TAB: Sensor Data       
     QLabel *labelGetForceData = new QLabel("Force [N]");
-    QLineEdit *editGetForceData= new QLineEdit("0");
+    QLineEdit *editGetForceXData= new QLineEdit("0");
+    QLineEdit *editGetForceYData= new QLineEdit("0");
+    QLineEdit *editGetForceZData= new QLineEdit("0");
     // editGetForceData->setMinimumHeight(lineTextMinHeight);
-    editGetForceData->setMaximumHeight(100);
-    editGetForceData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    editGetForceData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    editGetForceData->setDisabled(true);
+    editGetForceXData->setMaximumHeight(100);
+    editGetForceXData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetForceXData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetForceXData->setDisabled(true);
+    editGetForceYData->setMaximumHeight(100);
+    editGetForceYData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetForceYData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetForceYData->setDisabled(true);
+    editGetForceZData->setMaximumHeight(100);
+    editGetForceZData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetForceZData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetForceZData->setDisabled(true);
     QPushButton *btnGetForceData = new QPushButton("Read");
     // btnGetForceData->setMinimumHeight(lineTextMinHeight);
     btnGetForceData->setMaximumHeight(100);
     connect(btnGetForceData, SIGNAL(clicked(bool)), SLOT(OnClickButtonGetForceData(bool)));
 
     QLabel *labelGetTorqueData = new QLabel("Torque [Nm]");
-    QLineEdit *editGetTorqueData= new QLineEdit("0");
+    QLineEdit *editGetTorqueXData= new QLineEdit("0");
+    QLineEdit *editGetTorqueYData= new QLineEdit("0");
+    QLineEdit *editGetTorqueZData= new QLineEdit("0");
     // editGetTorqueData->setMinimumHeight(lineTextMinHeight);
-    editGetTorqueData->setMaximumHeight(100);
-    editGetTorqueData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    editGetTorqueData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    editGetTorqueData->setDisabled(true);
+    editGetTorqueXData->setMaximumHeight(100);
+    editGetTorqueXData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetTorqueXData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetTorqueXData->setDisabled(true);
+    editGetTorqueYData->setMaximumHeight(100);
+    editGetTorqueYData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetTorqueYData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetTorqueYData->setDisabled(true);
+    editGetTorqueZData->setMaximumHeight(100);
+    editGetTorqueZData->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    editGetTorqueZData->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    editGetTorqueZData->setDisabled(true);
     QPushButton *btnGetTorqueData = new QPushButton("Read");
     // btnGetTorqueData->setMinimumHeight(lineTextMinHeight);
     btnGetTorqueData->setMaximumHeight(100);
@@ -421,11 +441,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     QGridLayout *gl_Sensor = new QGridLayout(this);
     gl_Sensor->addWidget(labelGetForceData, 1, 1);
-    gl_Sensor->addWidget(editGetForceData, 1, 2);
-    gl_Sensor->addWidget(btnGetForceData, 1, 3);
+    gl_Sensor->addWidget(editGetForceXData, 1, 2);
+    gl_Sensor->addWidget(editGetForceYData, 1, 3);
+    gl_Sensor->addWidget(editGetForceZData, 1, 4);
+    gl_Sensor->addWidget(btnGetForceData, 1, 5);
     gl_Sensor->addWidget(labelGetTorqueData, 2, 1);
-    gl_Sensor->addWidget(editGetTorqueData, 2, 2);
-    gl_Sensor->addWidget(btnGetTorqueData, 2, 3);
+    gl_Sensor->addWidget(editGetTorqueXData, 2, 2);
+    gl_Sensor->addWidget(editGetTorqueYData, 2, 3);
+    gl_Sensor->addWidget(editGetTorqueZData, 2, 4);
+    gl_Sensor->addWidget(btnGetTorqueData, 2, 5);
 
 
     QWidget *tab_Sensor = new QWidget();

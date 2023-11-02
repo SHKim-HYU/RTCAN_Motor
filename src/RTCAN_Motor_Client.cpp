@@ -205,7 +205,7 @@ void xddp_writer_run(void *arg)
 	struct timespec ts;
 	size_t poolsz;
 
-    rt_task_set_periodic(NULL, TM_NOW, 1*cycle_ns); // 10ms
+    rt_task_set_periodic(NULL, TM_NOW, 1*cycle_ns); // 1ms
 
 	s = __cobalt_socket(AF_RTIPC, SOCK_DGRAM, IPCPROTO_XDDP);
 	if (s < 0) {
