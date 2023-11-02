@@ -62,11 +62,6 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/inclu
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/copperplate/heapobj.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/copperplate/reference.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/copperplate/threadobj.h
-CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/trank/native/pipe.h
-CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/trank/native/task.h
-CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/trank/native/timer.h
-CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/trank/native/types.h
-CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/trank/rtdk.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/trank/trank.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: /usr/xenomai/include/xeno_config.h
 

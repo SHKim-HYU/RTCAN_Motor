@@ -1,0 +1,261 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "include/DarkStyleWindow/libDarkStyleWindow.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"include/DarkStyleWindow/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 135,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 136,
+				"parent" : 3
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -std=c++17 -Wall -Wextra -fPIC -O2 -DNDEBUG  "
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-fPIC"
+				},
+				{
+					"fragment" : "-std=c++17"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_NO_DEBUG"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_QMLMODELS_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_QML_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_QUICK_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_WIDGETS_LIB"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/include/DarkStyleWindow"
+				},
+				{
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow"
+				},
+				{
+					"backtrace" : 0,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/include/DarkStyleWindow/DarkStyleWindow_autogen/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/bin/inc"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/EcatSystem"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Interpolator"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Robot"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/QtWidgets"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow/framelesswindow"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/./mkspecs/linux-g++"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "framelesswindow::@0853fdb130f0c777b8f5"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "DarkStyleWindow_autogen::@f0091f1f28e587374ecd"
+		}
+	],
+	"id" : "DarkStyleWindow::@f0091f1f28e587374ecd",
+	"name" : "DarkStyleWindow",
+	"nameOnDisk" : "libDarkStyleWindow.a",
+	"paths" : 
+	{
+		"build" : "include/DarkStyleWindow",
+		"source" : "include/DarkStyleWindow"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/include/DarkStyleWindow/DarkStyleWindow_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "include/DarkStyleWindow/DarkStyle.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/DarkStyleWindow/DarkStyle.h",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

@@ -7,10 +7,10 @@
 #include <signal.h>
 #include <unistd.h>
 #include <sys/mman.h>
-#include <rtdk.h>
-#include <native/pipe.h>
-#include <native/task.h>
-#include <native/timer.h>
+
+#include <alchemy/pipe.h>
+#include <alchemy/task.h>
+#include <alchemy/timer.h>
 
 // Peak CAN
 #include <PCANDevice.h>
@@ -220,7 +220,7 @@ void signal_handler(int signum)
 int main(int argc, char *argv[])
 {
     // Perform auto-init of rt_print buffers if the task doesn't do so
-    rt_print_auto_init(1);
+    rt_print_init(0, NULL);
 
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);

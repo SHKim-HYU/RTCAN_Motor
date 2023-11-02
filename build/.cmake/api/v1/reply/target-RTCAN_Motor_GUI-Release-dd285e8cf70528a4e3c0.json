@@ -1,0 +1,342 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "RTCAN_Motor_GUI"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 175,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 208,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 135,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 136,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -std=c++17 -Wall -Wextra -fPIC -O2 -DNDEBUG  "
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-fPIC"
+				},
+				{
+					"fragment" : "-std=c++17"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_NO_DEBUG"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_QMLMODELS_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_QML_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_QUICK_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "QT_WIDGETS_LIB"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build"
+				},
+				{
+					"path" : "/home/robot/robot_ws/RTCAN_Motor"
+				},
+				{
+					"backtrace" : 0,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_GUI_autogen/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/bin/inc"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/EcatSystem"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Interpolator"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Robot"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/QtWidgets"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow/framelesswindow"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/./mkspecs/linux-g++"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQuick"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQmlModels"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/opt/Qt5.14.2/5.14.2/gcc_64/include/QtQml"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "QtWidgets::@f3637580905fab2528a1"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "DarkStyleWindow::@f0091f1f28e587374ecd"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "framelesswindow::@0853fdb130f0c777b8f5"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "RTCAN_Motor_GUI_autogen::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "RTCAN_Motor_GUI::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-std=c++17 -Wall -Wextra -fPIC -O2 -DNDEBUG",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/opt/Qt5.14.2/5.14.2/gcc_64/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "include/QtWidgets/libQtWidgets.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "include/DarkStyleWindow/libDarkStyleWindow.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "include/DarkStyleWindow/framelesswindow/libframelesswindow.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Widgets.so.5.14.2",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Quick.so.5.14.2",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Gui.so.5.14.2",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5QmlModels.so.5.14.2",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Qml.so.5.14.2",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Network.so.5.14.2",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Core.so.5.14.2",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "RTCAN_Motor_GUI",
+	"nameOnDisk" : "RTCAN_Motor_GUI",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				3
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/RTCAN_Motor_GUI_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/QTmain.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/mainwindow.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/mainwindow.ui",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "EXECUTABLE"
+}

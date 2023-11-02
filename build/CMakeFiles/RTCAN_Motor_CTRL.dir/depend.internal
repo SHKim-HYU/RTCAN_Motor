@@ -63,10 +63,5 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o
  /usr/xenomai/include/copperplate/heapobj.h
  /usr/xenomai/include/copperplate/reference.h
  /usr/xenomai/include/copperplate/threadobj.h
- /usr/xenomai/include/trank/native/pipe.h
- /usr/xenomai/include/trank/native/task.h
- /usr/xenomai/include/trank/native/timer.h
- /usr/xenomai/include/trank/native/types.h
- /usr/xenomai/include/trank/rtdk.h
  /usr/xenomai/include/trank/trank.h
  /usr/xenomai/include/xeno_config.h

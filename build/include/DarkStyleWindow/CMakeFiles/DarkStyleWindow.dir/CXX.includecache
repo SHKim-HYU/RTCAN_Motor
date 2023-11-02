@@ -32,6 +32,22 @@ QtCore/qmetatype.h
 EWIEGA46WW/moc_DarkStyle.cpp
 /home/robot/robot_ws/RTCAN_Motor/build/include/DarkStyleWindow/DarkStyleWindow_autogen/EWIEGA46WW/moc_DarkStyle.cpp
 
+/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow/DarkStyle.cpp
+DarkStyle.h
+/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow/DarkStyle.h
+
+/home/robot/robot_ws/RTCAN_Motor/include/DarkStyleWindow/DarkStyle.h
+QApplication
+-
+QFile
+-
+QFont
+-
+QProxyStyle
+-
+QStyleFactory
+-
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QFile
 qfile.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfile.h

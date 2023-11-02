@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp
+
 /home/robot/robot_ws/RTCAN_Motor/src/xddp_nrt.cpp
 iostream
 -
