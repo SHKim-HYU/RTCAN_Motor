@@ -8,6 +8,7 @@
 #include <pthread.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <time.h>
 
 pthread_t nrt;
 
@@ -24,6 +25,8 @@ static void *regular_thread(void *arg)
 	double buf[6];
     char *devname;
 	int fd, ret;
+    struct timespec start, end;
+    long long elapsed;
 
 	if (asprintf(&devname, "/dev/rtp%d", XDDP_PORT) < 0)
 		fail("asprintf");
@@ -33,11 +36,17 @@ static void *regular_thread(void *arg)
 	if (fd < 0)
 		fail("open");
 
+    clock_gettime(CLOCK_MONOTONIC, &start);
 	while(1){
+        end=start;
+        clock_gettime(CLOCK_MONOTONIC, &start);
+        elapsed = ((start.tv_sec - end.tv_sec) * 1000000LL) + ((start.tv_nsec - end.tv_nsec) / 1000LL);
 		/* Get the next message from realtime_thread. */
 		ret = read(fd, buf, sizeof(buf));
 		if (ret <= 0)
 			fail("read");
+        
+        std::cout << "xddp-NRT looptime: "<<elapsed<<"us"<<std::endl;
         std::cout << "[Force] x:"<<buf[0]<<", y:"<<buf[1]<<", z:"<<buf[2] << std::endl;
         std::cout << "[Torque] x:"<<buf[3]<<", y:"<<buf[4]<<", z:"<<buf[5] << std::endl;
         std::cout << std::endl;

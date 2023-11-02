@@ -117,12 +117,12 @@ void ft_run(void *arg)
                 ft_array[n+3] = ((float)raw_data[n+3]) / DT;
             }
 
-            rt_printf("\nX direction Force: %f   \n",   ft_array[0]);
-            rt_printf("Y direction Force: %f    \n",    ft_array[1]);
-            rt_printf("Z direction Force: %f    \n\n",  ft_array[2]);
-            rt_printf("X direction Torque: %f   \n",    ft_array[3]);
-            rt_printf("Y direction Torque: %f   \n",    ft_array[4]);
-            rt_printf("Z direction Torque: %f   \n\n",  ft_array[5]);
+            // rt_printf("\nX direction Force: %f   \n",   ft_array[0]);
+            // rt_printf("Y direction Force: %f    \n",    ft_array[1]);
+            // rt_printf("Z direction Force: %f    \n\n",  ft_array[2]);
+            // rt_printf("X direction Torque: %f   \n",    ft_array[3]);
+            // rt_printf("Y direction Torque: %f   \n",    ft_array[4]);
+            // rt_printf("Z direction Torque: %f   \n\n",  ft_array[5]);
         }
     }
     can1.Close();
@@ -174,17 +174,17 @@ void motor_run(void *arg)
     rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
-        can2.Send(txmsg);
+        // can2.Send(txmsg);
         
-        can2.Receive(rxmsg);
-        rt_printf("Device2 \n");
-        rt_printf("id: %d, ",rxmsg.id);
-        rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
+        // can2.Receive(rxmsg);
+        // rt_printf("Device2 \n");
+        // rt_printf("id: %d, ",rxmsg.id);
+        // rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
 
-        can2.Receive(rxmsg);
-        rt_printf("id: %d, ",rxmsg.id);
-        rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
-        rt_printf("\n\n");
+        // can2.Receive(rxmsg);
+        // rt_printf("id: %d, ",rxmsg.id);
+        // rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
+        // rt_printf("\n\n");
     }
     can2.Close();
 }
@@ -197,12 +197,15 @@ static void fail(const char *reason)
 
 void xddp_writer_run(void *arg)
 {
+    RTIME beginCycle, prevCycle;
+    unsigned long periodCycle = 0;
+
     struct sockaddr_ipc saddr;
 	int ret, s, n = 0, len;
 	struct timespec ts;
 	size_t poolsz;
 
-    rt_task_set_periodic(NULL, TM_NOW, 100*cycle_ns); // 100ms
+    rt_task_set_periodic(NULL, TM_NOW, 1*cycle_ns); // 10ms
 
 	s = __cobalt_socket(AF_RTIPC, SOCK_DGRAM, IPCPROTO_XDDP);
 	if (s < 0) {
@@ -222,14 +225,21 @@ void xddp_writer_run(void *arg)
 	ret = __cobalt_bind(s, (struct sockaddr *)&saddr, sizeof(saddr));
 	if (ret)
 		fail("bind");
-
+    beginCycle = rt_timer_read();
     while(1) 
     {
         rt_task_wait_period(NULL); //wait for next cycle
-	
+        prevCycle = beginCycle;
+        beginCycle = rt_timer_read();
+
+        periodCycle = (unsigned long) beginCycle - prevCycle;
+        rt_printf("xddp-RT looptime: %lius\n", periodCycle/1000);
+        rt_printf("[Force] x: %f, y: %f, z: %f\n",  ft_array[0], ft_array[1], ft_array[2]);
+        rt_printf("[Torque] x: %f, y: %f, z: %f\n\n",  ft_array[3], ft_array[4], ft_array[5]);
+
 		ret = __cobalt_sendto(s, ft_array, sizeof(ft_array), 0, NULL, 0);
-		if (ret != sizeof(ft_array))
-			fail("sendto");
+		// if (ret != sizeof(ft_array))
+		// 	fail("sendto");
 
 		// /* Read back packets echoed by the regular thread */
 		// ret = __cobalt_recvfrom(s, buf, sizeof(buf), 0, NULL, 0);
