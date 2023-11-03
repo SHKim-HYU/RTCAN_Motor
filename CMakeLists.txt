@@ -164,40 +164,9 @@ set(CTRL_SOURCE_FILES
     src/mainwindow.ui
 )
 
-set(GUI_SOURCE_FILES
-    src/QTmain.cpp
-    src/mainwindow.cpp
-    src/mainwindow.ui
-)
-
 # Add a executable with the above sources
 set(CTRL_EXECUTABLE ${PROJECT_NAME}_CTRL)
-set(GUI_EXECUTABLE ${PROJECT_NAME}_GUI)
 add_executable(${CTRL_EXECUTABLE} ${CTRL_SOURCE_FILES})
-add_executable(${GUI_EXECUTABLE} ${GUI_SOURCE_FILES})
-
-# Test for XDDP
-# Source files
-# set(XDDP_RT_SOURCE_FILES
-#     src/xddp_rt.cpp
-# )
-set(XDDP_NRT_SOURCE_FILES
-    src/xddp_nrt.cpp
-)
-# set(XDDP_RT ${PROJECT_NAME}_XDDP_RT)
-set(XDDP_NRT ${PROJECT_NAME}_XDDP_NRT)
-# add_executable(${XDDP_RT} ${XDDP_RT_SOURCE_FILES})
-add_executable(${XDDP_NRT} ${XDDP_NRT_SOURCE_FILES})
-
-# Add shell script file to run the executables and as a link
-file(WRITE ${CMAKE_BINARY_DIR}/run_script.sh "#!/bin/sh\n")
-file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/${CTRL_EXECUTABLE} &\n")
-file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "sudo ${CMAKE_BINARY_DIR}/${GUI_EXECUTABLE} &\n")
-file(APPEND ${CMAKE_BINARY_DIR}/run_script.sh "wait")
-
-set(SOURCE_SCRIPT "${CMAKE_BINARY_DIR}/run_script.sh")
-set(SYMLINK_PATH "${CMAKE_SOURCE_DIR}/run_script_symlink.sh")
-execute_process(COMMAND ln -s ${SOURCE_SCRIPT} ${SYMLINK_PATH})
 
 target_link_libraries(${CTRL_EXECUTABLE}
         sub::CAN
@@ -205,27 +174,12 @@ target_link_libraries(${CTRL_EXECUTABLE}
         sub::Robot
         dl
         sub::QtWidgets
-    sub::DarkStyleWindow
-    Qt5::Widgets 
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Network
-    Qt5::Quick
-)
-
-# Use the Widgets module from Qt 5
-target_link_libraries(${GUI_EXECUTABLE}
-    sub::QtWidgets
-    sub::DarkStyleWindow
-    Qt5::Widgets 
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Network
-    Qt5::Quick
-)
-
-target_link_libraries(${XDDP_NRT}
-    pthread
+        sub::DarkStyleWindow
+        Qt5::Widgets 
+        Qt5::Core
+        Qt5::Gui
+        Qt5::Network
+        Qt5::Quick
 )
 
 # libpcan
@@ -243,7 +197,6 @@ find_package(Xenomai 3.1.1 REQUIRED ALCHEMY)
 message(STATUS "Xenomai found with theses skins: ${Xenomai_SKINS}")
 if(Xenomai_FOUND)
     target_include_directories(${CTRL_EXECUTABLE} PUBLIC ${KERNELHEADERS_DIR})
-    # target_include_directories(${XDDP_RT} PUBLIC ${KERNELHEADERS_DIR})
     foreach(comp_lists ${Xenomai_FOUND_COMP})
         #message(STATUS "Xenomai ${comp_lists} includes : ${Xenomai_${comp_lists}_INCLUDE_DIRS}" )
         #message(STATUS "Xenomai ${comp_lists} definitions: ${Xenomai_${comp_lists}_DEFINITIONS}")
@@ -253,12 +206,9 @@ if(Xenomai_FOUND)
         #message(STATUS "Xenomai ${comp_lists} DL_FLAGS : ${Xenomai_${comp_lists}_DL_FLAGS}")
 
         target_include_directories(${CTRL_EXECUTABLE} PUBLIC ${Xenomai_${comp_lists}_INCLUDE_DIRS})
-        # target_include_directories(${XDDP_RT} PUBLIC ${Xenomai_${comp_lists}_INCLUDE_DIRS})
         # target_link_libraries(${PROJECT_NAME} PUBLIC ${Xenomai_${comp_lists}_LIBRARY_DIRS} ${Xenomai_${comp_lists}_LIBRARIES})
         target_link_libraries(${CTRL_EXECUTABLE} ${Xenomai_${comp_lists}_DL_FLAGS})
         set_target_properties(${CTRL_EXECUTABLE} PROPERTIES COMPILE_FLAGS ${Xenomai_${comp_lists}_DEFINITIONS})
-        # target_link_libraries(${XDDP_RT} ${Xenomai_${comp_lists}_DL_FLAGS})
-        # set_target_properties(${XDDP_RT} PROPERTIES COMPILE_FLAGS ${Xenomai_${comp_lists}_DEFINITIONS})
     endforeach(comp_lists ${Xenomai_SKINS})
 endif(Xenomai_FOUND)
 

@@ -1,1 +1,0 @@
-/usr/bin/g++   -std=c++17 -Wall -Wextra -fPIC -O2 -DNDEBUG   CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/RTCAN_Motor_XDDP_NRT_autogen/mocs_compilation.cpp.o CMakeFiles/RTCAN_Motor_XDDP_NRT.dir/src/xddp_nrt.cpp.o  -o RTCAN_Motor_XDDP_NRT  -lpthread 

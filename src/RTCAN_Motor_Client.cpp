@@ -62,6 +62,8 @@ double ft_array[6];
 
 void ft_run(void *arg)
 {
+    RTIME beginCycle, prevCycle;
+    unsigned long periodCycle = 0;
     // CAN Setup
     CANDevice::Config_t config;
     config.mode_fd = 0; // 0: CAN2.0 Mode, 1: CAN-FD Mode
@@ -105,11 +107,19 @@ void ft_run(void *arg)
     can1.Status();
 
     can1.Send(TxFrame);
-
-    rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
+    beginCycle = rt_timer_read();
+    rt_task_set_periodic(NULL, TM_NOW, 2*cycle_ns);
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
         
+        prevCycle = beginCycle;
+        beginCycle = rt_timer_read();
+
+        periodCycle = (unsigned long) beginCycle - prevCycle;
+        rt_printf("xddp-RT looptime: %lius\n", periodCycle/1000);
+        rt_printf("[Force] x: %f, y: %f, z: %f\n",  ft_array[0], ft_array[1], ft_array[2]);
+        rt_printf("[Torque] x: %f, y: %f, z: %f\n\n",  ft_array[3], ft_array[4], ft_array[5]);
+
         res2 = can1.Receive(RxFrame2);
         res1 = can1.Receive(RxFrame1);
 
@@ -211,69 +221,6 @@ void motor_run(void *arg)
     can2.Close();
 }
 
-static void fail(const char *reason)
-{
-	perror(reason);
-	exit(EXIT_FAILURE);
-}
-
-void xddp_writer_run(void *arg)
-{
-    RTIME beginCycle, prevCycle;
-    unsigned long periodCycle = 0;
-
-    struct sockaddr_ipc saddr;
-	int ret, s, n = 0, len;
-	struct timespec ts;
-	size_t poolsz;
-
-    rt_task_set_periodic(NULL, TM_NOW, 1*cycle_ns); // 1ms
-
-	s = __cobalt_socket(AF_RTIPC, SOCK_DGRAM, IPCPROTO_XDDP);
-	if (s < 0) {
-		perror("socket");
-		exit(EXIT_FAILURE);
-	}
-
-	poolsz = 16384; /* bytes */
-	ret = __cobalt_setsockopt(s, SOL_XDDP, XDDP_POOLSZ,
-			 &poolsz, sizeof(poolsz));
-	if (ret)
-		fail("setsockopt");
-
-	memset(&saddr, 0, sizeof(saddr));
-	saddr.sipc_family = AF_RTIPC;
-	saddr.sipc_port = XDDP_PORT;
-	ret = __cobalt_bind(s, (struct sockaddr *)&saddr, sizeof(saddr));
-	if (ret)
-		fail("bind");
-    beginCycle = rt_timer_read();
-    while(1) 
-    {
-        rt_task_wait_period(NULL); //wait for next cycle
-        prevCycle = beginCycle;
-        beginCycle = rt_timer_read();
-
-        periodCycle = (unsigned long) beginCycle - prevCycle;
-        rt_printf("xddp-RT looptime: %lius\n", periodCycle/1000);
-        rt_printf("[Force] x: %f, y: %f, z: %f\n",  ft_array[0], ft_array[1], ft_array[2]);
-        rt_printf("[Torque] x: %f, y: %f, z: %f\n\n",  ft_array[3], ft_array[4], ft_array[5]);
-
-		ret = __cobalt_sendto(s, ft_array, sizeof(ft_array), 0, NULL, 0);
-		// if (ret != sizeof(ft_array))
-		// 	fail("sendto");
-
-		// /* Read back packets echoed by the regular thread */
-		// ret = __cobalt_recvfrom(s, buf, sizeof(buf), 0, NULL, 0);
-		// if (ret <= 0)
-		// 	fail("recvfrom");
-
-		// printf("   => \"%.*s\" echoed by peer\n", ret, buf);
-	}
-
-	return;
-}
-
 void runQtApplication(int argc, char* argv[]) {
   QApplication a(argc, argv);
   // style our application with custom dark style
@@ -326,15 +273,12 @@ int main(int argc, char *argv[])
     rt_task_set_affinity(&ft_task, &cpuset_rt);
     rt_task_start(&ft_task, &ft_run, NULL);
 
-    rt_task_create(&motor_task, "motor_task", 0, 98, 0);
-    rt_task_start(&motor_task, &motor_run, NULL);
-
-    rt_task_create(&xddp_writer, "xddp_writer", 0, 80, 0);
-    rt_task_start(&xddp_writer, &xddp_writer_run, NULL);
+    // rt_task_create(&motor_task, "motor_task", 0, 98, 0);
+    // rt_task_start(&motor_task, &motor_run, NULL);
 
     // Must pause here
     pause();
-    qtThread.join();
+    // qtThread.join();
 
     // Finalize
     signal_handler(0);
