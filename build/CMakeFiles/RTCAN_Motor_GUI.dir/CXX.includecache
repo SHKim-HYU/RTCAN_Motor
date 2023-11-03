@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+../include/DarkStyleWindow/DarkStyle.h
+QApplication
+-
+QFile
+-
+QFont
+-
+QProxyStyle
+-
+QStyleFactory
+-
+
+../include/DarkStyleWindow/framelesswindow/framelesswindow.h
+QWidget
+-
+
 ../include/QtWidgets/QtButtonLedIndicator.h
 QAbstractButton
 -
@@ -24,6 +40,80 @@ QtStyle.h
 
 ../include/QtWidgets/QtStyle.h
 QtCore/qeasingcurve.h
+-
+
+../src/mainwindow.h
+QMainWindow
+-
+QTimer
+-
+QGraphicsScene
+-
+QGraphicsPixmapItem
+-
+QImage
+-
+QPixmap
+-
+QCloseEvent
+-
+QMessageBox
+-
+QTextEdit
+-
+QHBoxLayout
+-
+QTreeWidget
+-
+QtButtonLedIndicator.h
+../src/QtButtonLedIndicator.h
+vector
+-
+chrono
+-
+
+/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_GUI_autogen/UVLADIE3JM/moc_mainwindow.cpp
+memory
+-
+src/mainwindow.h
+/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_GUI_autogen/UVLADIE3JM/src/mainwindow.h
+QtCore/qbytearray.h
+-
+QtCore/qmetatype.h
+-
+
+/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_GUI_autogen/mocs_compilation.cpp
+UVLADIE3JM/moc_mainwindow.cpp
+/home/robot/robot_ws/RTCAN_Motor/build/RTCAN_Motor_GUI_autogen/UVLADIE3JM/moc_mainwindow.cpp
+
+/home/robot/robot_ws/RTCAN_Motor/src/QTmain.cpp
+mainwindow.h
+/home/robot/robot_ws/RTCAN_Motor/src/mainwindow.h
+iostream
+-
+QApplication
+-
+QResource
+-
+QTextCodec
+-
+QScreen
+-
+DarkStyle.h
+/home/robot/robot_ws/RTCAN_Motor/src/DarkStyle.h
+framelesswindow.h
+/home/robot/robot_ws/RTCAN_Motor/src/framelesswindow.h
+QApplication
+-
+QSplitter
+-
+QTreeView
+-
+QListView
+-
+QTableView
+-
+QStandardItemModel
 -
 
 /home/robot/robot_ws/RTCAN_Motor/src/mainwindow.cpp
@@ -114,6 +204,10 @@ qdebug.h
 qcoreevent.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qcoreevent.h
 
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QFile
+qfile.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qfile.h
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QList
 qlist.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qlist.h
@@ -138,6 +232,10 @@ qpoint.h
 qrect.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qrect.h
 
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QResource
+qresource.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qresource.h
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QScopedPointer
 qscopedpointer.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qscopedpointer.h
@@ -161,6 +259,10 @@ qstring.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QStringList
 qstringlist.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qstringlist.h
+
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QTextCodec
+qtextcodec.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qtextcodec.h
 
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QTimer
 qtimer.h
@@ -2128,6 +2230,10 @@ qevent.h
 qcolor.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qcolor.h
 
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QFont
+qfont.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qfont.h
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QImage
 qimage.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qimage.h
@@ -2159,6 +2265,14 @@ qpixmap.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QResizeEvent
 qevent.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qevent.h
+
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QScreen
+qscreen.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qscreen.h
+
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QStandardItemModel
+qstandarditemmodel.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qstandarditemmodel.h
 
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/QSurfaceFormat
 qsurfaceformat.h
@@ -3646,6 +3760,10 @@ qboxlayout.h
 qlayout.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlayout.h
 
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QListView
+qlistview.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlistview.h
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QMainWindow
 qmainwindow.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qmainwindow.h
@@ -3658,6 +3776,10 @@ qmenubar.h
 qmessagebox.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qmessagebox.h
 
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QProxyStyle
+qproxystyle.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qproxystyle.h
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QPushButton
 qpushbutton.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qpushbutton.h
@@ -3666,13 +3788,29 @@ qpushbutton.h
 qscrollerproperties.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qscrollerproperties.h
 
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QSplitter
+qsplitter.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qsplitter.h
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QStatusBar
 qstatusbar.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qstatusbar.h
 
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QStyleFactory
+qstylefactory.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qstylefactory.h
+
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTableView
+qtableview.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtableview.h
+
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTextEdit
 qtextedit.h
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtextedit.h
+
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTreeView
+qtreeview.h
+/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qtreeview.h
 
 /opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QTreeWidget
 qtreewidget.h

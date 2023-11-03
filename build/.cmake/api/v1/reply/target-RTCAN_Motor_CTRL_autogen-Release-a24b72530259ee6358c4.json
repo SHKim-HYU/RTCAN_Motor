@@ -27,6 +27,14 @@
 		{
 			"backtrace" : 0,
 			"id" : "Robot::@bc8f6043f00d71530807"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "QtWidgets::@f3637580905fab2528a1"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "DarkStyleWindow::@f0091f1f28e587374ecd"
 		}
 	],
 	"id" : "RTCAN_Motor_CTRL_autogen::@6890427a1f51a3e7e1df",

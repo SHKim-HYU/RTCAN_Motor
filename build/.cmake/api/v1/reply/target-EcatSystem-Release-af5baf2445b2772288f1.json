@@ -55,6 +55,12 @@
 			{
 				"command" : 2,
 				"file" : 0,
+				"line" : 37,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
 				"line" : 46,
 				"parent" : 0
 			}
@@ -93,10 +99,6 @@
 				},
 				{
 					"backtrace" : 4,
-					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
-				},
-				{
-					"backtrace" : 4,
 					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
 				},
 				{
@@ -121,18 +123,22 @@
 				},
 				{
 					"backtrace" : 6,
+					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
+				},
+				{
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include/trank"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include/cobalt"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include/alchemy"
 				}
 			],
@@ -171,10 +177,6 @@
 				},
 				{
 					"backtrace" : 4,
-					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
-				},
-				{
-					"backtrace" : 4,
 					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
 				},
 				{
@@ -199,18 +201,22 @@
 				},
 				{
 					"backtrace" : 6,
+					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
+				},
+				{
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include/trank"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include/cobalt"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/usr/xenomai/include/alchemy"
 				}
 			],

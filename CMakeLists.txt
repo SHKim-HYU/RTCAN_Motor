@@ -160,6 +160,8 @@ add_subdirectory(include/DarkStyleWindow)
 # Source files
 set(CTRL_SOURCE_FILES
     src/RTCAN_Motor_Client.cpp
+    src/mainwindow.cpp
+    src/mainwindow.ui
 )
 
 set(GUI_SOURCE_FILES
@@ -202,6 +204,13 @@ target_link_libraries(${CTRL_EXECUTABLE}
         sub::Interpolator
         sub::Robot
         dl
+        sub::QtWidgets
+    sub::DarkStyleWindow
+    Qt5::Widgets 
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Network
+    Qt5::Quick
 )
 
 # Use the Widgets module from Qt 5

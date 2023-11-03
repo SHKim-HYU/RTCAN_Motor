@@ -8,9 +8,31 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
+#include <sched.h>
 #include <alchemy/task.h>
 #include <alchemy/timer.h>
 #include <rtdm/ipc.h> 
+
+#undef debug
+//QT
+// #include <thread>
+// #include <pthread.h>
+#include <QApplication>
+#include <QSplitter>
+#include <QTreeView>
+#include <QListView>
+#include <QTableView>
+#include <QStandardItemModel>
+#include <QScreen>
+
+#include "DarkStyle.h"
+#include "framelesswindow.h"
+#include "mainwindow.h"
+#include <iostream>
+
+#include <QApplication>
+#include <QResource>
+#include <QTextCodec>
 
 // Peak CAN
 #include <PCANDevice.h>
@@ -252,6 +274,23 @@ void xddp_writer_run(void *arg)
 	return;
 }
 
+void runQtApplication(int argc, char* argv[]) {
+  QApplication a(argc, argv);
+  // style our application with custom dark style
+  QApplication::setStyle(new DarkStyle);
+
+  // create frameless window (and set windowState or title)
+  FramelessWindow framelessWindow;
+
+  // create our mainwindow instance
+  MainWindow *mainWindow = new MainWindow;
+  // add the mainwindow to our custom frameless window
+  framelessWindow.resize(1600,600);
+  framelessWindow.setContent(mainWindow);
+  framelessWindow.show();
+  a.exec();
+}
+
 void signal_handler(int signum)
 {
     rt_task_delete(&ft_task);
@@ -272,8 +311,19 @@ int main(int argc, char *argv[])
     /* Avoids memory swapping for this program */
     mlockall(MCL_CURRENT|MCL_FUTURE);
 
+    cpu_set_t cpuset_qt, cpuset_rt;
+    CPU_ZERO(&cpuset_qt);
+    CPU_ZERO(&cpuset_rt);  
+
+    CPU_SET(6, &cpuset_qt);  
+    CPU_SET(7, &cpuset_rt);  
+    
+    std::thread qtThread(runQtApplication, argc, argv);
+    pthread_t pthread = qtThread.native_handle();
+    int rc = pthread_setaffinity_np(pthread, sizeof(cpu_set_t), &cpuset_qt);
 
     rt_task_create(&ft_task, "ft_task", 0, 99, 0);
+    rt_task_set_affinity(&ft_task, &cpuset_rt);
     rt_task_start(&ft_task, &ft_run, NULL);
 
     rt_task_create(&motor_task, "motor_task", 0, 98, 0);
@@ -284,6 +334,7 @@ int main(int argc, char *argv[])
 
     // Must pause here
     pause();
+    qtThread.join();
 
     // Finalize
     signal_handler(0);

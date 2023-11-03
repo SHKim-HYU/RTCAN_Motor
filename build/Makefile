@@ -558,6 +558,7 @@ src/mainwindow.o: src/mainwindow.cpp.o
 # target to build an object file
 src/mainwindow.cpp.o:
 	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/src/mainwindow.cpp.o
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL.dir/build.make CMakeFiles/RTCAN_Motor_CTRL.dir/src/mainwindow.cpp.o
 .PHONY : src/mainwindow.cpp.o
 
 src/mainwindow.i: src/mainwindow.cpp.i
@@ -567,6 +568,7 @@ src/mainwindow.i: src/mainwindow.cpp.i
 # target to preprocess a source file
 src/mainwindow.cpp.i:
 	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/src/mainwindow.cpp.i
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL.dir/build.make CMakeFiles/RTCAN_Motor_CTRL.dir/src/mainwindow.cpp.i
 .PHONY : src/mainwindow.cpp.i
 
 src/mainwindow.s: src/mainwindow.cpp.s
@@ -576,6 +578,7 @@ src/mainwindow.s: src/mainwindow.cpp.s
 # target to generate assembly for a file
 src/mainwindow.cpp.s:
 	$(MAKE) -f CMakeFiles/RTCAN_Motor_GUI.dir/build.make CMakeFiles/RTCAN_Motor_GUI.dir/src/mainwindow.cpp.s
+	$(MAKE) -f CMakeFiles/RTCAN_Motor_CTRL.dir/build.make CMakeFiles/RTCAN_Motor_CTRL.dir/src/mainwindow.cpp.s
 .PHONY : src/mainwindow.cpp.s
 
 src/xddp_nrt.o: src/xddp_nrt.cpp.o

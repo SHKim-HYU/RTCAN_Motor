@@ -95,10 +95,6 @@
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
-				},
-				{
-					"backtrace" : 5,
 					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
 				},
 				{
