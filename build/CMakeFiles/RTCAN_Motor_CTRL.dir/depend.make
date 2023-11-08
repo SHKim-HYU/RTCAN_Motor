@@ -169,6 +169,7 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/RTCAN_Motor_CTRL_autogen/mocs_compilation.cpp.o:
 
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/CAN/CANDevice.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/CAN/PCANDevice.h
+CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/CAN/Robotous_FT.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/DarkStyleWindow/DarkStyle.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/DarkStyleWindow/framelesswindow/framelesswindow.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o: ../include/QtWidgets/QtButtonLedIndicator.h

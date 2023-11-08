@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "include/CAN/libCAN.a"
+			"path" : "include/Interpolator/libInterpolator.a"
 		}
 	],
 	"backtrace" : 1,
@@ -16,7 +16,7 @@
 		],
 		"files" : 
 		[
-			"include/CAN/CMakeLists.txt",
+			"include/Interpolator/CMakeLists.txt",
 			"CMakeLists.txt"
 		],
 		"nodes" : 
@@ -27,7 +27,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 10,
+				"line" : 7,
 				"parent" : 0
 			},
 			{
@@ -62,14 +62,14 @@
 			"includes" : 
 			[
 				{
-					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/include/CAN"
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/include/Interpolator"
 				},
 				{
-					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Interpolator"
 				},
 				{
 					"backtrace" : 0,
-					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/include/CAN/CAN_autogen/include"
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/build/include/Interpolator/Interpolator_autogen/include"
 				},
 				{
 					"backtrace" : 3,
@@ -77,11 +77,15 @@
 				},
 				{
 					"backtrace" : 4,
-					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/EcatSystem"
+					"path" : "/usr/src/linux-headers-5.4.239-xenomai-3.2.3+"
 				},
 				{
 					"backtrace" : 4,
-					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/Interpolator"
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/CAN"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/robot/robot_ws/RTCAN_Motor/include/EcatSystem"
 				},
 				{
 					"backtrace" : 4,
@@ -99,10 +103,7 @@
 			"language" : "CXX",
 			"sourceIndexes" : 
 			[
-				0,
-				1,
-				4,
-				6
+				0
 			]
 		}
 	],
@@ -110,16 +111,16 @@
 	[
 		{
 			"backtrace" : 0,
-			"id" : "CAN_autogen::@b812fb93f64d8e23a576"
+			"id" : "Interpolator_autogen::@3b557d557d621394a5fb"
 		}
 	],
-	"id" : "CAN::@b812fb93f64d8e23a576",
-	"name" : "CAN",
-	"nameOnDisk" : "libCAN.a",
+	"id" : "Interpolator::@3b557d557d621394a5fb",
+	"name" : "Interpolator",
+	"nameOnDisk" : "libInterpolator.a",
 	"paths" : 
 	{
-		"build" : "include/CAN",
-		"source" : "include/CAN"
+		"build" : "include/Interpolator",
+		"source" : "include/Interpolator"
 	},
 	"sourceGroups" : 
 	[
@@ -127,20 +128,16 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0,
-				1,
-				4,
-				6
+				0
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
+				1,
 				2,
-				3,
-				5,
-				7
+				3
 			]
 		}
 	],
@@ -150,45 +147,22 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/include/CAN/CAN_autogen/mocs_compilation.cpp",
+			"path" : "build/include/Interpolator/Interpolator_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "include/CAN/CANDevice.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/CAN/CANDevice.h",
+			"path" : "include/Interpolator/BlendedPolynomialAlgorithm.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "include/CAN/CiA402_Object_Dictionary.h",
+			"path" : "include/Interpolator/InterpolatorConstants.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "include/CAN/MotorCiA402.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/CAN/MotorCiA402.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "include/CAN/PCANDevice.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/CAN/PCANDevice.h",
+			"path" : "include/Interpolator/PolynomialAlgorithm.h",
 			"sourceGroupIndex" : 1
 		}
 	],

@@ -36,6 +36,7 @@
 
 // Peak CAN
 #include <PCANDevice.h>
+#include <Robotous_FT.h>
 
 // PCI/E-FD
 #define DEVICE1 "/dev/rtdm/pcan0"
@@ -57,8 +58,8 @@ unsigned char data_field[16];
 
 short raw_data[6] = { 0 };
 unsigned short temp;
-unsigned DF=50, DT=2000;
-double ft_array[6];
+unsigned DF=50, DT=1000;
+float ft_array[6];
 
 void ft_run(void *arg)
 {
@@ -90,25 +91,27 @@ void ft_run(void *arg)
     CANDevice::CAN_msg_t RxFrame1;
     CANDevice::CAN_msg_t RxFrame2;
 
+    can1.Status();
+
     TxFrame.id = 0x64;
     TxFrame.length = 8;
-    TxFrame.data[0] = 0x0A;
-    TxFrame.data[1] = 0x00;
-    TxFrame.data[2] = 0x00;
-    TxFrame.data[3] = 0x00;
-    TxFrame.data[4] = 0x00;
-    TxFrame.data[5] = 0x00;
-    TxFrame.data[6] = 0x00;
-    TxFrame.data[7] = 0x00;
+    for(int i=0; i<8; i++) TxFrame.data[i]=0x00;
 
+    // Read Data Output Rate
+    TxFrame.data[0] = SET_DATA_RATE;
+    TxFrame.data[1] = FT_RATE_1000HZ; // 1000Hz
+
+    can1.Send(TxFrame);
+
+    // Read Once
+    TxFrame.data[0] = READ_START;
+    
     RxFrame1.length = 8;
     RxFrame2.length = 8;
 
-    can1.Status();
-
     can1.Send(TxFrame);
     beginCycle = rt_timer_read();
-    rt_task_set_periodic(NULL, TM_NOW, 2*cycle_ns);
+    rt_task_set_periodic(NULL, TM_NOW, 1*cycle_ns);
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
         
@@ -123,15 +126,13 @@ void ft_run(void *arg)
         res2 = can1.Receive(RxFrame2);
         res1 = can1.Receive(RxFrame1);
 
-        can1.Send(TxFrame);
-
         if (res1 == 1 && res2 == 1)
         {
             //CANbus data to Torque data
             for(int i = 0; i<6; i++)
             {
-                data_field[i] = (unsigned char) RxFrame1.data[i];
-                data_field[i+8] = (unsigned char) RxFrame2.data[i];
+                data_field[i] = RxFrame1.data[i];
+                data_field[i+8] = RxFrame2.data[i];
             }
             
             for(int idx = 0; idx<6; idx++)
@@ -145,16 +146,9 @@ void ft_run(void *arg)
             // Set Force/Torque Original
             for(int n = 0; n<3; n++)
             {
-                ft_array[n] = ((float)raw_data[n]) / DF;
-                ft_array[n+3] = ((float)raw_data[n+3]) / DT;
+                ft_array[n] = ((float)raw_data[n]) / (float)DF;
+                ft_array[n+3] = ((float)raw_data[n+3]) / (float)DT;
             }
-
-            // rt_printf("\nX direction Force: %f   \n",   ft_array[0]);
-            // rt_printf("Y direction Force: %f    \n",    ft_array[1]);
-            // rt_printf("Z direction Force: %f    \n\n",  ft_array[2]);
-            // rt_printf("X direction Torque: %f   \n",    ft_array[3]);
-            // rt_printf("Y direction Torque: %f   \n",    ft_array[4]);
-            // rt_printf("Z direction Torque: %f   \n\n",  ft_array[5]);
         }
     }
     can1.Close();
@@ -187,15 +181,10 @@ void motor_run(void *arg)
     
     txmsg.id = 0x64;
     txmsg.length = 8;
-    txmsg.data[0] = 0x0A;
-    txmsg.data[1] = 0x00;
-    txmsg.data[2] = 0x00;
-    txmsg.data[3] = 0x00;
-    txmsg.data[4] = 0x00;
-    txmsg.data[5] = 0x00;
-    txmsg.data[6] = 0x00;
-    txmsg.data[7] = 0x00;
-
+    for(int i=0; i<8; i++) txmsg.data[i]=0x00;    
+    
+    txmsg.data[0] = READ_ONCE;
+    
     // rxmsg.id = 0x01;
     rxmsg.length = 8;
 
@@ -206,17 +195,17 @@ void motor_run(void *arg)
     rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
-        // can2.Send(txmsg);
+        can2.Send(txmsg);
         
-        // can2.Receive(rxmsg);
-        // rt_printf("Device2 \n");
-        // rt_printf("id: %d, ",rxmsg.id);
-        // rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
+        can2.Receive(rxmsg);
+        rt_printf("Device2 \n");
+        rt_printf("id: %d, ",rxmsg.id);
+        rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
 
-        // can2.Receive(rxmsg);
-        // rt_printf("id: %d, ",rxmsg.id);
-        // rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
-        // rt_printf("\n\n");
+        can2.Receive(rxmsg);
+        rt_printf("id: %d, ",rxmsg.id);
+        rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
+        rt_printf("\n\n");
     }
     can2.Close();
 }
@@ -258,22 +247,25 @@ int main(int argc, char *argv[])
     /* Avoids memory swapping for this program */
     mlockall(MCL_CURRENT|MCL_FUTURE);
 
-    cpu_set_t cpuset_qt, cpuset_rt;
+    cpu_set_t cpuset_qt, cpuset_rt1, cpuset_rt2;
     CPU_ZERO(&cpuset_qt);
-    CPU_ZERO(&cpuset_rt);  
+    CPU_ZERO(&cpuset_rt1);  
+    CPU_ZERO(&cpuset_rt2);  
 
     CPU_SET(6, &cpuset_qt);  
-    CPU_SET(7, &cpuset_rt);  
+    CPU_SET(7, &cpuset_rt1);  
+    CPU_SET(5, &cpuset_rt2);  
     
     std::thread qtThread(runQtApplication, argc, argv);
     pthread_t pthread = qtThread.native_handle();
     int rc = pthread_setaffinity_np(pthread, sizeof(cpu_set_t), &cpuset_qt);
 
     rt_task_create(&ft_task, "ft_task", 0, 99, 0);
-    rt_task_set_affinity(&ft_task, &cpuset_rt);
+    rt_task_set_affinity(&ft_task, &cpuset_rt1);
     rt_task_start(&ft_task, &ft_run, NULL);
 
-    // rt_task_create(&motor_task, "motor_task", 0, 98, 0);
+    rt_task_create(&motor_task, "motor_task", 0, 99, 0);
+    rt_task_set_affinity(&ft_task, &cpuset_rt2);
     // rt_task_start(&motor_task, &motor_run, NULL);
 
     // Must pause here

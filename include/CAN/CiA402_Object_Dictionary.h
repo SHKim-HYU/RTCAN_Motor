@@ -54,7 +54,7 @@
 #define OBJ_MODES_OPERATION 0x6060U
 #define OBJ_MODES_OPERATION_DISPLAY 0x6061U
 #define NO_MODE 		0xFF
-#define	POSITION_MODE 	0x02
+#define	PP_MODE 		0x01	// Profile Position Mode (PP)
 #define VELOCITY_MODE 	0x03
 #define TORQUE_MODE 	0x04
 #define HOMING_MODE 	0x06
@@ -89,6 +89,12 @@ typedef union{
 	}info;
 	unsigned char value[8];
 }SDO_PACKET;
+
+typedef union{
+	unsigned char uint8Value[4];
+	unsigned short uint16Value[2];
+	unsigned long uint32Value;
+}DATA_OBJECT;
 
 
 #endif /* CIA402_OBJECT_DICTIONARY_H_ */

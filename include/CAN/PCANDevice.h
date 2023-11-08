@@ -69,6 +69,7 @@ public:
 protected:
     int mode = -1;
     int fd_; // PCAN File Descriptor
+    struct CAN_msg_t tx_frame, rx_frame;
 
 };
 

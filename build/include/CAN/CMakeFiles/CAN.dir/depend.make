@@ -6,7 +6,11 @@ include/CAN/CMakeFiles/CAN.dir/CANDevice.cpp.o: ../include/CAN/CANDevice.cpp
 
 include/CAN/CMakeFiles/CAN.dir/CAN_autogen/mocs_compilation.cpp.o: include/CAN/CAN_autogen/mocs_compilation.cpp
 
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: ../include/CAN/CANDevice.h
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: ../include/CAN/CiA402_Object_Dictionary.h
 include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: ../include/CAN/MotorCiA402.cpp
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: ../include/CAN/MotorCiA402.h
+include/CAN/CMakeFiles/CAN.dir/MotorCiA402.cpp.o: ../include/CAN/PCANDevice.h
 
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o: ../include/CAN/CANDevice.h
 include/CAN/CMakeFiles/CAN.dir/PCANDevice.cpp.o: ../include/CAN/PCANDevice.h

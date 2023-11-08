@@ -6,5 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/robot/robot_ws/RTCAN_Motor/build/include/Interpolator/Interpolator_autogen/mocs_compilation.cpp
-

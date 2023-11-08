@@ -26,6 +26,8 @@ string
 CANDevice.h
 -
 
+../include/CAN/Robotous_FT.h
+
 ../include/DarkStyleWindow/DarkStyle.h
 QApplication
 -
@@ -102,6 +104,8 @@ QResource
 QTextCodec
 -
 PCANDevice.h
+-
+Robotous_FT.h
 -
 
 /home/robot/robot_ws/RTCAN_Motor/src/mainwindow.h
