@@ -169,6 +169,8 @@ CMakeFiles/RTCAN_Motor_CTRL.dir/RTCAN_Motor_CTRL_autogen/mocs_compilation.cpp.o
  /usr/xenomai/include/xeno_config.h
 CMakeFiles/RTCAN_Motor_CTRL.dir/src/RTCAN_Motor_Client.cpp.o
  ../include/CAN/CANDevice.h
+ ../include/CAN/CiA402_Object_Dictionary.h
+ ../include/CAN/MotorCiA402.h
  ../include/CAN/PCANDevice.h
  ../include/CAN/Robotous_FT.h
  ../include/DarkStyleWindow/DarkStyle.h

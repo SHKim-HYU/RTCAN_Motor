@@ -37,6 +37,7 @@
 // Peak CAN
 #include <PCANDevice.h>
 #include <Robotous_FT.h>
+#include <MotorCiA402.h>
 
 // PCI/E-FD
 #define DEVICE1 "/dev/rtdm/pcan0"
@@ -49,6 +50,8 @@ RT_TASK motor_task;
 RT_TASK xddp_writer;
 
 PCANDevice can1, can2;
+
+Motor_CiA402 motor;
 
 using namespace std;
 
@@ -164,50 +167,19 @@ void motor_run(void *arg)
     config.d_sample_point = 0.6; //60%
     config.clock_freq = 80e6; // 80mhz // Read from driver?  
     
+    motor.activate_all(DEVICE2, config);
 
-    if(!can2.Open(DEVICE2, config, false))
-    {
-        std::cout << "Unable to open CAN Device2" << std::endl;
-        // exit(-2);
-        return;
-    }
+    float rate_current;
 
-    // Setup Filters
-    can2.ClearFilters(); // Clear Existing/Reset.  Filters are saved on the device hardware.  Must make sure to clear
-    can2.AddFilter(1, 2); // Only Listen to messages on id 0x01, 0x02.  
+    rate_current = ((float)motor.SDO_RATE_CURRENT(1))/1000.f;
 
-    CANDevice::CAN_msg_t txmsg;
-    CANDevice::CAN_msg_t rxmsg;
-    
-    txmsg.id = 0x64;
-    txmsg.length = 8;
-    for(int i=0; i<8; i++) txmsg.data[i]=0x00;    
-    
-    txmsg.data[0] = READ_ONCE;
-    
-    // rxmsg.id = 0x01;
-    rxmsg.length = 8;
-
-    can2.Status();
-
-    // can.Send(txmsg);
+    printf("rate current: %f\n", rate_current);
 
     rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
-        can2.Send(txmsg);
-        
-        can2.Receive(rxmsg);
-        rt_printf("Device2 \n");
-        rt_printf("id: %d, ",rxmsg.id);
-        rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
 
-        can2.Receive(rxmsg);
-        rt_printf("id: %d, ",rxmsg.id);
-        rt_printf("data: %X %X %X %X %X %X %X %X\n",rxmsg.data[0],rxmsg.data[1],rxmsg.data[2],rxmsg.data[3],rxmsg.data[4],rxmsg.data[5],rxmsg.data[6],rxmsg.data[7]);
-        rt_printf("\n\n");
     }
-    can2.Close();
 }
 
 void runQtApplication(int argc, char* argv[]) {
@@ -256,17 +228,17 @@ int main(int argc, char *argv[])
     CPU_SET(7, &cpuset_rt1);  
     CPU_SET(5, &cpuset_rt2);  
     
-    std::thread qtThread(runQtApplication, argc, argv);
-    pthread_t pthread = qtThread.native_handle();
-    int rc = pthread_setaffinity_np(pthread, sizeof(cpu_set_t), &cpuset_qt);
+    // std::thread qtThread(runQtApplication, argc, argv);
+    // pthread_t pthread = qtThread.native_handle();
+    // int rc = pthread_setaffinity_np(pthread, sizeof(cpu_set_t), &cpuset_qt);
 
     rt_task_create(&ft_task, "ft_task", 0, 99, 0);
     rt_task_set_affinity(&ft_task, &cpuset_rt1);
-    rt_task_start(&ft_task, &ft_run, NULL);
+    // rt_task_start(&ft_task, &ft_run, NULL);
 
     rt_task_create(&motor_task, "motor_task", 0, 99, 0);
     rt_task_set_affinity(&ft_task, &cpuset_rt2);
-    // rt_task_start(&motor_task, &motor_run, NULL);
+    rt_task_start(&motor_task, &motor_run, NULL);
 
     // Must pause here
     pause();

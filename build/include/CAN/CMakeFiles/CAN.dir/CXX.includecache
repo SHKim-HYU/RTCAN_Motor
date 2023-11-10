@@ -18,14 +18,6 @@ vector
 functional
 -
 
-../include/CAN/PCANDevice.h
-stdint.h
--
-string
--
-CANDevice.h
--
-
 /home/robot/robot_ws/RTCAN_Motor/include/CAN/CiA402_Object_Dictionary.h
 
 /home/robot/robot_ws/RTCAN_Motor/include/CAN/MotorCiA402.cpp
@@ -41,22 +33,6 @@ PCANDevice.h
 /home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.h
 CiA402_Object_Dictionary.h
 /home/robot/robot_ws/RTCAN_Motor/include/CAN/CiA402_Object_Dictionary.h
-
-/home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.cpp
-stdio.h
--
-stdlib.h
--
-string.h
--
-unistd.h
--
-iostream
--
-libpcanfd.h
--
-PCANDevice.h
--
 
 /home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.h
 stdint.h

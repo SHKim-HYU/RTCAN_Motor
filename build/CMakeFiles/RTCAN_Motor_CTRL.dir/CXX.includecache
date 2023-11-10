@@ -18,6 +18,18 @@ vector
 functional
 -
 
+../include/CAN/CiA402_Object_Dictionary.h
+
+../include/CAN/MotorCiA402.h
+string.h
+-
+unistd.h
+-
+PCANDevice.h
+../include/CAN/PCANDevice.h
+CiA402_Object_Dictionary.h
+../include/CAN/CiA402_Object_Dictionary.h
+
 ../include/CAN/PCANDevice.h
 stdint.h
 -
@@ -106,6 +118,8 @@ QTextCodec
 PCANDevice.h
 -
 Robotous_FT.h
+-
+MotorCiA402.h
 -
 
 /home/robot/robot_ws/RTCAN_Motor/src/mainwindow.h

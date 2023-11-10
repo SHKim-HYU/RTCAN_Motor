@@ -12,8 +12,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "PCANDevice.h"
-// #include "CiA402_Object_Dictionary.h"
-#include "CoE.h"
+#include "CiA402_Object_Dictionary.h"
 
 #define DEBUG_PRINT 0
 
@@ -22,7 +21,6 @@
 class Motor_CiA402: public PCANDevice {
 public:
 	Motor_CiA402();
-    Motor_CiA402(const std::string &_device_id, Config_t &_config);
 	virtual ~Motor_CiA402();
 
 	void SDO_CONTROLWORD(int NodeID, int RW, unsigned char data);
@@ -33,24 +31,27 @@ public:
 
 	void NMT_STATE(unsigned char NodeID, unsigned char data);
 
+    // Process Data Objects (PDO)
 	void PDO_STOP(unsigned char NodeID, unsigned char TPDO_VAL);
-	void PDO_MAPPING_2(unsigned char NodeID);
-	void PDO_MAPPING_2_1(unsigned char NodeID);
-	void PDO_MAPPING_3(unsigned char NodeID);
-	void RPDO2_MAPPING(unsigned char NodeID, unsigned short index);
-	void RPDO2_MAPPING(unsigned char NodeID, unsigned short index, unsigned short index2);
-	void RPDO2_SEND(unsigned char NodeID, short RPDO_VAL);
+    void TxPDO1_MAPPING(unsigned char NodeID);
+    void TxPDO2_MAPPING(unsigned char NodeID);
+    void RxPDO1_MAPPING(unsigned char NodeID);
+
+    void RxPDO1_SEND(unsigned char NodeID, short RPDO_VAL);
+
+    void TxPDO1_READ(int *d1, int *d2, int *d3);
+	void TxPDO1_READ(int *d1, int *d2);   
 
 	void SYNC(void);
 	void Motor_STATE(int *d1, int *d2, int *d3);
 
+    // Debug
 	void Print_CAN_FRAME(int type);
-	void TPDO2_READ(int *d1, int *d2, int *d3);
-	void TPDO2_READ(int *d1, int *d2);
+
 	void motor_activate(int ID);
 	void motor_deactivate(int ID);
 
-	void activate_all(void);
+	void activate_all(const std::string &_device_id, Config_t &_config);
 	void deactivate_all(void);
 private:
 	int res;
