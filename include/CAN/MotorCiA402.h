@@ -2,7 +2,7 @@
  *  @file MotorCiA402.h
  *  @brief MotorCiA402
  *  @author Sunhong Kim (tjsghd101@naver.com)
- *  @data Nov. 08. 2023
+ *  @data Nov. 20. 2023
  *  @Comm
  */
 

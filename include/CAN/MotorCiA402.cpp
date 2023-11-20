@@ -2,7 +2,7 @@
  *  @file MotorCiA402.cpp
  *  @brief MotorCiA402
  *  @author Sunhong Kim (tjsghd101@naver.com)
- *  @data Nov. 08. 2023
+ *  @data Nov. 20. 2023
  *  @Comm
  */
 
@@ -22,7 +22,6 @@ void Motor_CiA402::SDO_CONTROLWORD(int NodeID, int RW, unsigned char data)
 {
 	memset(&s_obj, 0, sizeof(DATA_OBJECT));
 	memset(&s_packet, 0, sizeof(SDO_PACKET));
-	memset(&rx_frame, 0, sizeof(CAN_msg_t));
 	memset(&tx_frame, 0, sizeof(CAN_msg_t));
 
 	switch(RW)
@@ -75,7 +74,6 @@ void Motor_CiA402::SDO_MODES_OPERTAION(unsigned char NodeID, int RW, unsigned ch
 {
 	memset(&s_obj, 0, sizeof(DATA_OBJECT));
 	memset(&s_packet, 0, sizeof(SDO_PACKET));
-	memset(&rx_frame, 0, sizeof(CAN_msg_t));
 	memset(&tx_frame, 0, sizeof(CAN_msg_t));
 
 	switch(RW)
@@ -99,14 +97,14 @@ void Motor_CiA402::SDO_MODES_OPERTAION(unsigned char NodeID, int RW, unsigned ch
 		s_obj.uint16Value[0] = OBJ_OPERATIONMODE;
 		if(data == OP_MODE_NO_MODE || data == OP_MODE_PROFILE_POSITION || data == OP_MODE_CYCLIC_SYNC_TORQUE)
 		{
-			s_packet.info.type = WRITE_REQUEST_2BYTE;
+			s_packet.info.type = WRITE_REQUEST_1BYTE;
 			s_packet.info.index_low = s_obj.uint8Value[0];
 			s_packet.info.index_high = s_obj.uint8Value[1];
 			s_packet.info.subindex = OBJ_SUBINDEX_NULL;
 			s_packet.info.data[0] = data;
 			cob = COB_RxSDO+NodeID;
 			SDO_SEND(cob, s_packet.value, 5);
-			printf("SDO: mode of operation\n");
+			if (DEBUG_PRINT) printf("SDO: mode of operation\n");
 			Print_CAN_FRAME(OBJ_WRITE);
 			res = Receive(tx_frame);
 			Print_CAN_FRAME(OBJ_READ);
@@ -126,7 +124,6 @@ void Motor_CiA402::SDO_TARGET_TORQUE(unsigned char NodeID, int val)
 	memset(&tx_frame, 0, sizeof(CAN_msg_t));
 
 	cob = COB_RxSDO+NodeID;
-	rx_frame.id = cob; 
 
 	s_obj.uint16Value[0] = 0x6074;
 
@@ -149,7 +146,6 @@ int Motor_CiA402::SDO_RATE_CURRENT(unsigned char NodeID)
 
 	memset(&s_obj, 0, sizeof(DATA_OBJECT));
 	memset(&s_packet, 0, sizeof(SDO_PACKET));
-	memset(&rx_frame, 0, sizeof(CAN_msg_t));
 	memset(&tx_frame, 0, sizeof(CAN_msg_t));
 
 	s_obj.uint16Value[0] = OBJ_RATE_CURRENT;
@@ -191,15 +187,14 @@ void Motor_CiA402::NMT_STATE(unsigned char NodeID, unsigned char data)
 	memset(&s_packet, 0, sizeof(SDO_PACKET));
 
 	cob = COB_NMT;
-	rx_frame.id = cob; 
 	s_packet.info.type = data;
 	s_packet.info.index_low = NodeID;
-	printf("NMT State: 0x%02x\n",data);
+	if (DEBUG_PRINT) printf("NMT State: 0x%02x\n",data);
 	SDO_SEND(cob, s_packet.value, 2);
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
+	printf("res: %d\n",res);
 	Print_CAN_FRAME(OBJ_READ);
-	printf("yes\n");
 }
 
 void Motor_CiA402::PDO_STOP(unsigned char NodeID, unsigned char PDO_VAL)
@@ -209,9 +204,8 @@ void Motor_CiA402::PDO_STOP(unsigned char NodeID, unsigned char PDO_VAL)
 	memset(&tx_frame, 0, sizeof(CAN_msg_t));
 
 	cob = COB_RxSDO+NodeID;
-	rx_frame.id = cob; 
 	// TxPDO Stop
-	printf("TxPDO Stopping\n");
+	if (DEBUG_PRINT) printf("TxPDO Stopping\n");
 	switch(PDO_VAL)
 	{
 	case 1:
@@ -255,7 +249,7 @@ void Motor_CiA402::PDO_STOP(unsigned char NodeID, unsigned char PDO_VAL)
 	Print_CAN_FRAME(OBJ_READ);
 	
 	// RxPDO Stop
-	printf("RxPDO Stopping\n");
+	if (DEBUG_PRINT) printf("RxPDO Stopping\n");
 	switch(PDO_VAL)
 	{
 	case 1:
@@ -297,7 +291,7 @@ void Motor_CiA402::PDO_STOP(unsigned char NodeID, unsigned char PDO_VAL)
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
-	printf("\n");
+	if (DEBUG_PRINT) printf("\n");
 }
 
 
@@ -307,7 +301,7 @@ void Motor_CiA402::TxPDO1_MAPPING(unsigned char NodeID)
 	// 4byte actual position, 4byte actual velocity
 	cob = COB_RxSDO+NodeID;
 
-	printf("TxPDO1 Mapping\n");
+	if (DEBUG_PRINT) printf("TxPDO1 Mapping\n");
 
 	//pdo - actual position
 	s_obj.uint16Value[0] = TxPDO1_MAP;
@@ -322,12 +316,12 @@ void Motor_CiA402::TxPDO1_MAPPING(unsigned char NodeID)
 	s_packet.info.data[1] = 0x00;
 	s_packet.info.data[2] = s_obj.uint8Value[2];
 	s_packet.info.data[3] = s_obj.uint8Value[3];
+
 	SDO_SEND(cob, s_packet.value, 8);
-	printf("TxPDO1-01: actual position\n");
+	if (DEBUG_PRINT) printf("TxPDO1-01: actual position (0x6064)\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
 	
 	//pdo - actual velocity
 	s_obj.uint16Value[0] = TxPDO1_MAP;
@@ -342,28 +336,12 @@ void Motor_CiA402::TxPDO1_MAPPING(unsigned char NodeID)
 	s_packet.info.data[1] = 0x00;
 	s_packet.info.data[2] = s_obj.uint8Value[2];
 	s_packet.info.data[3] = s_obj.uint8Value[3];
+
 	SDO_SEND(cob, s_packet.value, 8);
-	printf("TxPDO1-02: actual velocity\n");
+	if (DEBUG_PRINT) printf("TxPDO1-02: actual velocity (0x606c)\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
-
-	// set sync(broadcast)
-	s_obj.uint16Value[0] = TxPDO1_COMM;
-
-	s_packet.info.type = WRITE_REQUEST_1BYTE;
-	s_packet.info.index_low = s_obj.uint8Value[0];
-	s_packet.info.index_high = s_obj.uint8Value[1];
-	s_packet.info.subindex = 0x01;
-
-	s_packet.info.data[0] = 0x01;
-	SDO_SEND(cob, s_packet.value, 5);
-	printf("TxPDO1-Comm: set sync\n");
-	Print_CAN_FRAME(OBJ_WRITE);
-	res = Receive(tx_frame);
-	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
 
 	// regist the object
 	s_obj.uint16Value[0] = TxPDO1_MAP;
@@ -372,24 +350,37 @@ void Motor_CiA402::TxPDO1_MAPPING(unsigned char NodeID)
 	s_packet.info.index_high = s_obj.uint8Value[1];
 	s_packet.info.subindex = OBJ_SUBINDEX_NULL;
 
-	s_packet.info.data[0] = 0x03;
+	s_packet.info.data[0] = 0x02;
 	SDO_SEND(cob, s_packet.value, 5);
-	printf("TxPDO1: register object\n");
+	if (DEBUG_PRINT) printf("TxPDO1: register object\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
-	printf("\n");
+
+	// set sync(broadcast)
+	s_obj.uint16Value[0] = TxPDO1_COMM;
+
+	s_packet.info.type = WRITE_REQUEST_1BYTE;
+	s_packet.info.index_low = s_obj.uint8Value[0];
+	s_packet.info.index_high = s_obj.uint8Value[1];
+	s_packet.info.subindex = 0x02;
+
+	s_packet.info.data[0] = 0x01;
+	SDO_SEND(cob, s_packet.value, 5);
+	if (DEBUG_PRINT) printf("TxPDO1-Comm: set sync\n");
+	Print_CAN_FRAME(OBJ_WRITE);
+	res = Receive(tx_frame);
+	Print_CAN_FRAME(OBJ_READ);
+	if (DEBUG_PRINT) printf("\n");
 }
 
 void Motor_CiA402::TxPDO2_MAPPING(unsigned char NodeID)
 {
 	// mapping objects
-	// 2byte status word, 2byte actual current
+	// 2byte status word, 1byte mode of operation, 2byte actual current
 	cob = COB_RxSDO+NodeID;
-	rx_frame.id = cob; 
 
-	printf("TxPDO2 Mapping\n");
+	if (DEBUG_PRINT) printf("TxPDO2 Mapping\n");
 
 	//pdo - statusword
 	s_obj.uint16Value[0] = TxPDO2_MAP;
@@ -404,12 +395,32 @@ void Motor_CiA402::TxPDO2_MAPPING(unsigned char NodeID)
 	s_packet.info.data[1] = 0x00;
 	s_packet.info.data[2] = s_obj.uint8Value[2];
 	s_packet.info.data[3] = s_obj.uint8Value[3];
+
 	SDO_SEND(cob, s_packet.value, 8);
-	printf("TxPDO2-01: statusword\n");
+	if (DEBUG_PRINT) printf("TxPDO2-01: statusword (0x6041)\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
+
+	//pdo - mode of operation display
+	s_obj.uint16Value[0] = TxPDO2_MAP;
+	s_obj.uint16Value[1] = OBJ_OPERATIONMODE_MONITOR;
+
+	s_packet.info.type = WRITE_REQUEST_4BYTE;
+	s_packet.info.index_low = s_obj.uint8Value[0];
+	s_packet.info.index_high = s_obj.uint8Value[1];
+	s_packet.info.subindex = 0x02;
+
+	s_packet.info.data[0] = PDO_1BYTE;
+	s_packet.info.data[1] = 0x00;
+	s_packet.info.data[2] = s_obj.uint8Value[2];
+	s_packet.info.data[3] = s_obj.uint8Value[3];
+
+	SDO_SEND(cob, s_packet.value, 8);
+	if (DEBUG_PRINT) printf("TxPDO2-02: mode of operation display (0x6061)\n");
+	Print_CAN_FRAME(OBJ_WRITE);
+	res = Receive(tx_frame);
+	Print_CAN_FRAME(OBJ_READ);
 
 	//pdo - actual current
 	s_obj.uint16Value[0] = TxPDO2_MAP;
@@ -418,34 +429,18 @@ void Motor_CiA402::TxPDO2_MAPPING(unsigned char NodeID)
 	s_packet.info.type = WRITE_REQUEST_4BYTE;
 	s_packet.info.index_low = s_obj.uint8Value[0];
 	s_packet.info.index_high = s_obj.uint8Value[1];
-	s_packet.info.subindex = 0x02;
+	s_packet.info.subindex = 0x03;
 
 	s_packet.info.data[0] = PDO_2BYTE;
 	s_packet.info.data[1] = 0x00;
 	s_packet.info.data[2] = s_obj.uint8Value[2];
 	s_packet.info.data[3] = s_obj.uint8Value[3];
+
 	SDO_SEND(cob, s_packet.value, 8);
-	printf("TxPDO2-02: actual current\n");
+	if (DEBUG_PRINT) printf("TxPDO2-03: actual current (0x6078)\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
-
-	// set sync(broadcast)
-	s_obj.uint16Value[0] = TxPDO2_COMM;
-
-	s_packet.info.type = WRITE_REQUEST_1BYTE;
-	s_packet.info.index_low = s_obj.uint8Value[0];
-	s_packet.info.index_high = s_obj.uint8Value[1];
-	s_packet.info.subindex = 0x01;
-
-	s_packet.info.data[0] = 0x01;
-	SDO_SEND(cob, s_packet.value, 5);
-	printf("TxPDO2-Comm: set sync\n");
-	Print_CAN_FRAME(OBJ_WRITE);
-	res = Receive(tx_frame);
-	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
 
 	// regist the object
 	s_obj.uint16Value[0] = TxPDO2_MAP;
@@ -455,13 +450,27 @@ void Motor_CiA402::TxPDO2_MAPPING(unsigned char NodeID)
 	s_packet.info.subindex = OBJ_SUBINDEX_NULL;
 
 	s_packet.info.data[0] = 0x03;
-	SDO_SEND(cob, s_packet.value, 2);
-	printf("TxPDO2: register object\n");
+	SDO_SEND(cob, s_packet.value, 5);
+	if (DEBUG_PRINT) printf("TxPDO2: register object\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
-	usleep(10000);
-	printf("\n");
+
+	// set sync(broadcast)
+	s_obj.uint16Value[0] = TxPDO2_COMM;
+
+	s_packet.info.type = WRITE_REQUEST_1BYTE;
+	s_packet.info.index_low = s_obj.uint8Value[0];
+	s_packet.info.index_high = s_obj.uint8Value[1];
+	s_packet.info.subindex = 0x02;
+
+	s_packet.info.data[0] = 0x01;
+	SDO_SEND(cob, s_packet.value, 5);
+	if (DEBUG_PRINT) printf("TxPDO2-Comm: set sync\n");
+	Print_CAN_FRAME(OBJ_WRITE);
+	res = Receive(tx_frame);
+	Print_CAN_FRAME(OBJ_READ);
+	if (DEBUG_PRINT) printf("\n");
 }
 
 void Motor_CiA402::RxPDO1_MAPPING(unsigned char NodeID)
@@ -469,19 +478,8 @@ void Motor_CiA402::RxPDO1_MAPPING(unsigned char NodeID)
 	// mapping objects
 	// 2byte target-torque, 2byte controlword, 1byte mode of operation
 	cob = COB_RxSDO + NodeID;
-	rx_frame.id = cob; 
-	printf("RxPDO1 Mapping\n");
-	// // rpdo2 - stop
-	// s_obj.uint16Value[0] = RxPDO1_MAP;
-	// s_packet.info.type = WRITE_REQUEST_1BYTE;
-	// s_packet.info.index_low = s_obj.uint8Value[0];
-	// s_packet.info.index_high = s_obj.uint8Value[1];
-	// s_packet.info.subindex = OBJ_SUBINDEX_NULL;
-	// s_packet.info.data[0] = 0x00;
-	// res = Send(cob, s_packet.value, 8);
-	// Print_CAN_FRAME(OBJ_WRITE);
-	// res = Receive(tx_frame);
-	// Print_CAN_FRAME(OBJ_READ);
+	
+	if (DEBUG_PRINT) printf("RxPDO1 Mapping\n");
 
 	//rpdo1-01 - target-torque
 	s_obj.uint16Value[0] = RxPDO1_MAP;
@@ -497,7 +495,7 @@ void Motor_CiA402::RxPDO1_MAPPING(unsigned char NodeID)
 	s_packet.info.data[2] = s_obj.uint8Value[2];
 	s_packet.info.data[3] = s_obj.uint8Value[3];
 	SDO_SEND(cob, s_packet.value, 8);
-	printf("RxPDO1-01: target-torque\n");
+	if (DEBUG_PRINT) printf("RxPDO1-01: target-torque\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
@@ -517,7 +515,7 @@ void Motor_CiA402::RxPDO1_MAPPING(unsigned char NodeID)
 	s_packet.info.data[2] = s_obj.uint8Value[2];
 	s_packet.info.data[3] = s_obj.uint8Value[3];
 	SDO_SEND(cob, s_packet.value, 8);
-	printf("RxPDO1-02: controlword\n");
+	if (DEBUG_PRINT) printf("RxPDO1-02: controlword\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
@@ -530,18 +528,19 @@ void Motor_CiA402::RxPDO1_MAPPING(unsigned char NodeID)
 	s_packet.info.index_high = s_obj.uint8Value[1];
 	s_packet.info.subindex = OBJ_SUBINDEX_NULL;
 	s_packet.info.data[0] = 0x02;
-	SDO_SEND(cob, s_packet.value, 8);
-	printf("RxPDO1: mapping object\n");
+	SDO_SEND(cob, s_packet.value, 5);
+	if (DEBUG_PRINT) printf("RxPDO1: mapping object\n");
 	Print_CAN_FRAME(OBJ_WRITE);
 	res = Receive(tx_frame);
 	Print_CAN_FRAME(OBJ_READ);
 	usleep(10000);
-	printf("\n");
+	if (DEBUG_PRINT) printf("\n");
 }
 
 void Motor_CiA402::RxPDO1_SEND(unsigned char NodeID, short RPDO_VAL)
 {
 	cob = COB_RxPDO1 + NodeID;
+	rx_frame.id = cob; 
 
 	unsigned short tmp = (unsigned short)RPDO_VAL;
 
@@ -636,13 +635,13 @@ void Motor_CiA402::TxPDO1_READ(int *d1, int *d2)
 
 void Motor_CiA402::motor_activate(int ID)
 {
-	printf("Controlword: Shutdown\n");
+	if (DEBUG_PRINT) printf("Controlword: Shutdown\n");
 	SDO_CONTROLWORD(ID, OBJ_WRITE, CONTROL_COMMAND_SHUTDOWN);
 	usleep(10000);
-	printf("Controlword: Switch On\n");
+	if (DEBUG_PRINT) printf("Controlword: Switch On\n");
 	SDO_CONTROLWORD(ID, OBJ_WRITE, CONTROL_COMMAND_SWITCH_ON);
 	usleep(10000);
-	printf("Controlword: Enable Operation\n");
+	if (DEBUG_PRINT) printf("Controlword: Enable Operation\n");
 	SDO_CONTROLWORD(ID, OBJ_WRITE, CONTROL_COMMAND_ENABLE_OPERATION);
 	usleep(10000);
 }
@@ -674,7 +673,7 @@ void Motor_CiA402::activate_all(const std::string &_device_id, Config_t &_config
             NMT_STATE(i, NMT_PREOP_MODE);
             for(int j=1; j<=4; ++j)
 			{
-				printf("pdo stop node: %d, pdo: %d\n",i,j);
+				if (DEBUG_PRINT) printf("pdo stop node: %d, pdo: %d\n",i,j);
                 PDO_STOP(i, j);
 			}
 
