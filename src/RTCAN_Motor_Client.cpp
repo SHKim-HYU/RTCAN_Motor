@@ -1,49 +1,6 @@
-#ifndef RTCAN_MOTOR_CLIENT_H_
-#define RTCAN_MOTOR_CLIENT_H_
+#include "RTCAN_Motor_Client.h"
 
-#include <stdio.h>
-#include "iostream"
-#include <stdlib.h>
-#include <signal.h>
-#include <unistd.h>
-#include <sys/mman.h>
-
-#include <sched.h>
-#include <alchemy/task.h>
-#include <alchemy/timer.h>
-#include <rtdm/ipc.h> 
-
-#undef debug
-//QT
-// #include <thread>
-// #include <pthread.h>
-#include <QApplication>
-#include <QSplitter>
-#include <QTreeView>
-#include <QListView>
-#include <QTableView>
-#include <QStandardItemModel>
-#include <QScreen>
-
-#include "DarkStyle.h"
-#include "framelesswindow.h"
-#include "mainwindow.h"
-#include <iostream>
-
-#include <QApplication>
-#include <QResource>
-#include <QTextCodec>
-
-// Peak CAN
-#include <PCANDevice.h>
-#include <Robotous_FT.h>
-#include <MotorCiA402.h>
-
-// PCI/E-FD
-#define DEVICE1 "/dev/rtdm/pcan0"
-#define DEVICE2 "/dev/rtdm/pcan1"
-
-#define XDDP_PORT 0	/* [0..CONFIG-XENO_OPT_PIPE_NRDEV - 1] */
+ROBOT_INFO info;
 
 RT_TASK ft_task;
 RT_TASK motor_task;
@@ -167,6 +124,8 @@ void motor_run(void *arg)
     config.d_sample_point = 0.6; //60%
     config.clock_freq = 80e6; // 80mhz // Read from driver?  
     
+    memset(&info, 0, sizeof(ROBOT_INFO));
+
     motor.activate_all(DEVICE2, config);
 
     float rate_current;
@@ -179,7 +138,8 @@ void motor_run(void *arg)
     rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
-        printf("rate current: %f\n", rate_current);
+        motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
+        rt_printf("pos: %d, vel: %d, tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
     }
 }
 
@@ -250,4 +210,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-#endif
+
