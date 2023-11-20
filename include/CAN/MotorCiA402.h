@@ -14,7 +14,7 @@
 #include "PCANDevice.h"
 #include "CiA402_Object_Dictionary.h"
 
-#define DEBUG_PRINT 0
+#define DEBUG_PRINT 1
 
 
 
@@ -28,11 +28,12 @@ public:
 	void SDO_TARGET_TORQUE(unsigned char NodeID, int val);
 	int SDO_RATE_CURRENT(unsigned char NodeID);
 	int SDO_RECEIVE(void);
+	void SDO_SEND(uint32_t _cob_id, uint8_t *_s_packet, uint16_t _length);
 
 	void NMT_STATE(unsigned char NodeID, unsigned char data);
 
     // Process Data Objects (PDO)
-	void PDO_STOP(unsigned char NodeID, unsigned char TPDO_VAL);
+	void PDO_STOP(unsigned char NodeID, unsigned char PDO_VAL);
     void TxPDO1_MAPPING(unsigned char NodeID);
     void TxPDO2_MAPPING(unsigned char NodeID);
     void RxPDO1_MAPPING(unsigned char NodeID);

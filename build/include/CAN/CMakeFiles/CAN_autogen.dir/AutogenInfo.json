@@ -26,6 +26,11 @@
 			"/home/robot/robot_ws/RTCAN_Motor/include/CAN/PCANDevice.h",
 			"MU",
 			"EWIEGA46WW/moc_PCANDevice.cpp"
+		],
+		[
+			"/home/robot/robot_ws/RTCAN_Motor/include/CAN/Robotous_FT.h",
+			"MU",
+			"EWIEGA46WW/moc_Robotous_FT.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],

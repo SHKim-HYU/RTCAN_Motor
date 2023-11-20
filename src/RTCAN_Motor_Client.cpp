@@ -175,10 +175,11 @@ void motor_run(void *arg)
 
     printf("rate current: %f\n", rate_current);
 
+
     rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
     while (1) {
         rt_task_wait_period(NULL); //wait for next cycle
-
+        printf("rate current: %f\n", rate_current);
     }
 }
 
