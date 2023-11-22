@@ -13,6 +13,7 @@ Motor_CiA402 motor;
 using namespace std;
 
 unsigned int cycle_ns = 1000000; // 1 ms
+double period=((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
 unsigned char data_field[16];
 
@@ -20,6 +21,86 @@ short raw_data[6] = { 0 };
 unsigned short temp;
 unsigned DF=50, DT=1000;
 float ft_array[6];
+
+int initAxes()
+{
+	for (int i = 1; i <= JOINTNUM; i++)
+	{	
+		Axis[i-1].setGearRatio(gearRatio[i]);
+		Axis[i-1].setGearEfficiency(EFFICIENCY);
+		Axis[i-1].setPulsePerRevolution(motor.SDO_ENCODER_RESOLUTION(i));
+		Axis[i-1].setTauRateCur(((float)motor.SDO_RATE_CURRENT(i))/1000.f);
+		Axis[i-1].setTauK(motor.SDO_TORQUE_CONSTANT(i));
+		Axis[i-1].setZeroPos(zeroPos[i]);
+
+		Axis[i-1].setDirQ(motor.SDO_MOTOR_DIRECTION(i));
+		Axis[i-1].setDirTau(motor.SDO_MOTOR_DIRECTION(i));
+
+		Axis[i-1].setConversionConstants();
+
+		Axis[i-1].setTrajPeriod(period);
+		
+		Axis[i-1].setTarVelInCnt(0);
+		Axis[i-1].setTarTorInCnt(0);
+	}
+	
+	return 1;
+}
+
+/****************************************************************************/
+void trajectory_generation(){
+	/////////////Trajectory for Joint Space//////////////
+    if(!Axis[0].trajInitialized())
+    {
+	    switch(motion)
+	    {
+	    case 1:
+	    	info.q_target(0)=1.5709;
+	    	traj_time = 3.0;
+	    	motion++;
+	        break;
+	    case 2:
+	    	info.q_target(0)=0.0;
+	    	traj_time = 3.0;
+	    	motion++;
+	    	// motion=1;
+	        break;
+	    case 3:
+	    	info.q_target(0)=-1.5709;
+	    	traj_time = 3.0;
+	    	motion++;
+	        break;
+	    case 4:
+	    	info.q_target(0)=0.0;
+	    	traj_time = 3.0;
+	    	motion=1;
+	    	break;
+	    default:
+	    	info.q_target(0)=info.act.q(0);
+
+	    	motion=1;
+	    	break;
+	    }
+	}
+
+	for(int i=0;i<JOINTNUM;i++)
+	{
+		if(!Axis[i].trajInitialized())
+		{
+			Axis[i].setTrajInitialQuintic();
+			Axis[i].setTarPosInRad(info.q_target(i));
+			Axis[i].setTarVelInRad(0);
+			Axis[i].setTrajTargetQuintic(traj_time);
+		}
+
+		Axis[i].TrajQuintic();
+
+		info.des.q(i)=Axis[i].getDesPosInRad();
+		info.des.q_dot(i)=Axis[i].getDesVelInRad();
+		info.des.q_ddot(i)=Axis[i].getDesAccInRad();
+	}
+}
+
 
 void ft_run(void *arg)
 {
@@ -128,18 +209,66 @@ void motor_run(void *arg)
 
     motor.activate_all(DEVICE2, config);
 
-    float rate_current;
+    initAxes();
 
-    rate_current = ((float)motor.SDO_RATE_CURRENT(1))/1000.f;
+    float rate_current[JOINTNUM];
+    int enc_resol[JOINTNUM], torque_const[JOINTNUM], motor_dir[JOINTNUM];
 
-    printf("rate current: %f\n", rate_current);
+    for(int i=1; i<=JOINTNUM; i++)
+    {
+        rate_current[i-1] = ((float)motor.SDO_RATE_CURRENT(i))/1000.f;
+        enc_resol[i-1] = motor.SDO_ENCODER_RESOLUTION(i);
+        torque_const[i-1] = motor.SDO_TORQUE_CONSTANT(i);
+        motor_dir[i-1] = motor.SDO_MOTOR_DIRECTION(i);
+    }
+
+    printf("rate current: %f\n", rate_current[0]);
+    printf("encoder resol: %d\n", enc_resol[0]);
+    printf("torque constant: %d\n", torque_const[0]);
+    printf("motor direction: %d\n", motor_dir[0]);
+
 
 
     rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
     while (1) {
-        rt_task_wait_period(NULL); //wait for next cycle
+
         motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
-        rt_printf("pos: %d, vel: %d, tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
+        rt_printf("[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
+
+        for(int i=0; i<JOINTNUM;i++)
+        {
+
+            Axis[i].setCurrentPosInCnt(info.q_inc[i]);
+            Axis[i].setCurrentVelInCnt(info.dq_inc[i]);
+            Axis[i].setCurrentTorInCnt(info.tau_per[i]);
+            
+            Axis[i].setCurrentTime(gt);
+
+            info.act.q(i) = Axis[i].getCurrPosInRad();
+            info.act.q_dot(i) = Axis[i].getCurrVelInRad();
+            info.act.tau(i) = Axis[i].getCurrTorInNm();
+
+            if(!system_ready)
+            {
+                Axis[i].setTarPosInRad(info.act.q(i));
+                Axis[i].setDesPosInRad(info.act.q(i));
+                system_ready = 1;
+            }
+
+        }
+
+        // Trajectory Generation
+        trajectory_generation();
+        
+        // Compute KDL
+        // compute();	
+
+        rt_printf("[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[0], info.act.q_dot[0], info.act.tau[0]);
+
+
+
+        gt+= period;
+        rt_task_wait_period(NULL); //wait for next cycle
     }
 }
 
@@ -165,6 +294,9 @@ void signal_handler(int signum)
     rt_task_delete(&ft_task);
     rt_task_delete(&motor_task);
     rt_task_delete(&xddp_writer);
+
+    motor.deactivate_all();
+
     printf("Servo drives Stopped!\n");
     exit(1);
 }

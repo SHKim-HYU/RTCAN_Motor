@@ -23,10 +23,14 @@ public:
 	Motor_CiA402();
 	virtual ~Motor_CiA402();
 
+	// Service Data Objects (SDO)
 	void SDO_CONTROLWORD(int NodeID, int RW, unsigned char data);
 	void SDO_MODES_OPERTAION(unsigned char NodeID, int RW, unsigned char data);
 	void SDO_TARGET_TORQUE(unsigned char NodeID, int val);
 	int SDO_RATE_CURRENT(unsigned char NodeID);
+	int SDO_ENCODER_RESOLUTION(unsigned char NodeID);
+	int SDO_TORQUE_CONSTANT(unsigned char NodeID);
+	int SDO_MOTOR_DIRECTION(unsigned char NodeID);
 	int SDO_RECEIVE(void);
 	void SDO_SEND(uint32_t _cob_id, uint8_t *_s_packet, uint16_t _length);
 

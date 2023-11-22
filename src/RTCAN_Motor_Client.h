@@ -34,6 +34,8 @@
 #include <QResource>
 #include <QTextCodec>
 
+#include "ServoAxis_Motor.h"
+
 // Peak CAN
 #include <PCANDevice.h>
 #include <Robotous_FT.h>
@@ -45,6 +47,24 @@
 #define DEVICE2 "/dev/rtdm/pcan1"
 
 #define XDDP_PORT 0	/* [0..CONFIG-XENO_OPT_PIPE_NRDEV - 1] */
+
+#define NSEC_PER_SEC 			1000000000
+
+// Interface to physical axes
+NRMKHelper::ServoAxis Axis[JOINTNUM];
+const int 	 zeroPos[JOINTNUM] = {0};
+const int 	 gearRatio[JOINTNUM] = {1};
+
+// When all slaves or drives reach OP mode,
+// system_ready becomes 1.
+int system_ready = 0;
+
+// Global time (beginning from zero)
+double gt=0;
+
+// Trajectory parameers
+double traj_time=0;
+int motion=-1;
 
 typedef struct STATE{
 	JVec q;

@@ -1,18 +1,13 @@
-/*! 
- *  @file ServoAxis_Motor.h
- *  @brief ServoAxis_Motor header inspired by ServoAxis, NRMK
- *  @author Sunhong Kim (tjsghd101@naver.com)
- *  @data Oct. 26. 2023
- *  @Comm
- */
+/*
+ * ServoAxis.h
+*/
 
 #pragma once
 
 #include <limits>	// for numerical limits
 
 // Trapezoidal trajectory interpolation for NRMK EtherLab Configuration Tool
-#include "Interpolator/BlendedPolynomialAlgorithm.h"
-#include "TrajectoryDataList.h"
+#include "BlendedPolynomialAlgorithm.h"
 
 #ifndef PI
 #define PI	(3.14159265359)
@@ -56,9 +51,9 @@ namespace NRMKHelper
 
 
 			_radToCnt = 1;
-			_NmToCnt = 1;
+			_NmToPer = 1;
 			_cntToRad = 1;
-			_cntToNm = 1;
+			_PerToNm = 1;
 
 			// Trajectory boundary conditions
 			_trajMaxVel = 100;
@@ -79,9 +74,9 @@ namespace NRMKHelper
 			setConversionConstants();
 		}
 		
-		void setTauADC(int adc)
+		void setTauRateCur(int cur)
 		{
-			_tauADC = adc;
+			_tauRateCur = cur;
 			setConversionConstants();
 		}
 		double getTauK()		
@@ -127,20 +122,21 @@ namespace NRMKHelper
 		void setConversionConstants()
 		{
 			_radToCnt = (_dirQ * _gearRatio * _pulsePerRevolution) / (PI2);
-			_NmToCnt = (_dirTau*_tauADC)/(_tauK*_gearRatio*_gearEfficiency)*100.0;
+			_NmToPer = (_dirTau)/(_tauK*_tauRateCur*_gearRatio*_gearEfficiency)*1000.0;
 
 			_cntToRad = 1.0 /_radToCnt;
-			_cntToNm = 1.0 /_NmToCnt;
+			_PerToNm = 1.0 /_NmToPer;
 		}
 
 		bool isLimitReached()
 		{
-			if ((_q > _qLimit[0]) || (_q < _qLimit[1]))
-				return true;
+			// if ((_q > _qLimit[0]) || (_q < _qLimit[1]))
+			// 	return true;
 
 			if ((_qdot > _qdotLimit[0]) || (_qdot < _qdotLimit[1]))
 				return true;
-
+			if ((_tau > _tauLimit[0]) || (_tau < _tauLimit[1]))
+				return true;
 			return false;
 		}
 
@@ -172,7 +168,7 @@ namespace NRMKHelper
 		}
 		void setCurrentTorInCnt(INT16 ActTorInCnt)
 		{
-			_tau = (double) ActTorInCnt * _cntToNm;
+			_tau = (double) ActTorInCnt * _PerToNm;
 		}
 
 		void setTarPosInCnt(INT32 TarPosInCnt)
@@ -188,7 +184,7 @@ namespace NRMKHelper
 		}
 		void setTarTorInCnt(INT16 TarTorInCnt)
 		{
-			_taudes = (double) TarTorInCnt * _cntToNm;
+			_taudes = (double) TarTorInCnt * _PerToNm;
 		}
 
 		void setCurrentTime(double t)
@@ -253,7 +249,7 @@ namespace NRMKHelper
 		}
 		INT16 getDesTorInCnt()
 		{
-			return (INT16) (_taudes*_NmToCnt);
+			return (INT16) (_taudes*_NmToPer);
 		}
 
 		double getDesPosInRad()
@@ -295,7 +291,7 @@ namespace NRMKHelper
 		// Quintic Trajectory
 		void setTrajInitialQuintic()
 		{
-			_quintic.setInitialTraj(_t, _q, _qdot, 0);
+			_quintic.setInitialTraj(_t, _qdes, _qdotdes, 0);
 		}
 		void setTrajTargetQuintic(double duration)
 		{
@@ -348,10 +344,10 @@ namespace NRMKHelper
 		double _tauLimit[2];	// _torLimit[0] = positive limit, _torLimit[1] = negative limit
 
 		double _radToCnt;	// = Cnt/Rad
-		double _NmToCnt;	// = Cnt/Nm
+		double _NmToPer;	// = Per/Nm
 
 		double _cntToRad;	// = Rad/Cnt
-		double _cntToNm;	// = Nr/Cnt
+		double _PerToNm;	// = Nr/Per
 
 		double _q;			// Current Angle in Radiant
 		double _qdot;		// Current Velocity in Radiant
@@ -376,8 +372,8 @@ namespace NRMKHelper
 
 		int _pulsePerRevolution;	// Number of pulses for single revolution
 		int _gearRatio;				// Gear ratio (usually greater than 1)
-		int _gearEfficiency;			// Gear efficiency (usually 60~75 [%])
-		int _tauADC;				// ADC parameter (CORE 100,200=96, CORE 500=48)
+		int _gearEfficiency;		// Gear efficiency (usually 60~75 [%])
+		int _tauRateCur;			// Rate Current [A]
 		double _tauK;				// torque constant (read from motor catalogue)
 		
 		//int _tauRatio;				// = 1/_gearRatio
