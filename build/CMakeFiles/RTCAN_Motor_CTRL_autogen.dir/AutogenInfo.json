@@ -8,6 +8,11 @@
 	"HEADERS" : 
 	[
 		[
+			"/home/robot/robot_ws/RTCAN_Motor/src/RTCAN_Motor_Client.h",
+			"MU",
+			"UVLADIE3JM/moc_RTCAN_Motor_Client.cpp"
+		],
+		[
 			"/home/robot/robot_ws/RTCAN_Motor/src/mainwindow.h",
 			"MU",
 			"UVLADIE3JM/moc_mainwindow.cpp"

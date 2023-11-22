@@ -76,8 +76,12 @@ namespace NRMKHelper
 		
 		void setTauRateCur(int cur)
 		{
-			_tauRateCur = cur;
+			_tauRateCur = (double) cur;
 			setConversionConstants();
+		}
+		double getTauRateCur()
+		{
+			return _tauRateCur;
 		}
 		double getTauK()		
 		{		
@@ -100,11 +104,19 @@ namespace NRMKHelper
 			_dirQ = dir;
 			setConversionConstants();
 		}
+		int getDirQ()
+		{
+			return _dirQ;
+		}
 
 		void setDirTau(int dir)
 		{
 			_dirTau = dir;
 			setConversionConstants();
+		}
+		int getDirTau()
+		{
+			return _dirTau;
 		}
 		
 		void setMaxTorInCnt(INT16 MaxTor)		
@@ -118,11 +130,16 @@ namespace NRMKHelper
 			_pulsePerRevolution = ppr;
 			setConversionConstants();
 		}
+		int getPulsePerRevolution()
+		{
+			return _pulsePerRevolution;
+		}
+
 
 		void setConversionConstants()
 		{
-			_radToCnt = (_dirQ * _gearRatio * _pulsePerRevolution) / (PI2);
-			_NmToPer = (_dirTau)/(_tauK*_tauRateCur*_gearRatio*_gearEfficiency)*1000.0;
+			_radToCnt = (double)(_dirQ * _gearRatio * _pulsePerRevolution) / (PI2);
+			_NmToPer = (_dirTau)/(double)(_tauK*_tauRateCur*_gearRatio*_gearEfficiency)*1000.0*100.0;
 
 			_cntToRad = 1.0 /_radToCnt;
 			_PerToNm = 1.0 /_NmToPer;
@@ -247,9 +264,9 @@ namespace NRMKHelper
 		{
 			return (INT32) (_qdotdes*_radToCnt);
 		}
-		INT16 getDesTorInCnt()
+		INT16 getDesTorInPer()
 		{
-			return (INT16) (_taudes*_NmToPer);
+			return (INT16) round(_taudes*_NmToPer);
 		}
 
 		double getDesPosInRad()
@@ -373,7 +390,7 @@ namespace NRMKHelper
 		int _pulsePerRevolution;	// Number of pulses for single revolution
 		int _gearRatio;				// Gear ratio (usually greater than 1)
 		int _gearEfficiency;		// Gear efficiency (usually 60~75 [%])
-		int _tauRateCur;			// Rate Current [A]
+		double _tauRateCur;			// Rate Current [A]
 		double _tauK;				// torque constant (read from motor catalogue)
 		
 		//int _tauRatio;				// = 1/_gearRatio

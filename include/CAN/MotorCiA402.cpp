@@ -50,7 +50,7 @@ void Motor_CiA402::SDO_CONTROLWORD(int NodeID, int RW, unsigned char data)
 				|| data == CONTROL_COMMAND_ENABLE_OPERATION
 				|| data == CONTROL_COMMAND_QUICK_STOP )
 		{
-			s_packet.info.type = WRITE_REQUEST_1BYTE;
+			s_packet.info.type = WRITE_REQUEST_2BYTE;
 			s_packet.info.index_low = s_obj.uint8Value[0];
 			s_packet.info.index_high = s_obj.uint8Value[1];
 			s_packet.info.subindex = OBJ_SUBINDEX_NULL;
@@ -611,7 +611,6 @@ void Motor_CiA402::RxPDO1_MAPPING(unsigned char NodeID)
 void Motor_CiA402::RxPDO1_SEND(unsigned char NodeID, short RPDO_VAL)
 {
 	cob = COB_RxPDO1 + NodeID;
-	rx_frame.id = cob; 
 
 	unsigned short tmp = (unsigned short)RPDO_VAL;
 
@@ -623,10 +622,11 @@ void Motor_CiA402::RxPDO1_SEND(unsigned char NodeID, short RPDO_VAL)
 
 	res = Send(cob, s_packet.value, 4);
 	memset(&rx_frame, 0, sizeof(CAN_msg_t));
+	rx_frame.id = cob; 
 	memcpy(rx_frame.data.data(), s_packet.value, 4);
 	rx_frame.length = 4;
-	usleep(50);
-	//Print_CAN_FRAME(OBJ_WRITE);
+	// usleep(50);
+	Print_CAN_FRAME(OBJ_WRITE);
 }
 
 void Motor_CiA402::SYNC(void)

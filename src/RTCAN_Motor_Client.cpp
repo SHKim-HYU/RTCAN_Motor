@@ -4,6 +4,7 @@ ROBOT_INFO info;
 
 RT_TASK ft_task;
 RT_TASK motor_task;
+RT_TASK print_task;
 RT_TASK xddp_writer;
 
 PCANDevice can1, can2;
@@ -12,16 +13,6 @@ Motor_CiA402 motor;
 
 using namespace std;
 
-unsigned int cycle_ns = 1000000; // 1 ms
-double period=((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
-
-unsigned char data_field[16];
-
-short raw_data[6] = { 0 };
-unsigned short temp;
-unsigned DF=50, DT=1000;
-float ft_array[6];
-
 int initAxes()
 {
 	for (int i = 1; i <= JOINTNUM; i++)
@@ -29,8 +20,8 @@ int initAxes()
 		Axis[i-1].setGearRatio(gearRatio[i]);
 		Axis[i-1].setGearEfficiency(EFFICIENCY);
 		Axis[i-1].setPulsePerRevolution(motor.SDO_ENCODER_RESOLUTION(i));
-		Axis[i-1].setTauRateCur(((float)motor.SDO_RATE_CURRENT(i))/1000.f);
-		Axis[i-1].setTauK(motor.SDO_TORQUE_CONSTANT(i));
+		Axis[i-1].setTauRateCur(((double)motor.SDO_RATE_CURRENT(i))/1000.0);
+		Axis[i-1].setTauK(((double)motor.SDO_TORQUE_CONSTANT(i))/1000.0);
 		Axis[i-1].setZeroPos(zeroPos[i]);
 
 		Axis[i-1].setDirQ(motor.SDO_MOTOR_DIRECTION(i));
@@ -45,6 +36,33 @@ int initAxes()
 	}
 	
 	return 1;
+}
+
+void readData()
+{
+    motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
+
+    for(int i=0; i<JOINTNUM;i++)
+    {
+
+        Axis[i].setCurrentPosInCnt(info.q_inc[i]);
+        Axis[i].setCurrentVelInCnt(info.dq_inc[i]);
+        Axis[i].setCurrentTorInCnt(info.tau_per[i]);
+        
+        Axis[i].setCurrentTime(gt);
+
+        info.act.q(i) = Axis[i].getCurrPosInRad();
+        info.act.q_dot(i) = Axis[i].getCurrVelInRad();
+        info.act.tau(i) = Axis[i].getCurrTorInNm();
+
+        if(!system_ready)
+        {
+            Axis[i].setTarPosInRad(info.act.q(i));
+            Axis[i].setDesPosInRad(info.act.q(i));
+            system_ready = 1;
+        }
+
+    }
 }
 
 /****************************************************************************/
@@ -101,6 +119,14 @@ void trajectory_generation(){
 	}
 }
 
+void writeData()
+{
+    for(int i=1;i<=JOINTNUM;i++){
+		Axis[i-1].setDesTorInNm(info.des.tau(i-1));
+        motor.RxPDO1_SEND(i, Axis[i-1].getDesTorInPer());
+	}
+}
+
 
 void ft_run(void *arg)
 {
@@ -116,7 +142,7 @@ void ft_run(void *arg)
     config.clock_freq = 80e6; // 80mhz // Read from driver?  
     
 
-    if(!can1.Open(DEVICE1, config, false))
+    if(!can1.Open(DEVICE2, config, false))
     {
         std::cout << "Unable to open CAN Device" << std::endl;
         // exit(-2);
@@ -197,6 +223,8 @@ void ft_run(void *arg)
 
 void motor_run(void *arg)
 {
+    RTIME beginCycle, endCycle;
+
     CANDevice::Config_t config;
     config.mode_fd = 0; // 0: CAN2.0 Mode, 1: CAN-FD Mode
     config.bitrate = 1e6; //1mbps
@@ -207,67 +235,46 @@ void motor_run(void *arg)
     
     memset(&info, 0, sizeof(ROBOT_INFO));
 
-    motor.activate_all(DEVICE2, config);
+    motor.activate_all(DEVICE1, config);
 
     initAxes();
 
-    float rate_current[JOINTNUM];
-    int enc_resol[JOINTNUM], torque_const[JOINTNUM], motor_dir[JOINTNUM];
-
-    for(int i=1; i<=JOINTNUM; i++)
+    // Print Motor parameters
+    for(int i=0; i<JOINTNUM; i++)
     {
-        rate_current[i-1] = ((float)motor.SDO_RATE_CURRENT(i))/1000.f;
-        enc_resol[i-1] = motor.SDO_ENCODER_RESOLUTION(i);
-        torque_const[i-1] = motor.SDO_TORQUE_CONSTANT(i);
-        motor_dir[i-1] = motor.SDO_MOTOR_DIRECTION(i);
+        rt_printf("rate current: %lf\n", Axis[i].getTauRateCur());
+        rt_printf("torque constant: %lf\n", Axis[i].getTauK());
+        rt_printf("encoder resol: %d\n", Axis[i].getPulsePerRevolution());
+        rt_printf("motor direction: %d\n", Axis[i].getDirQ());
+
     }
-
-    printf("rate current: %f\n", rate_current[0]);
-    printf("encoder resol: %d\n", enc_resol[0]);
-    printf("torque constant: %d\n", torque_const[0]);
-    printf("motor direction: %d\n", motor_dir[0]);
-
-
 
     rt_task_set_periodic(NULL, TM_NOW, cycle_ns);
     while (1) {
-
-        motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
-        rt_printf("[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
-
-        for(int i=0; i<JOINTNUM;i++)
-        {
-
-            Axis[i].setCurrentPosInCnt(info.q_inc[i]);
-            Axis[i].setCurrentVelInCnt(info.dq_inc[i]);
-            Axis[i].setCurrentTorInCnt(info.tau_per[i]);
-            
-            Axis[i].setCurrentTime(gt);
-
-            info.act.q(i) = Axis[i].getCurrPosInRad();
-            info.act.q_dot(i) = Axis[i].getCurrVelInRad();
-            info.act.tau(i) = Axis[i].getCurrTorInNm();
-
-            if(!system_ready)
-            {
-                Axis[i].setTarPosInRad(info.act.q(i));
-                Axis[i].setDesPosInRad(info.act.q(i));
-                system_ready = 1;
-            }
-
-        }
-
+        beginCycle = rt_timer_read();
+        // Read Joints Data
+        readData();
+        // rt_printf("[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
+        // rt_printf("[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[0], info.act.q_dot[0], info.act.tau[0]);
+    
         // Trajectory Generation
         trajectory_generation();
         
         // Compute KDL
         // compute();	
 
-        rt_printf("[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[0], info.act.q_dot[0], info.act.tau[0]);
+        
+        // Controller
+        // control();
 
+        // Write Joint Data
+        writeData();
 
+        endCycle = rt_timer_read();
+		periodCycle = (unsigned long) endCycle - beginCycle;
 
         gt+= period;
+        if (periodCycle > cycle_ns) overruns++;
         rt_task_wait_period(NULL); //wait for next cycle
     }
 }
@@ -289,10 +296,74 @@ void runQtApplication(int argc, char* argv[]) {
   a.exec();
 }
 
+void print_run(void *arg)
+{
+	RTIME now, previous=0;
+	int i;
+	unsigned long itime=0, step;
+	long stick=0;
+	int count=0;
+		
+	/* Arguments: &task (NULL=self),
+	 *            start time,
+	 *            period (here: 100ms = 0.1s)
+	 */
+	rt_task_set_periodic(NULL, TM_NOW, cycle_ns*50);
+	
+	while (1)
+	{
+		rt_task_wait_period(NULL); //wait for next cycle
+		if (++count==10)
+		{
+			++stick;
+			count=0;
+		}
+		
+		if (system_ready)
+		{
+			now = rt_timer_read();
+			step=(unsigned long)(now - previous) / 1000000;
+			itime+=step;
+			previous=now;
+
+			rt_printf("Time=%0.3lfs, cycle_dt=%lius,  overrun=%d\n", gt, periodCycle/1000, overruns);
+			
+			for(int j=0; j<JOINTNUM; ++j){
+				rt_printf("ID: %d", j);
+			// 	//rt_printf("\t CtrlWord: 0x%04X, ",		ControlWord[j]);
+			// 	//rt_printf("\t StatWord: 0x%04X, \n",	StatusWord[j]);
+			//     //rt_printf("\t DeviceState: %d, ",		DeviceState[j]);
+			// 	//rt_printf("\t ModeOfOp: %d,	\n",		ModeOfOperationDisplay[j]);
+                rt_printf("\t[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[j], info.dq_inc[j], info.tau_per[j]);
+                rt_printf("\t[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[j], info.act.q_dot[j], info.act.tau[j]);
+				rt_printf("\t ActPos: %lf, ActVel: %lf \n",info.act.q(j), info.act.q_dot(j));
+				rt_printf("\t DesPos: %lf, DesVel :%lf, DesAcc :%lf\n",info.des.q[j],info.des.q_dot[j],info.des.q_ddot[j]);
+				rt_printf("\t TarTor: %lf, ActTor: %lf, ExtTor: %lf \n", info.des.tau(j), info.act.tau(j), info.act.tau_ext(j));
+			}
+
+			// rt_printf("ReadFT: %lf, %lf, %lf, %lf, %lf, %lf\n", info.act.F(0),info.act.F(1),info.act.F(2),info.act.F(3),info.act.F(4),info.act.F(5));
+
+			rt_printf("\n");
+
+		}
+		else
+		{
+			if (count==0){
+				rt_printf("%i", stick);
+				for(i=0; i<stick; ++i)
+					rt_printf(".");
+				rt_printf("\n");
+			}
+		}
+	}
+}
+
+
 void signal_handler(int signum)
 {
     rt_task_delete(&ft_task);
     rt_task_delete(&motor_task);
+    rt_task_delete(&print_task);
     rt_task_delete(&xddp_writer);
 
     motor.deactivate_all();
@@ -330,8 +401,12 @@ int main(int argc, char *argv[])
     // rt_task_start(&ft_task, &ft_run, NULL);
 
     rt_task_create(&motor_task, "motor_task", 0, 99, 0);
-    rt_task_set_affinity(&ft_task, &cpuset_rt2);
+    rt_task_set_affinity(&motor_task, &cpuset_rt2);
     rt_task_start(&motor_task, &motor_run, NULL);
+
+    rt_task_create(&print_task, "print_task", 0, 70, 0);
+    rt_task_set_affinity(&print_task, &cpuset_rt2);
+    rt_task_start(&print_task, &print_run, NULL);
 
     // Must pause here
     pause();

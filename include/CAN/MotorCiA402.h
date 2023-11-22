@@ -64,7 +64,6 @@ private:
 	SDO_PACKET s_packet;
 	DATA_OBJECT s_obj;
 	int motor_id;
-	unsigned char motor_c[4], motor_p[4];
 	struct CAN_msg_t can_motor;
 
     std::string device_id;
