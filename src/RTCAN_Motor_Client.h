@@ -49,7 +49,7 @@
 #define XDDP_PORT 0	/* [0..CONFIG-XENO_OPT_PIPE_NRDEV - 1] */
 
 #define NSEC_PER_SEC 			1000000000
-unsigned int cycle_ns = 2000000; // 2 ms
+unsigned int cycle_ns = 1000000; // 2 ms
 double period=((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
 // For RT thread management
@@ -62,7 +62,7 @@ unsigned int overruns = 0;
 unsigned char data_field[16];
 short raw_data[6] = { 0 };
 unsigned short temp;
-unsigned DF=50, DT=1000;
+float DF=50.0, DT=1000.0;
 float ft_array[6];
 
 // Interface to physical axes

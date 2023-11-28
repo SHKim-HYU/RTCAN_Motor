@@ -31,6 +31,7 @@ public:
 	int SDO_ENCODER_RESOLUTION(unsigned char NodeID);
 	int SDO_TORQUE_CONSTANT(unsigned char NodeID);
 	int SDO_MOTOR_DIRECTION(unsigned char NodeID);
+	void SDO_READ_COB_ID(unsigned char PDO_VAL);
 	int SDO_RECEIVE(void);
 	void SDO_SEND(uint32_t _cob_id, uint8_t *_s_packet, uint16_t _length);
 

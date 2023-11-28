@@ -21,7 +21,7 @@ int initAxes()
 		Axis[i-1].setGearEfficiency(EFFICIENCY);
 		Axis[i-1].setPulsePerRevolution(motor.SDO_ENCODER_RESOLUTION(i));
 		Axis[i-1].setTauRateCur(((double)motor.SDO_RATE_CURRENT(i))/1000.0);
-		Axis[i-1].setTauK(((double)motor.SDO_TORQUE_CONSTANT(i))/1000.0);
+		Axis[i-1].setTauK(((double)motor.SDO_TORQUE_CONSTANT(i))/1000000.0);
 		Axis[i-1].setZeroPos(zeroPos[i]);
 
 		Axis[i-1].setDirQ(motor.SDO_MOTOR_DIRECTION(i));
@@ -40,7 +40,7 @@ int initAxes()
 
 void readData()
 {
-    motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
+    // motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
 
     for(int i=0; i<JOINTNUM;i++)
     {
@@ -124,25 +124,26 @@ void writeData()
     for(int i=1;i<=JOINTNUM;i++){
 		Axis[i-1].setDesTorInNm(info.des.tau(i-1));
         motor.RxPDO1_SEND(i, Axis[i-1].getDesTorInPer());
+        // motor.RxPDO1_SEND(i, (short)-40);
 	}
 }
 
 
 void ft_run(void *arg)
 {
-    RTIME beginCycle, prevCycle;
+    RTIME beginCycle, prevCycle, FTCycle;
     unsigned long periodCycle = 0;
     // CAN Setup
     CANDevice::Config_t config;
     config.mode_fd = 0; // 0: CAN2.0 Mode, 1: CAN-FD Mode
-    config.bitrate = 1e6; //1mbps
-    config.d_bitrate = 2e6; //2mbps
+    config.bitrate = 1e6; //1Mbps
+    config.d_bitrate = 2e6; //2Mbps
     config.sample_point = .875; //87.5% 
     config.d_sample_point = 0.6; //60%
-    config.clock_freq = 80e6; // 80mhz // Read from driver?  
+    config.clock_freq = 80e6; // 80Mhz // Read from driver?  
     
 
-    if(!can1.Open(DEVICE2, config, false))
+    if(!can1.Open(DEVICE1, config, false))
     {
         std::cout << "Unable to open CAN Device" << std::endl;
         // exit(-2);
@@ -158,25 +159,58 @@ void ft_run(void *arg)
     CANDevice::CAN_msg_t RxFrame1;
     CANDevice::CAN_msg_t RxFrame2;
 
+    RxFrame1.length = 8;
+    for(int i=0; i<8; i++) RxFrame1.data[i]=0x00;
+    RxFrame2.length = 8;
+    for(int i=0; i<8; i++) RxFrame2.data[i]=0x00;
+
     can1.Status();
 
     TxFrame.id = 0x64;
     TxFrame.length = 8;
-    for(int i=0; i<8; i++) TxFrame.data[i]=0x00;
 
-    // Read Data Output Rate
+    // Stop FT Sensor
+    for(int i=0; i<8; i++) TxFrame.data[i]=0x00;
+    TxFrame.data[0] = READ_STOP;
+    can1.Send(TxFrame);
+    for(int i=0; i<8; i++) RxFrame1.data[i]=0x00;
+    res1 = can1.Receive(RxFrame1);
+
+    // Read Start
+    for(int i=0; i<8; i++) TxFrame.data[i]=0x00;
+    TxFrame.data[0] = READ_START;
+    can1.Send(TxFrame);
+    for(int i=0; i<8; i++) RxFrame1.data[i]=0x00;
+    for(int i=0; i<8; i++) RxFrame2.data[i]=0x00;
+    res1 = can1.Receive(RxFrame1);
+    res2 = can1.Receive(RxFrame2);
+
+    // Set Data Output Rate
+    for(int i=0; i<8; i++) TxFrame.data[i]=0x00;
     TxFrame.data[0] = SET_DATA_RATE;
     TxFrame.data[1] = FT_RATE_1000HZ; // 1000Hz
-
     can1.Send(TxFrame);
-
-    // Read Once
-    TxFrame.data[0] = READ_START;
-    
-    RxFrame1.length = 8;
-    RxFrame2.length = 8;
-
+    for(int i=0; i<8; i++) RxFrame1.data[i]=0x00;
+    for(int i=0; i<8; i++) RxFrame2.data[i]=0x00;
+    res1 = can1.Receive(RxFrame1);
+    res2 = can1.Receive(RxFrame2);
+   
+    // Set Filter
+    for(int i=0; i<8; i++) TxFrame.data[i]=0x00;
+    TxFrame.data[0] = SET_FILTER;
+    TxFrame.data[1] = 0x01;
+    TxFrame.data[2] = 0x09;
     can1.Send(TxFrame);
+    for(int i=0; i<8; i++) RxFrame1.data[i]=0x00;
+    for(int i=0; i<8; i++) RxFrame2.data[i]=0x00;
+    res1 = can1.Receive(RxFrame1);
+    res2 = can1.Receive(RxFrame2);
+   
+    // Set Bias
+    for(int i=0; i<8; i++) TxFrame.data[i]=0x01;
+    TxFrame.data[0] = SET_BIAS;
+    can1.Send(TxFrame);    
+
     beginCycle = rt_timer_read();
     rt_task_set_periodic(NULL, TM_NOW, 1*cycle_ns);
     while (1) {
@@ -186,17 +220,19 @@ void ft_run(void *arg)
         beginCycle = rt_timer_read();
 
         periodCycle = (unsigned long) beginCycle - prevCycle;
-        rt_printf("xddp-RT looptime: %lius\n", periodCycle/1000);
+        rt_printf("xddp-RT looptime: %lius, readtime: %lius\n", periodCycle/1000, FTCycle/1000);
         rt_printf("[Force] x: %f, y: %f, z: %f\n",  ft_array[0], ft_array[1], ft_array[2]);
         rt_printf("[Torque] x: %f, y: %f, z: %f\n\n",  ft_array[3], ft_array[4], ft_array[5]);
 
-        res2 = can1.Receive(RxFrame2);
+        for(int i=0; i<8; i++) RxFrame1.data[i]=0x00;
+        for(int i=0; i<8; i++) RxFrame2.data[i]=0x00;
         res1 = can1.Receive(RxFrame1);
+        res2 = can1.Receive(RxFrame2);
 
         if (res1 == 1 && res2 == 1)
         {
             //CANbus data to Torque data
-            for(int i = 0; i<6; i++)
+            for(int i = 0; i<8; i++)
             {
                 data_field[i] = RxFrame1.data[i];
                 data_field[i+8] = RxFrame2.data[i];
@@ -204,8 +240,8 @@ void ft_run(void *arg)
             
             for(int idx = 0; idx<6; idx++)
             {
-                temp = data_field[2*idx+1]*256;
-                temp += data_field[2*idx+2];
+                temp = (data_field[2*idx+1]<<8) + data_field[2*idx+2];
+                // temp += data_field[2*idx+1];
 
                 raw_data[idx] = (signed short) temp;
             }
@@ -213,10 +249,11 @@ void ft_run(void *arg)
             // Set Force/Torque Original
             for(int n = 0; n<3; n++)
             {
-                ft_array[n] = ((float)raw_data[n]) / (float)DF;
-                ft_array[n+3] = ((float)raw_data[n+3]) / (float)DT;
+                ft_array[n] = ((float)raw_data[n]) / DF;
+                ft_array[n+3] = ((float)raw_data[n+3]) / DT;
             }
         }
+        FTCycle = (unsigned long) rt_timer_read() - beginCycle;
     }
     can1.Close();
 }
@@ -227,15 +264,15 @@ void motor_run(void *arg)
 
     CANDevice::Config_t config;
     config.mode_fd = 0; // 0: CAN2.0 Mode, 1: CAN-FD Mode
-    config.bitrate = 1e6; //1mbps
-    config.d_bitrate = 2e6; //2mbps
+    config.bitrate = 1e6; //1Mbps
+    config.d_bitrate = 2e6; //2Mbps
     config.sample_point = .875; //87.5% 
     config.d_sample_point = 0.6; //60%
-    config.clock_freq = 80e6; // 80mhz // Read from driver?  
+    config.clock_freq = 80e6; // 80Mhz // Read from driver?  
     
     memset(&info, 0, sizeof(ROBOT_INFO));
 
-    motor.activate_all(DEVICE1, config);
+    motor.activate_all(DEVICE2, config);
 
     initAxes();
 
@@ -253,6 +290,11 @@ void motor_run(void *arg)
     while (1) {
         beginCycle = rt_timer_read();
         // Read Joints Data
+        motor.SYNC();
+
+        motor.TxPDO1_READ(info.q_inc, info.dq_inc);
+        motor.TxPDO2_READ(info.tau_per, info.statusword, info.modeofop);
+
         readData();
         // rt_printf("[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
         // rt_printf("[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[0], info.act.q_dot[0], info.act.tau[0]);
@@ -266,6 +308,10 @@ void motor_run(void *arg)
         
         // Controller
         // control();
+        double Kp = 0.2;
+        double Kd = 0.002;
+
+        info.des.tau(0) = Kp*(info.des.q(0)-info.act.q(0))+Kd*(info.des.q_dot(0)-info.act.q_dot(0));
 
         // Write Joint Data
         writeData();
@@ -398,15 +444,15 @@ int main(int argc, char *argv[])
 
     rt_task_create(&ft_task, "ft_task", 0, 99, 0);
     rt_task_set_affinity(&ft_task, &cpuset_rt1);
-    // rt_task_start(&ft_task, &ft_run, NULL);
+    rt_task_start(&ft_task, &ft_run, NULL);
 
     rt_task_create(&motor_task, "motor_task", 0, 99, 0);
     rt_task_set_affinity(&motor_task, &cpuset_rt2);
-    rt_task_start(&motor_task, &motor_run, NULL);
+    // rt_task_start(&motor_task, &motor_run, NULL);
 
     rt_task_create(&print_task, "print_task", 0, 70, 0);
     rt_task_set_affinity(&print_task, &cpuset_rt2);
-    rt_task_start(&print_task, &print_run, NULL);
+    // rt_task_start(&print_task, &print_run, NULL);
 
     // Must pause here
     pause();

@@ -12,6 +12,7 @@
 // Definition
 #define OBJ_READ 	1
 #define OBJ_WRITE 	2
+#define PDO_READ	3
 
 #define READ_REQUEST 			0x40
 #define READ_1BYTE_RESPONSE 	0x4F
