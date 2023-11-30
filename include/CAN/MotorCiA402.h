@@ -57,7 +57,7 @@ public:
 	void motor_activate(int ID);
 	void motor_deactivate(int ID);
 
-	void activate_all(const std::string &_device_id, Config_t &_config);
+	void activate_all(const std::string &_device_id, Config_t &_config, int nodes);
 	void deactivate_all(void);
 private:
 	int res;
@@ -66,6 +66,8 @@ private:
 	DATA_OBJECT s_obj;
 	int motor_id;
 	struct CAN_msg_t can_motor;
+
+	int n_Nodes;
 
     std::string device_id;
     Config_t config;

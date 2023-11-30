@@ -40,7 +40,7 @@ int initAxes()
 
 void readData()
 {
-    // motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
+    motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
 
     for(int i=0; i<JOINTNUM;i++)
     {
@@ -74,23 +74,23 @@ void trajectory_generation(){
 	    {
 	    case 1:
 	    	info.q_target(0)=1.5709;
-	    	traj_time = 3.0;
+	    	traj_time = 600.0;
 	    	motion++;
 	        break;
 	    case 2:
 	    	info.q_target(0)=0.0;
-	    	traj_time = 3.0;
+	    	traj_time = 600.0;
 	    	motion++;
 	    	// motion=1;
 	        break;
 	    case 3:
 	    	info.q_target(0)=-1.5709;
-	    	traj_time = 3.0;
+	    	traj_time = 600.0;
 	    	motion++;
 	        break;
 	    case 4:
 	    	info.q_target(0)=0.0;
-	    	traj_time = 3.0;
+	    	traj_time = 600.0;
 	    	motion=1;
 	    	break;
 	    default:
@@ -123,8 +123,16 @@ void writeData()
 {
     for(int i=1;i<=JOINTNUM;i++){
 		Axis[i-1].setDesTorInNm(info.des.tau(i-1));
-        motor.RxPDO1_SEND(i, Axis[i-1].getDesTorInPer());
-        // motor.RxPDO1_SEND(i, (short)-40);
+        int temp = Axis[i-1].getDesTorInPer();
+        if (temp > 1000)
+        {
+            temp = 1000;            
+        }
+        else if (temp<-1000)
+        {
+            temp = -1000;
+        }
+        motor.RxPDO1_SEND(i, (short)temp);
 	}
 }
 
@@ -143,7 +151,7 @@ void ft_run(void *arg)
     config.clock_freq = 80e6; // 80Mhz // Read from driver?  
     
 
-    if(!can1.Open(DEVICE1, config, false))
+    if(!can1.Open(DEVICE2, config, false))
     {
         std::cout << "Unable to open CAN Device" << std::endl;
         // exit(-2);
@@ -272,7 +280,7 @@ void motor_run(void *arg)
     
     memset(&info, 0, sizeof(ROBOT_INFO));
 
-    motor.activate_all(DEVICE2, config);
+    motor.activate_all(DEVICE1, config, JOINTNUM);
 
     initAxes();
 
@@ -290,10 +298,10 @@ void motor_run(void *arg)
     while (1) {
         beginCycle = rt_timer_read();
         // Read Joints Data
-        motor.SYNC();
+        // motor.SYNC();
 
-        motor.TxPDO1_READ(info.q_inc, info.dq_inc);
-        motor.TxPDO2_READ(info.tau_per, info.statusword, info.modeofop);
+        // motor.TxPDO1_READ(info.q_inc, info.dq_inc);
+        // motor.TxPDO2_READ(info.tau_per, info.statusword, info.modeofop);
 
         readData();
         // rt_printf("[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
@@ -308,11 +316,14 @@ void motor_run(void *arg)
         
         // Controller
         // control();
-        double Kp = 0.2;
-        double Kd = 0.002;
+        double Kp = 10;
+        double Kd = 0.2;
 
-        info.des.tau(0) = Kp*(info.des.q(0)-info.act.q(0))+Kd*(info.des.q_dot(0)-info.act.q_dot(0));
-
+        for (int i = 0; i<JOINTNUM; i++)
+        {
+            info.des.tau(i) = Kp*(info.des.q(i)-info.act.q(i))+Kd*(info.des.q_dot(i)-info.act.q_dot(i));
+        }
+        
         // Write Joint Data
         writeData();
 
@@ -452,7 +463,7 @@ int main(int argc, char *argv[])
 
     rt_task_create(&print_task, "print_task", 0, 70, 0);
     rt_task_set_affinity(&print_task, &cpuset_rt2);
-    rt_task_start(&print_task, &print_run, NULL);
+    // rt_task_start(&print_task, &print_run, NULL);
 
     // Must pause here
     pause();
