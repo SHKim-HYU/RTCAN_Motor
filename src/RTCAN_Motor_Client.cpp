@@ -444,15 +444,15 @@ int main(int argc, char *argv[])
 
     rt_task_create(&ft_task, "ft_task", 0, 99, 0);
     rt_task_set_affinity(&ft_task, &cpuset_rt1);
-    rt_task_start(&ft_task, &ft_run, NULL);
+    // rt_task_start(&ft_task, &ft_run, NULL);
 
     rt_task_create(&motor_task, "motor_task", 0, 99, 0);
     rt_task_set_affinity(&motor_task, &cpuset_rt2);
-    // rt_task_start(&motor_task, &motor_run, NULL);
+    rt_task_start(&motor_task, &motor_run, NULL);
 
     rt_task_create(&print_task, "print_task", 0, 70, 0);
     rt_task_set_affinity(&print_task, &cpuset_rt2);
-    // rt_task_start(&print_task, &print_run, NULL);
+    rt_task_start(&print_task, &print_run, NULL);
 
     // Must pause here
     pause();

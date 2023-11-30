@@ -49,7 +49,7 @@
 #define XDDP_PORT 0	/* [0..CONFIG-XENO_OPT_PIPE_NRDEV - 1] */
 
 #define NSEC_PER_SEC 			1000000000
-unsigned int cycle_ns = 1000000; // 2 ms
+unsigned int cycle_ns = 2000000; // 2 ms
 double period=((double) cycle_ns)/((double) NSEC_PER_SEC);	//period in second unit
 
 // For RT thread management
