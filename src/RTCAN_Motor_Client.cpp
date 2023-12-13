@@ -320,9 +320,9 @@ void motor_run(void *arg)
         
         // Controller
         // control();
-        double Kp = 0.1;
-        double Kd = 0.0001;
-        double Ki = 0.0;
+        double Kp = 0.15;
+        double Kd = 0.01;
+        double Ki = 1.5;
 
 
         for (int i = 0; i<JOINTNUM; i++)
