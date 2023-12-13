@@ -13,7 +13,7 @@
 
 #define CONTROL_FREQ 1000
 #define ROBOT_DOF 1
-#define JOINTNUM 1
+#define JOINTNUM 2
 
 #define ZERO_POS_1 -1625
 

@@ -17,12 +17,12 @@ int initAxes()
 {
 	for (int i = 1; i <= JOINTNUM; i++)
 	{	
-		Axis[i-1].setGearRatio(gearRatio[i]);
+		Axis[i-1].setGearRatio(gearRatio[i-1]);
 		Axis[i-1].setGearEfficiency(EFFICIENCY);
 		Axis[i-1].setPulsePerRevolution(motor.SDO_ENCODER_RESOLUTION(i));
 		Axis[i-1].setTauRateCur(((double)motor.SDO_RATE_CURRENT(i))/1000.0);
 		Axis[i-1].setTauK(((double)motor.SDO_TORQUE_CONSTANT(i))/1000000.0);
-		Axis[i-1].setZeroPos(zeroPos[i]);
+		Axis[i-1].setZeroPos(zeroPos[i-1]);
 
 		Axis[i-1].setDirQ(motor.SDO_MOTOR_DIRECTION(i));
 		Axis[i-1].setDirTau(motor.SDO_MOTOR_DIRECTION(i));
@@ -33,6 +33,9 @@ int initAxes()
 		
 		Axis[i-1].setTarVelInCnt(0);
 		Axis[i-1].setTarTorInCnt(0);
+
+        info.des.e = JVec::Zero();
+        info.des.eint = JVec::Zero();
 	}
 	
 	return 1;
@@ -41,7 +44,6 @@ int initAxes()
 void readData()
 {
     motor.Motor_STATE(info.q_inc, info.dq_inc, info.tau_per, info.statusword, info.modeofop);
-
     for(int i=0; i<JOINTNUM;i++)
     {
 
@@ -55,11 +57,12 @@ void readData()
         info.act.q_dot(i) = Axis[i].getCurrVelInRad();
         info.act.tau(i) = Axis[i].getCurrTorInNm();
 
+        // For Inital target
         if(!system_ready)
         {
             Axis[i].setTarPosInRad(info.act.q(i));
             Axis[i].setDesPosInRad(info.act.q(i));
-            system_ready = 1;
+            if (i == JOINTNUM-1) system_ready = 1;
         }
 
     }
@@ -73,28 +76,29 @@ void trajectory_generation(){
 	    switch(motion)
 	    {
 	    case 1:
-	    	info.q_target(0)=1.5709;
-	    	traj_time = 600.0;
+	    	info.q_target(0)=1.5709; info.q_target(1)=1.5709;
+	    	traj_time = 2.0;
 	    	motion++;
 	        break;
 	    case 2:
-	    	info.q_target(0)=0.0;
-	    	traj_time = 600.0;
+	    	info.q_target(0)=0.0; info.q_target(1)=0.0;
+	    	traj_time = 2.0;
 	    	motion++;
 	    	// motion=1;
 	        break;
 	    case 3:
-	    	info.q_target(0)=-1.5709;
-	    	traj_time = 600.0;
+	    	info.q_target(0)=-1.5709; info.q_target(1)=-1.5709;
+	    	traj_time = 2.0;
 	    	motion++;
 	        break;
 	    case 4:
-	    	info.q_target(0)=0.0;
-	    	traj_time = 600.0;
+	    	info.q_target(0)=0.0; info.q_target(1)=0.0;
+	    	traj_time = 2.0;
 	    	motion=1;
 	    	break;
 	    default:
 	    	info.q_target(0)=info.act.q(0);
+            info.q_target(1)=info.act.q(1);
 
 	    	motion=1;
 	    	break;
@@ -151,7 +155,7 @@ void ft_run(void *arg)
     config.clock_freq = 80e6; // 80Mhz // Read from driver?  
     
 
-    if(!can1.Open(DEVICE2, config, false))
+    if(!can1.Open(DEVICE1, config, false))
     {
         std::cout << "Unable to open CAN Device" << std::endl;
         // exit(-2);
@@ -280,7 +284,7 @@ void motor_run(void *arg)
     
     memset(&info, 0, sizeof(ROBOT_INFO));
 
-    motor.activate_all(DEVICE1, config, JOINTNUM);
+    motor.activate_all(DEVICE2, config, JOINTNUM);
 
     initAxes();
 
@@ -316,12 +320,17 @@ void motor_run(void *arg)
         
         // Controller
         // control();
-        double Kp = 10;
-        double Kd = 0.2;
+        double Kp = 0.1;
+        double Kd = 0.0001;
+        double Ki = 0.0;
+
 
         for (int i = 0; i<JOINTNUM; i++)
         {
-            info.des.tau(i) = Kp*(info.des.q(i)-info.act.q(i))+Kd*(info.des.q_dot(i)-info.act.q_dot(i));
+            info.des.e(i) = info.des.q(i)-info.act.q(i);
+            info.des.eint(i) = info.des.eint(i) + info.des.e(i)*period;
+            info.des.tau(i) = Kp*info.des.e(i)+Kd*(info.des.q_dot(i)-info.act.q_dot(i)) + Ki*info.des.eint(i);
+
         }
         
         // Write Joint Data
@@ -463,7 +472,7 @@ int main(int argc, char *argv[])
 
     rt_task_create(&print_task, "print_task", 0, 70, 0);
     rt_task_set_affinity(&print_task, &cpuset_rt2);
-    // rt_task_start(&print_task, &print_run, NULL);
+    rt_task_start(&print_task, &print_run, NULL);
 
     // Must pause here
     pause();

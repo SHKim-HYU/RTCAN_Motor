@@ -45,8 +45,7 @@ public:
 
     void RxPDO1_SEND(unsigned char NodeID, short RPDO_VAL);
 
-    void TxPDO1_READ(int *d1, int *d2);
-	void TxPDO2_READ(int *d3, int *d4, int *d5);   
+	void TxPDO_READ(int *d1, int *d2, int *d3, int *d4, int *d5);
 
 	void SYNC(void);
 	void Motor_STATE(int *d1, int *d2, int *d3, int *d4, int *d5);

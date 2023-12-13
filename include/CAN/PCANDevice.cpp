@@ -54,7 +54,7 @@ bool PCANDevice::Open(const std::string &device_id, Config_t &config, bool bUseR
     if (config_.mode_fd == 0)
     {
         mode = config_.mode_fd;
-        fd_ = pcanfd_open(device_id.c_str(), OFD_BITRATE, config.bitrate);
+        fd_ = pcanfd_open(device_id.c_str(), OFD_BITRATE | OFD_NONBLOCKING, config.bitrate);
     }
     else if (config_.mode_fd == 1)
     {
@@ -253,13 +253,14 @@ bool PCANDevice::Send(CAN_msg_t &msg)
 bool PCANDevice::Receive(CAN_msg_t &msg)
 {
     struct pcanfd_msg pcan_msg;
-    //auto start_time = std::chrono::high_resolution_clock::now();
+    // auto start_time = std::chrono::high_resolution_clock::now();
+    // std::cout << "Read Start"<< std::endl;
     int rx_error = pcanfd_recv_msg(fd_, &pcan_msg);
-    //auto time_now = std::chrono::high_resolution_clock::now();
-    //auto total_elapsed = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_time).count();
-    //std::cout << "Read Duration: " << total_elapsed << "us" << std::endl;
+    // auto time_now = std::chrono::high_resolution_clock::now();
+    // auto total_elapsed = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_time).count();
+    // std::cout << "Read Duration: " << total_elapsed << "us" << std::endl;
 
-   // std::cout << "RECEIVED: TYPE: " << pcan_msg.type << std::endl;
+//    std::cout << "RECEIVED: TYPE: " << pcan_msg.type << std::endl;
     if (rx_error)
     {
         // TODO: Log Received Errors??
@@ -269,10 +270,21 @@ bool PCANDevice::Receive(CAN_msg_t &msg)
 
     // TODO: Handle Status/Error Messages somehow?  For now skip
     // // TODO: Support other messages. CAN FD ONLY!
-    // if(pcan_msg.type != PCANFD_TYPE_CANFD_MSG)
-    // {
-    //     return false;
-    // }
+    if(mode == 0)
+    {
+        if(pcan_msg.type != PCANFD_TYPE_CAN20_MSG)
+        {
+            return false;
+        }
+    }
+    else if(mode == 1)
+    {
+        if(pcan_msg.type != PCANFD_TYPE_CAN20_MSG)
+        {
+            return false;
+        }
+    }
+
 
     msg.id = pcan_msg.id;
     msg.length = pcan_msg.data_len;
