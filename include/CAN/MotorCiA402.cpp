@@ -524,21 +524,6 @@ void Motor_CiA402::TxPDO1_MAPPING(unsigned char NodeID)
 	// if (!res) return false;
 	Print_CAN_FRAME(OBJ_READ);
 
-	// // set sync(inhibit time) subindex:0x03, UINT16
-	// // 0x00: no inhibit time btw messages, 0x01: 1x100us ex) 0x64: 10ms(100x100us) 
-	// s_obj.uint16Value[0] = TxPDO1_COMM;
-
-	// s_packet.info.type = WRITE_REQUEST_2BYTE;
-	// s_packet.info.index_low = s_obj.uint8Value[0];
-	// s_packet.info.index_high = s_obj.uint8Value[1];
-	// s_packet.info.subindex = 0x03;
-
-	// s_packet.info.data[0] = 0x00;
-	// SDO_SEND(cob, s_packet.value, 6);
-	// if (DEBUG_PRINT) printf("TxPDO1-Comm: set sync(inhibit time)\n");
-	// Print_CAN_FRAME(OBJ_WRITE);
-	// res = Receive(tx_frame);
-	// Print_CAN_FRAME(OBJ_READ);
 	if (DEBUG_PRINT) printf("\n");
 }
 
@@ -654,22 +639,7 @@ void Motor_CiA402::TxPDO2_MAPPING(unsigned char NodeID)
 	res = SDO_RECEIVE();
 	// if (!res) return false;
 	Print_CAN_FRAME(OBJ_READ);
-	
-	// // set sync(inhibit time) subindex:0x03, UINT16
-	// // 0x00: no inhibit time btw messages, 0x01: 1x100us ex) 0x64: 10ms(100x100us) 
-	// s_obj.uint16Value[0] = TxPDO2_COMM;
 
-	// s_packet.info.type = WRITE_REQUEST_2BYTE;
-	// s_packet.info.index_low = s_obj.uint8Value[0];
-	// s_packet.info.index_high = s_obj.uint8Value[1];
-	// s_packet.info.subindex = 0x03;
-
-	// s_packet.info.data[0] = 0x00;
-	// SDO_SEND(cob, s_packet.value, 6);
-	// if (DEBUG_PRINT) printf("TxPDO2-Comm: set sync(inhibit time)\n");
-	// Print_CAN_FRAME(OBJ_WRITE);
-	// res = Receive(tx_frame);
-	// Print_CAN_FRAME(OBJ_READ);
 	if (DEBUG_PRINT) printf("\n");
 }
 
@@ -795,7 +765,6 @@ void Motor_CiA402::SYNC(void)
 void Motor_CiA402::Motor_STATE(int *d1, int *d2, int *d3, int *d4, int *d5)
 {
 	SYNC();
-	// SYNC();
 
 	TxPDO_READ(d1,d2,d3,d4,d5);
 }

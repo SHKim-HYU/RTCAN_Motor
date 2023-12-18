@@ -76,7 +76,7 @@ void trajectory_generation(){
 	    switch(motion)
 	    {
 	    case 1:
-	    	info.q_target(0)=1.5709; info.q_target(1)=1.5709;
+	    	info.q_target(0)=1.5709; info.q_target(1)=-1.5709;
 	    	traj_time = 2.0;
 	    	motion++;
 	        break;
@@ -87,7 +87,7 @@ void trajectory_generation(){
 	    	// motion=1;
 	        break;
 	    case 3:
-	    	info.q_target(0)=-1.5709; info.q_target(1)=-1.5709;
+	    	info.q_target(0)=-1.5709; info.q_target(1)=1.5709;
 	    	traj_time = 2.0;
 	    	motion++;
 	        break;
@@ -121,6 +121,27 @@ void trajectory_generation(){
 		info.des.q_dot(i)=Axis[i].getDesVelInRad();
 		info.des.q_ddot(i)=Axis[i].getDesAccInRad();
 	}
+}
+
+void compute()
+{
+
+}
+
+void control()
+{
+    double Kp = 0.1;
+    double Kd = 0.01;
+    double Ki = 1.0;
+
+
+    for (int i = 0; i<JOINTNUM; i++)
+    {
+        info.des.e(i) = info.des.q(i)-info.act.q(i);
+        info.des.eint(i) = info.des.eint(i) + info.des.e(i)*period;
+        info.des.tau(i) = Kp*info.des.e(i)+Kd*(info.des.q_dot(i)-info.act.q_dot(i)) + Ki*info.des.eint(i);
+
+    }
 }
 
 void writeData()
@@ -302,15 +323,8 @@ void motor_run(void *arg)
     while (1) {
         beginCycle = rt_timer_read();
         // Read Joints Data
-        // motor.SYNC();
-
-        // motor.TxPDO1_READ(info.q_inc, info.dq_inc);
-        // motor.TxPDO2_READ(info.tau_per, info.statusword, info.modeofop);
-
         readData();
-        // rt_printf("[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[0], info.dq_inc[0], info.tau_per[0]);
-        // rt_printf("[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[0], info.act.q_dot[0], info.act.tau[0]);
-    
+       
         // Trajectory Generation
         trajectory_generation();
         
@@ -319,20 +333,8 @@ void motor_run(void *arg)
 
         
         // Controller
-        // control();
-        double Kp = 0.15;
-        double Kd = 0.01;
-        double Ki = 1.5;
-
-
-        for (int i = 0; i<JOINTNUM; i++)
-        {
-            info.des.e(i) = info.des.q(i)-info.act.q(i);
-            info.des.eint(i) = info.des.eint(i) + info.des.e(i)*period;
-            info.des.tau(i) = Kp*info.des.e(i)+Kd*(info.des.q_dot(i)-info.act.q_dot(i)) + Ki*info.des.eint(i);
-
-        }
-        
+        control();
+                
         // Write Joint Data
         writeData();
 
@@ -374,7 +376,7 @@ void print_run(void *arg)
 	 *            start time,
 	 *            period (here: 100ms = 0.1s)
 	 */
-	rt_task_set_periodic(NULL, TM_NOW, cycle_ns*50);
+	rt_task_set_periodic(NULL, TM_NOW, cycle_ns*100);
 	
 	while (1)
 	{
@@ -400,8 +402,8 @@ void print_run(void *arg)
 			// 	//rt_printf("\t StatWord: 0x%04X, \n",	StatusWord[j]);
 			//     //rt_printf("\t DeviceState: %d, ",		DeviceState[j]);
 			// 	//rt_printf("\t ModeOfOp: %d,	\n",		ModeOfOperationDisplay[j]);
-                rt_printf("\t[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[j], info.dq_inc[j], info.tau_per[j]);
-                rt_printf("\t[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[j], info.act.q_dot[j], info.act.tau[j]);
+                // rt_printf("\t[cnt] pos: %d, vel: %d, [per] tor: %d\n",info.q_inc[j], info.dq_inc[j], info.tau_per[j]);
+                // rt_printf("\t[rad] pos: %lf, vel: %lf, [Nm] tor: %lf\n",info.act.q[j], info.act.q_dot[j], info.act.tau[j]);
 				rt_printf("\t ActPos: %lf, ActVel: %lf \n",info.act.q(j), info.act.q_dot(j));
 				rt_printf("\t DesPos: %lf, DesVel :%lf, DesAcc :%lf\n",info.des.q[j],info.des.q_dot[j],info.des.q_ddot[j]);
 				rt_printf("\t TarTor: %lf, ActTor: %lf, ExtTor: %lf \n", info.des.tau(j), info.act.tau(j), info.act.tau_ext(j));
