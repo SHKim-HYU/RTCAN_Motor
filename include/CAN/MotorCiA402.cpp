@@ -97,7 +97,7 @@ void Motor_CiA402::SDO_MODES_OPERTAION(unsigned char NodeID, int RW, unsigned ch
 	case OBJ_WRITE:
 
 		s_obj.uint16Value[0] = OBJ_OPERATIONMODE;
-		if(data == OP_MODE_NO_MODE || data == OP_MODE_PROFILE_POSITION || data == OP_MODE_CYCLIC_SYNC_TORQUE)
+		if(data == OP_MODE_NO_MODE || data == OP_MODE_PROFILE_POSITION || data == OP_MODE_CYCLIC_SYNC_TORQUE || data == OP_MODE_TORQUE_PROFILE)
 		{
 			s_packet.info.type = WRITE_REQUEST_1BYTE;
 			s_packet.info.index_low = s_obj.uint8Value[0];

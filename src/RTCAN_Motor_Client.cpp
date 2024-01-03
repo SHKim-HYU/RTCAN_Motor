@@ -31,7 +31,7 @@ int initAxes()
 
 		Axis[i-1].setTrajPeriod(period);
 		
-		Axis[i-1].setTarVelInCnt(0);
+		Axis[i-1].setTarVelInRPM(0);
 		Axis[i-1].setTarTorInCnt(0);
 
         info.des.e = JVec::Zero();
@@ -48,7 +48,7 @@ void readData()
     {
 
         Axis[i].setCurrentPosInCnt(info.q_inc[i]);
-        Axis[i].setCurrentVelInCnt(info.dq_inc[i]);
+        Axis[i].setCurrentVelInRPM(info.dq_inc[i]);
         Axis[i].setCurrentTorInCnt(info.tau_per[i]);
         
         Axis[i].setCurrentTime(gt);
@@ -77,23 +77,23 @@ void trajectory_generation(){
 	    {
 	    case 1:
 	    	info.q_target(0)=1.5709; info.q_target(1)=-1.5709;
-	    	traj_time = 2.0;
+	    	traj_time = 0.5;
 	    	motion++;
 	        break;
 	    case 2:
 	    	info.q_target(0)=0.0; info.q_target(1)=0.0;
-	    	traj_time = 2.0;
+	    	traj_time = 0.5;
 	    	motion++;
 	    	// motion=1;
 	        break;
 	    case 3:
 	    	info.q_target(0)=-1.5709; info.q_target(1)=1.5709;
-	    	traj_time = 2.0;
+	    	traj_time = 0.5;
 	    	motion++;
 	        break;
 	    case 4:
 	    	info.q_target(0)=0.0; info.q_target(1)=0.0;
-	    	traj_time = 2.0;
+	    	traj_time = 0.5;
 	    	motion=1;
 	    	break;
 	    default:
@@ -131,7 +131,7 @@ void compute()
 void control()
 {
     double Kp = 0.1;
-    double Kd = 0.01;
+    double Kd = 0.001;
     double Ki = 1.0;
 
 
@@ -148,7 +148,9 @@ void writeData()
 {
     for(int i=1;i<=JOINTNUM;i++){
 		Axis[i-1].setDesTorInNm(info.des.tau(i-1));
-        int temp = Axis[i-1].getDesTorInPer();
+        
+        INT16 temp = Axis[i-1].getDesTorInPer();
+        // rt_printf("temp: %d\n", temp);
         if (temp > 1000)
         {
             temp = 1000;            
@@ -157,6 +159,7 @@ void writeData()
         {
             temp = -1000;
         }
+        // rt_printf("temp: %d\n\n", temp);
         motor.RxPDO1_SEND(i, (short)temp);
 	}
 }
@@ -376,7 +379,7 @@ void print_run(void *arg)
 	 *            start time,
 	 *            period (here: 100ms = 0.1s)
 	 */
-	rt_task_set_periodic(NULL, TM_NOW, cycle_ns*100);
+	rt_task_set_periodic(NULL, TM_NOW, cycle_ns*1);
 	
 	while (1)
 	{
@@ -436,7 +439,16 @@ void signal_handler(int signum)
 
     motor.deactivate_all();
 
-    printf("Servo drives Stopped!\n");
+    printf("\n\n");
+	if(signum==SIGINT)
+		printf("╔════════════════[SIGNAL INPUT SIGINT]═══════════════╗\n");
+	else if(signum==SIGTERM)
+		printf("╔═══════════════[SIGNAL INPUT SIGTERM]═══════════════╗\n");	
+	else if(signum==SIGTSTP)
+		printf("╔═══════════════[SIGNAL INPUT SIGTSTP]══════════════╗\n");
+    printf("║                Servo drives Stopped!               ║\n");
+	printf("╚════════════════════════════════════════════════════╝\n");	
+
     exit(1);
 }
 
@@ -447,6 +459,7 @@ int main(int argc, char *argv[])
 
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
+	signal(SIGTSTP, signal_handler);
 
     /* Avoids memory swapping for this program */
     mlockall(MCL_CURRENT|MCL_FUTURE);
@@ -456,9 +469,9 @@ int main(int argc, char *argv[])
     CPU_ZERO(&cpuset_rt1);  
     CPU_ZERO(&cpuset_rt2);  
 
-    CPU_SET(6, &cpuset_qt);  
-    CPU_SET(7, &cpuset_rt1);  
-    CPU_SET(5, &cpuset_rt2);  
+    CPU_SET(5, &cpuset_qt);  
+    CPU_SET(6, &cpuset_rt1);  
+    CPU_SET(7, &cpuset_rt2);  
     
     // std::thread qtThread(runQtApplication, argc, argv);
     // pthread_t pthread = qtThread.native_handle();

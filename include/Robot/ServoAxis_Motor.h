@@ -51,8 +51,11 @@ namespace NRMKHelper
 
 
 			_radToCnt = 1;
+			_RadToRPM = 1;
 			_NmToPer = 1;
+
 			_cntToRad = 1;
+			_RPMToRad = 1;
 			_PerToNm = 1;
 
 			// Trajectory boundary conditions
@@ -139,9 +142,11 @@ namespace NRMKHelper
 		void setConversionConstants()
 		{
 			_radToCnt = (double)(_dirQ * _gearRatio * _pulsePerRevolution) / (PI2);
-			_NmToPer = (_dirTau)/(double)(_tauK*_tauRateCur*_gearRatio*_gearEfficiency)*1000.0*100.0;
+			_RadToRPM = (double)(60.0 * _gearRatio / PI2);
+			_NmToPer = (double)(_dirTau)/(double)(_tauK*_tauRateCur*_gearRatio*_gearEfficiency)*1000.0*100.0;
 
 			_cntToRad = 1.0 /_radToCnt;
+			_RPMToRad = 1.0/_RadToRPM;
 			_PerToNm = 1.0 /_NmToPer;
 		}
 
@@ -183,6 +188,10 @@ namespace NRMKHelper
 		{
 			_qdot = (double) ActVelInCnt * _cntToRad;
 		}
+		void setCurrentVelInRPM(INT32 ActVelInRPM)
+		{
+			_qdot = (double) ActVelInRPM * _RPMToRad;
+		}
 		void setCurrentTorInCnt(INT16 ActTorInCnt)
 		{
 			_tau = (double) ActTorInCnt * _PerToNm;
@@ -198,6 +207,10 @@ namespace NRMKHelper
 		void setTarVelInCnt(INT32 TarVelInCnt)
 		{
 			_qdotdes = (double) TarVelInCnt * _cntToRad;
+		}
+		void setTarVelInRPM(INT32 TarVelInRPM)
+		{
+			_qdotdes = (double) TarVelInRPM * _RPMToRad;
 		}
 		void setTarTorInCnt(INT16 TarTorInCnt)
 		{
@@ -263,6 +276,14 @@ namespace NRMKHelper
 		INT32 getDesVelInCnt()
 		{
 			return (INT32) (_qdotdes*_radToCnt);
+		}
+		INT32 getDesVelInRPM()
+		{
+			return (INT32) (_qdotdes*_RadToRPM);
+		}
+		INT32 getDesVelInRPM(double _dqdot)
+		{
+			return (INT32) (_dqdot*_RadToRPM);
 		}
 		INT16 getDesTorInPer()
 		{
@@ -361,9 +382,11 @@ namespace NRMKHelper
 		double _tauLimit[2];	// _torLimit[0] = positive limit, _torLimit[1] = negative limit
 
 		double _radToCnt;	// = Cnt/Rad
+		double _RadToRPM;	// = RPM/Rad (for velocity)
 		double _NmToPer;	// = Per/Nm
 
 		double _cntToRad;	// = Rad/Cnt
+		double _RPMToRad;	// = Rad/RPM (for velocity)
 		double _PerToNm;	// = Nr/Per
 
 		double _q;			// Current Angle in Radiant
